@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{%load bootstrap4 %}
+{% block content %}
+    <div class="container">
+        <h1>O que Deseja?</h1>
+        <div class="escolha">
+            <div class="bebidas">
+                <a href="{% url 'bebidas' %}">Bebidas</a>
+            </div>
+
+            <div class="pizza">
+                <a href="{% url 'pizzas' %}">Pizzas</a>
+            </div>
+
+            <div class="comidas">
+                <a href="{% url 'comidas' %}">Comidas</a>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

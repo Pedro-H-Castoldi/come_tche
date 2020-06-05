@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{%load bootstrap4 %}
+{% block content %}
+<div class="container">
+    <h1>Carrinho</h1><br><br>
+    <h2>Pedido</h3><br>
+    {% for pp in pedido %}
+       <h3>Produto: {{ pp.0.0 }} ({{ pp.0.1 }})</h3><br>
+       <h3>Preço: R${{ pp.0.2 }}</h3><br>
+       <h3>Quantidade: {{ pp.1 }}</h3>
+   {% endfor %}
+   
+   <br><h3>TOTAL: R${{ total }}</h3>
+
+   <form action="{% url 'index' %}" method="GET">
+       {% csrf_token %}
+       <label for="hora">Horário de entrega</label>
+       <input type="datetime-local" name="encomenda" required>
+
+       <input type="submit" value="Encomendar" name="a">
+   </form>
+</div>
+
+{% endblock %}

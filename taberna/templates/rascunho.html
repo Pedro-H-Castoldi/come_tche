@@ -1,0 +1,39 @@
+{% for pi in pizza %}
+                <img src="{{ pi.imagem.thumb.url }}" alt="{{ pi.produto }}" />
+                <h2>{{ pi.produto }}</h2>
+                <label for="{{ pi.id }}"><h3>{{ pi.preco_f }}</h3></label>
+                <input type="checkbox" name="pizza" id="{{ pi.id }}" value="{{ pi.produto }}{{ pi.preco_f }}"><br>
+
+                <label for="{{ pi.id }}"><h3>{{ pi.preco_g }}</h3></label>
+                <input type="checkbox" name="pizza" id="{{ pi.id }}" value="{{ pi.produto }}{{ pi.preco_g }}"><br>
+
+                <label for="{{ pi.id }}"><h3>{{ pi.preco_m }}</h3></label>
+                <input type="checkbox" name="pizza" id="{{ pi.id }}" value="{{ pi.produto }}{{ pi.preco_m }}"><br>
+
+                <label for="{{ pi.id }}"><h3>{{ pi.preco_p }}</h3></label>
+                <input type="checkbox" name="pizza" id="{{ pi.id }}" value="{{ pi.produto }}{{ pi.preco_p }}"><br>
+            {% endfor %}
+            <input type="submit" value="Pedir" id="pedir">
+
+
+
+
+
+
+
+
+
+
+
+            {% for pi in pizza %}
+            <input type="checkbox" value="{{ pi.produto }}" name="pizzaa">
+            <h4>{{ pi.produto }}</h4>
+            {% endfor %}
+
+            <input type="checkbox" name="media" value="Média">
+            <label for="m">Média</label>
+
+            <input type="checkbox" name="grande" value="Grande">
+            <label for="g">Grande</label>
+                
+            <input type="submit" value="Pedir">

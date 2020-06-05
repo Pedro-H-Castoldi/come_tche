@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{%load bootstrap4 %}
+{% block content %}
+    <div class="container">
+        {% if mensagem %}
+            <h1>{{ mensagem }}</h1>
+        {% endif %}
+        <h1>Pizzas</h1>
+        <h3>Faça seu pedido</h3>
+        <div class="form">
+            <form action="{% url 'carrinho' %}" method="get" id="pedir" class="form">
+                {% csrf_token %}
+                {% for pi in pizza %}
+                <div class="pizza">
+                    <img src="{{ pi.imagem.thumb.url }}" alt="{{ pi.produto }}">
+                    <div class="tamanhos" id="{{ pi.id }}">
+                        <div class="fam">
+                            <strong>Família ---- R${{ pi.preco_f }}</strong>
+                            <input type="checkbox" name="f{{ pi.id }}" id="{{ pi.id }}" value="Pizza {{ pi.produto }}, familia, {{ pi.preco_f }}" class="box">
+                            <strong id="{{ pi.id }} {{ pi.preco_f }}"></strong>
+                        </div>
+  
+
+                        <div class="gra">
+                            <strong>Grande ---- R${{ pi.preco_g }}</strong>
+                            <input type="checkbox" name="g{{ pi.id }}" id="{{ pi.id }}" value=" Pizza{{ pi.produto }}, grande, {{ pi.preco_g }}" class="box">
+                            <strong id="{{ pi.id }} {{ pi.preco_g }}"></strong>
+                        </div>
+                        
+
+                        <div class="med">
+                            <strong>Média ----- R${{ pi.preco_m }}</strong>
+                            <input type="checkbox" name="m{{ pi.id }}" id="{{ pi.id }}" value="Pizza {{ pi.produto }}, media, {{ pi.preco_m }}" class="box">
+                            <strong id="{{ pi.id }} {{ pi.preco_m }}"></strong>
+                        </div>
+                        
+
+                        <div class="peq">
+                            <strong>Pequena -- R${{ pi.preco_p }}</strong>
+                            <input type="checkbox" name="p{{ pi.id }}" id="{{ pi.id }}" value="Pizza {{ pi.produto }}, pequena, {{ pi.preco_p }}" class="box">
+                            <strong id="{{ pi.id }} {{ pi.preco_p }}"></strong>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="ir" id="ir">
+                    <br><input type="submit" value="Pedir" />
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
