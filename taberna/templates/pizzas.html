@@ -13,36 +13,55 @@
                 {% for pi in pizza %}
                 <div class="pizza">
                     <img src="{{ pi.imagem.thumb.url }}" alt="{{ pi.produto }}">
+                    <h4>{{ pi.produto }}</h4>
                     <div class="tamanhos" id="{{ pi.id }}">
-                        <div class="fam">
+
+                        <div class="fam" id="fam{{ pi.id }}">
                             <strong>Família ---- R${{ pi.preco_f }}</strong>
                             <input type="checkbox" name="f{{ pi.id }}" id="{{ pi.id }}" value="Pizza {{ pi.produto }}, familia, {{ pi.preco_f }}" class="box">
                             <strong id="{{ pi.id }} {{ pi.preco_f }}"></strong>
                         </div>
   
 
-                        <div class="gra">
+                        <div class="gra" id="gra{{ pi.id }}">
                             <strong>Grande ---- R${{ pi.preco_g }}</strong>
-                            <input type="checkbox" name="g{{ pi.id }}" id="{{ pi.id }}" value=" Pizza{{ pi.produto }}, grande, {{ pi.preco_g }}" class="box">
+                            <input type="checkbox" name="g{{ pi.id }}" id="{{ pi.id }}" value="Pizza {{ pi.produto }}, grande, {{ pi.preco_g }}" class="box">
                             <strong id="{{ pi.id }} {{ pi.preco_g }}"></strong>
                         </div>
                         
 
-                        <div class="med">
+                        <div class="med" id="med{{ pi.id }}">
                             <strong>Média ----- R${{ pi.preco_m }}</strong>
                             <input type="checkbox" name="m{{ pi.id }}" id="{{ pi.id }}" value="Pizza {{ pi.produto }}, media, {{ pi.preco_m }}" class="box">
                             <strong id="{{ pi.id }} {{ pi.preco_m }}"></strong>
                         </div>
                         
 
-                        <div class="peq">
+                        <div class="peq" id="peq{{ pi.id }}">
                             <strong>Pequena -- R${{ pi.preco_p }}</strong>
                             <input type="checkbox" name="p{{ pi.id }}" id="{{ pi.id }}" value="Pizza {{ pi.produto }}, pequena, {{ pi.preco_p }}" class="box">
                             <strong id="{{ pi.id }} {{ pi.preco_p }}"></strong>
                         </div>
+
                     </div>
                 </div>
                 {% endfor %}
+                <div class="refrigerante">
+                    <select name="refri" id="refri" multiple>
+                        <optgroup label="Refrigerantes 1l">
+                            <option value="p1">{{ pizza.0.produto }}</option>
+                            <option value="g1">Guaraná 1l</option>
+                            <option value="f1">Fanta 1l</option>
+                        </optgroup>
+
+                        <optgroup label="Refrigerante 2l">
+                            <option value="c2">Cocá-cola 2l</option>
+                            <option value="p1">Pepsi 2l</option>
+                            <option value="g1">Guaraná 2l</option>
+                            <option value="f1">Fanta 2l</option>
+                        </optgroup>
+                    </select>
+                </div>
                 <div class="ir" id="ir">
                     <br><input type="submit" value="Pedir" />
                 </div>

@@ -16,12 +16,16 @@ def bebidas_view(request):
 
 def comidas_view(request):
 
-    return render(request, 'comidas.html')
+    context = {
+        'pizza': Pizza.objects.order_by('?').all(),
+    }
+
+    return render(request, 'comidas.html', context)
 
 def pizza_view(request):
 
     context = {
-        'pizza': Pizza.objects.all(),
+        'pizza': Pizza.objects.order_by('?').all(),
     }
 
     return render(request, 'pizzas.html', context)
@@ -43,6 +47,7 @@ def carrinho_view(request):
             pp[2] = float(pp[2])
 
             if request.GET.get(f'c{pi.id} {pi.preco_f}') == 'on':
+                pp[0] = pp[0] + ' + Catupiry'
                 pp[2] += 2
 
             pp[2] *= quant
@@ -57,6 +62,7 @@ def carrinho_view(request):
             pp[2] = float(pp[2])
 
             if request.GET.get(f'c{pi.id} {pi.preco_g}'):
+                pp[0] = pp[0] + ' + Catupiry'
                 pp[2] += 2
 
             pp[2] *= quant
@@ -71,6 +77,7 @@ def carrinho_view(request):
             pp[2] = float(pp[2])
 
             if request.GET.get(f'c{pi.id} {pi.preco_m}'):
+                pp[0] = pp[0] + ' + Catupiry'
                 pp[2] += 2
 
             pp[2] *= quant
@@ -85,6 +92,7 @@ def carrinho_view(request):
             pp[2] = float(pp[2])
 
             if request.GET.get(f'c{pi.id} {pi.preco_p}'):
+                pp[0] = pp[0] + ' + Catupiry'
                 pp[2] += 2
 
             pp[2] *= quant
@@ -95,9 +103,20 @@ def carrinho_view(request):
     if not encontrado:
         return redirect(to='pizzas')
 
+    data = request.GET.get('datetime')
+
+    data = f'{data[8:10]}/{data[5:7]}/{data[0:4]} às {data[11:]}'
+    mensagem = '*Olá. Eu gostaria de:*\n\n'
+    for pe in pedido:
+        mensagem = mensagem + f'{pe[0][0]} ({pe[0][1]}) x {pe[1]}\n'
+
+    mensagem = mensagem + f'\n*Data: {data}*'
+
     context = {
         'pedido': pedido,
         'total': total,
+        'data': data,
+        'mensagem': mensagem,
     }
 
     return render(request, 'carrinho.html', context)

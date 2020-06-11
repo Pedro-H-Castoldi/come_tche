@@ -1,5 +1,76 @@
 {% extends 'base.html' %}
 {%load bootstrap4 %}
 {% block content %}
-<h1>Comidas</h1>
+<center id="center">
+    <div class="container">
+        <h1>Pizzas</h1>
+        <h3>Faça seu pedido</h3>
+        <div class="form">
+            <form action="{% url 'bebidas' %}" method="get" id="pedir" class="form">
+                {% csrf_token %}
+                <div class="pizzas" id="pizzas">
+                    <div class="pizza" id="0">
+                        <div id="sabores">
+                            <select name="sabor1" id="sabor1">
+                                <optgroup label="Sabor 1">
+                                    {% for pi in pizza %}
+                                        <option value="{{ pi.produto }}">{{ pi.produto }}</option>
+                                    {% endfor %}
+                                </optgroup>
+                            </select>
+
+                            <select name="sabor2" id="sabor1">
+                                <optgroup label="Sabor 2">
+                                    {% for pi in pizza %}
+                                        <option value="{{ pi.produto }}">{{ pi.produto }}</option>
+                                    {% endfor %}
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="img_pizza" id="img_pizza">
+                            <img src="../static/images/pizza.jpg" alt="pizza">
+                        </div>
+
+
+                        <div id="tamanhos">
+
+                            <div class="fam" id="fam0">
+                                <strong>Família ---- R${{ pizza.0.preco_f }}</strong>
+                                <input type="checkbox" name="f0" id="0" value="familia, {{ pizza.0.preco_f }}" class="box">
+                                <strong id="0 {{ pizza.0.preco_f }}"></strong>
+                            </div>
+    
+
+                            <div class="gra" id="gra0">
+                                <strong>Grande ---- R${{ pizza.0.preco_g }}</strong>
+                                <input type="checkbox" name="g0" id="0" value="grande, {{ pizza.0.preco_g }}" class="box">
+                                <strong id="0 {{ pizza.0.preco_g }}"></strong>
+                            </div>
+                            
+
+                            <div class="med" id="med0">
+                                <strong>Média ----- R${{ pizza.0.preco_m }}</strong>
+                                <input type="checkbox" name="m0" id="0" value="media, {{ pizza.0.preco_m }}" class="box">
+                                <strong id="0 {{ pizza.0.preco_m }}"></strong>
+                            </div>
+                            
+
+                            <div class="peq" id="peq0">
+                                <strong>Pequena -- R${{ pizza.0.preco_p }}</strong>
+                                <input type="checkbox" name="p0" id="0" value="pequena, {{ pizza.0.preco_p }}" class="box">
+                                <strong id="0 {{ pizza.0.preco_p }}"></strong>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ir" id="ir">
+                    <br><input type="submit" value="Pedir" />
+                </div>
+            </form>
+        </div>
+    </div>
+</center>
 {% endblock %}
