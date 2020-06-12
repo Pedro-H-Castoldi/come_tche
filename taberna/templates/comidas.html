@@ -11,25 +11,25 @@
                 <div class="pizzas" id="pizzas">
                     <div class="pizza" id="0">
                         <div id="sabores">
-                            <select name="sabor1" id="sabor1">
+                            <select name="sabor1" id="sabor1" onchange="foto(this.id)">
                                 <optgroup label="Sabor 1">
                                     {% for pi in pizza %}
-                                        <option value="{{ pi.produto }}">{{ pi.produto }}</option>
+                                        <option value="{{ pi.produto }}" id="1">{{ pi.produto }}</option>
                                     {% endfor %}
                                 </optgroup>
                             </select>
 
-                            <select name="sabor2" id="sabor1">
+                            <select name="sabor2" id="sabor2" onchange="foto(this.id)">
                                 <optgroup label="Sabor 2">
                                     {% for pi in pizza %}
-                                        <option value="{{ pi.produto }}">{{ pi.produto }}</option>
+                                        <option value="{{ pi.produto }}" id="2">{{ pi.produto }}</option>
                                     {% endfor %}
                                 </optgroup>
                             </select>
                         </div>
 
                         <div class="img_pizza" id="img_pizza">
-                            <img src="../static/images/pizza.jpg" alt="pizza">
+                            <img src="../static/images/pizza.jpg" alt="pizza1" id="f1"><img src="../static/images/pizza2.jpg" alt="pizza2" id="f2">
                         </div>
 
 
@@ -64,6 +64,10 @@
 
                         </div>
                     </div>
+                </div>
+
+                <div class="mais" id="mais">
+                    <button id="mais_uma" type="button">Pedir mais uma pizza +</button>
                 </div>
 
                 <div class="ir" id="ir">
