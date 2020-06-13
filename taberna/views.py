@@ -43,17 +43,17 @@ def carrinho_view(request):
         if request.GET.get(f'f{pi.id}'):
             pp = request.GET.get(f'f{pi.id}').split(',')
             quant = int(request.GET.get(f'{pi.id} {pi.preco_f}'))
-            pp[1] = pp[1].strip()
-            pp[2] = float(pp[2])
+            #pp[1] = pp[1].strip()
+            pp[1] = float(pp[1])
 
             if request.GET.get(f'c{pi.id} {pi.preco_f}') == 'on':
                 pp[0] = pp[0] + ' + Catupiry'
-                pp[2] += 2
+                pp[1] += 2
 
-            pp[2] *= quant
+            pp[1] *= quant
             pedido.append([pp, quant])
             encontrado = True
-            total += pp[2]
+            total += pp[1]
 
         if request.GET.get(f'g{pi.id}'):
             pp = request.GET.get(f'g{pi.id}').split(',')
@@ -63,12 +63,12 @@ def carrinho_view(request):
 
             if request.GET.get(f'c{pi.id} {pi.preco_g}'):
                 pp[0] = pp[0] + ' + Catupiry'
-                pp[2] += 2
+                pp[1] += 2
 
             pp[2] *= quant
             pedido.append([pp, quant])
             encontrado = True
-            total += pp[2]
+            total += pp[1]
 
         if request.GET.get(f'm{pi.id}'):
             pp = request.GET.get(f'm{pi.id}').split(',')
@@ -101,7 +101,8 @@ def carrinho_view(request):
             total += pp[2]
 
     if not encontrado:
-        return redirect(to='pizzas')
+        pass
+        #return redirect(to='pizzas')
 
     data = request.GET.get('datetime')
 

@@ -8,9 +8,9 @@ let quant = ''
 var n = 1
 var ns = 3
 let pizzas_container = document.getElementById('pizzas')
+var tam = 4
 
 quant = function(id){
-    alert('qq')
     var quant = document.createElement('input')
     var catupiry = document.createElement('input')
     var label = document.createElement('label')
@@ -52,7 +52,7 @@ quant = function(id){
             if(ident[i][0] == quant.name){
                 encontrado = true
                 if(ident[i][1] == 0){
-                    alert('Não remover')
+                    //alert('Não remover')
                     ident[i][1] = 1
                     pizzas.append(quant)
                     label.append(texto)
@@ -60,7 +60,7 @@ quant = function(id){
                     pizzas.append(label)
                 }
                 else if(ident[i][1] == 1){
-                    alert('remover')
+                    //alert('remover')
                     ident[i][1] = 0
                     pizzas.remove()
                     pizzas = document.createElement('strong')
@@ -89,7 +89,7 @@ quant = function(id){
         }
         if(encontrado == false){
             ident.push([`${id.id}${p[1]}.${p[2]}`, 1])
-            alert('Criado carimbo')
+            //alert('Criado carimbo')
             pizzas.append(quant)
             label.append(texto)
             label.append(catupiry)
@@ -138,6 +138,7 @@ function foto(id) {
             img.src = "../static/images/portuguesa_d.png"
         }
     }
+    foi = true
 
 }
 
@@ -164,15 +165,19 @@ let mais_uma = function() {
     div.children[2].children[0].children[1].id = `${n}`
     div.children[2].children[0].children[1].name = `f${n}`
     div.children[2].children[0].children[2].id = `${n} 30,00`
+    div.children[2].children[0].children[2].innerHTML = ''
     div.children[2].children[1].children[1].id = `${n}`
     div.children[2].children[1].children[1].name = `g${n}`
     div.children[2].children[1].children[2].id = `${n} 25,00`
+    div.children[2].children[1].children[2].innerHTML = ''
     div.children[2].children[2].children[1].id = `${n}`
     div.children[2].children[2].children[1].name = `m${n}`
     div.children[2].children[2].children[2].id = `${n} 20,00`
+    div.children[2].children[2].children[2].innerHTML = ''
     div.children[2].children[3].children[1].id = `${n}`
     div.children[2].children[3].children[1].name = `p${n}`
     div.children[2].children[3].children[2].id = `${n} 15,00`
+    div.children[2].children[3].children[2].innerHTML = ''
 
     //alert(div.children[2].children[0].children[1].id)
     //alert(div.children[1].children[1].id)
@@ -182,10 +187,10 @@ let mais_uma = function() {
     n++
     ns += 2
 
-
-    for(let i=0; i < c.length; i++){
+    for(let i=tam; i < c.length; i++){
         c[i].addEventListener('click', function(){quant(c[i])})
     }
+    tam = c.length
 }
 
 
