@@ -9,9 +9,9 @@
             <form action="{% url 'carrinho' %}" method="get" id="pedir" class="form">
                 {% csrf_token %}
                 <div class="pizzas" id="pizzas">
-                    <div class="pizza" id="0">
+                    <div class="pizza" id="1">
                         <div id="sabores">
-                            <select name="sabor1" id="sabor1" onchange="foto(this.id)">
+                            <select name="sabor1-1" id="sabor1" onchange="foto(this.id)">
                                 <optgroup label="Sabor 1">
                                     {% for pi in pizza %}
                                         <option value="{{ pi.produto }}" id="1">{{ pi.produto }}</option>
@@ -19,7 +19,7 @@
                                 </optgroup>
                             </select>
 
-                            <select name="sabor2" id="sabor2" onchange="foto(this.id)">
+                            <select name="sabor2-1" id="sabor2" onchange="foto(this.id)">
                                 <optgroup label="Sabor 2">
                                     {% for pi in pizza %}
                                         <option value="{{ pi.produto }}" id="2">{{ pi.produto }}</option>
@@ -35,31 +35,31 @@
 
                         <div id="tamanhos">
 
-                            <div class="fam" id="fam0">
+                            <div class="fam" id="fam1">
                                 <strong>Família ---- R${{ pizza.0.preco_f }}</strong>
-                                <input type="checkbox" name="f0" id="0" value="familia, {{ pizza.0.preco_f }}" class="box">
-                                <strong id="0 {{ pizza.0.preco_f }}"></strong>
+                                <input type="checkbox" name="f1" id="1" value="familia, {{ pizza.0.preco_f }}" class="box">
+                                <strong id="1 {{ pizza.0.preco_f }}"></strong>
                             </div>
     
 
-                            <div class="gra" id="gra0">
+                            <div class="gra" id="gra1">
                                 <strong>Grande ---- R${{ pizza.0.preco_g }}</strong>
-                                <input type="checkbox" name="g0" id="0" value="grande, {{ pizza.0.preco_g }}" class="box">
-                                <strong id="0 {{ pizza.0.preco_g }}"></strong>
+                                <input type="checkbox" name="g1" id="1" value="grande, {{ pizza.0.preco_g }}" class="box">
+                                <strong id="1 {{ pizza.0.preco_g }}"></strong>
                             </div>
                             
 
-                            <div class="med" id="med0">
+                            <div class="med" id="med1">
                                 <strong>Média ----- R${{ pizza.0.preco_m }}</strong>
-                                <input type="checkbox" name="m0" id="0" value="media, {{ pizza.0.preco_m }}" class="box">
-                                <strong id="0 {{ pizza.0.preco_m }}"></strong>
+                                <input type="checkbox" name="m1" id="1" value="media, {{ pizza.0.preco_m }}" class="box">
+                                <strong id="1 {{ pizza.0.preco_m }}"></strong>
                             </div>
                             
 
-                            <div class="peq" id="peq0">
+                            <div class="peq" id="peq1">
                                 <strong>Pequena -- R${{ pizza.0.preco_p }}</strong>
-                                <input type="checkbox" name="p0" id="0" value="pequena, {{ pizza.0.preco_p }}" class="box">
-                                <strong id="0 {{ pizza.0.preco_p }}"></strong>
+                                <input type="checkbox" name="p1" id="1" value="pequena, {{ pizza.0.preco_p }}" class="box">
+                                <strong id="1 {{ pizza.0.preco_p }}"></strong>
                             </div>
 
                         </div>

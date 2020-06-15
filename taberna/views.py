@@ -34,71 +34,118 @@ def pizza_view(request):
 
 def carrinho_view(request):
     pedido = []
+    sabor = []
     encontrado = False
     total = 0
+    s = 1
+    verifica = ''
 
-    pizzas = Pizza.objects.all()
+    pizzas = Pizza.objects.order_by('pk').all()
 
+    while request.GET.get(f'sabor1-{s}') != None:
+        s1 = request.GET.get(f'sabor1-{s}')
+        s2 = request.GET.get(f'sabor2-{s}')
+        sabor.append(f'Pizza {s1} / {s2}')
+        s += 1
+
+    j = 0
     for pi in pizzas:
         if request.GET.get(f'f{pi.id}'):
             pp = request.GET.get(f'f{pi.id}').split(',')
             quant = int(request.GET.get(f'{pi.id} {pi.preco_f}'))
-            #pp[1] = pp[1].strip()
             pp[1] = float(pp[1])
 
-            if request.GET.get(f'c{pi.id} {pi.preco_f}') == 'on':
-                pp[0] = pp[0] + ' + Catupiry'
-                pp[1] += 2
-
             pp[1] *= quant
-            pedido.append([pp, quant])
+            if verifica != pi.id:
+                if request.GET.get(f'c{pi.id} {pi.preco_f}') == 'on':
+                    sabor[j] = sabor[j] + ' + Catupiry'
+                    pp[1] += 2
+
+                pedido.append([sabor[j], pp, quant])
+                j += 1
+            else:
+                if request.GET.get(f'c{pi.id} {pi.preco_f}') == 'on':
+                    sabor[j-1] = sabor[j-1] + ' + Catupiry'
+                    pp[1] += 2
+
+                pedido.append([sabor[j-1], pp, quant])
+
             encontrado = True
             total += pp[1]
+            verifica = pi.id
 
         if request.GET.get(f'g{pi.id}'):
             pp = request.GET.get(f'g{pi.id}').split(',')
             quant = int(request.GET.get(f'{pi.id} {pi.preco_g}'))
-            pp[1] = pp[1].strip()
-            pp[2] = float(pp[2])
+            pp[1] = float(pp[1])
 
-            if request.GET.get(f'c{pi.id} {pi.preco_g}'):
-                pp[0] = pp[0] + ' + Catupiry'
-                pp[1] += 2
+            pp[1] *= quant
 
-            pp[2] *= quant
-            pedido.append([pp, quant])
+            if verifica != pi.id:
+                if request.GET.get(f'c{pi.id} {pi.preco_g}') == 'on':
+                    sabor[j] = sabor[j] + ' + Catupiry'
+                    pp[1] += 2
+
+                pedido.append([sabor[j], pp, quant])
+                j += 1
+            else:
+                if request.GET.get(f'c{pi.id} {pi.preco_g}') == 'on':
+                    sabor[j-1] = sabor[j-1] + ' + Catupiry'
+                    pp[1] += 2
+
+                pedido.append([sabor[j-1], pp, quant])
+
             encontrado = True
             total += pp[1]
+            verifica = pi.id
 
         if request.GET.get(f'm{pi.id}'):
             pp = request.GET.get(f'm{pi.id}').split(',')
             quant = int(request.GET.get(f'{pi.id} {pi.preco_m}'))
-            pp[1] = pp[1].strip()
-            pp[2] = float(pp[2])
+            pp[1] = float(pp[1])
 
-            if request.GET.get(f'c{pi.id} {pi.preco_m}'):
-                pp[0] = pp[0] + ' + Catupiry'
-                pp[2] += 2
+            pp[1] *= quant
+            if verifica != pi.id:
+                if request.GET.get(f'c{pi.id} {pi.preco_m}') == 'on':
+                    sabor[j] = sabor[j] + ' + Catupiry'
+                    pp[1] += 2
 
-            pp[2] *= quant
-            pedido.append([pp, quant])
+                pedido.append([sabor[j], pp, quant])
+                j += 1
+            else:
+                if request.GET.get(f'c{pi.id} {pi.preco_m}') == 'on':
+                    sabor[j-1] = sabor[j-1] + ' + Catupiry'
+                    pp[1] += 2
+
+                pedido.append([sabor[j-1], pp, quant])
+
             encontrado = True
-            total += pp[2]
+            total += pp[1]
+            verifica = pi.id
 
         if request.GET.get(f'p{pi.id}'):
             pp = request.GET.get(f'p{pi.id}').split(',')
             quant = int(request.GET.get(f'{pi.id} {pi.preco_p}'))
-            pp[1] = pp[1].strip()
-            pp[2] = float(pp[2])
+            pp[1] = float(pp[1])
 
-            if request.GET.get(f'c{pi.id} {pi.preco_p}'):
-                pp[0] = pp[0] + ' + Catupiry'
-                pp[2] += 2
+            pp[1] *= quant
+            if verifica != pi.id:
+                if request.GET.get(f'c{pi.id} {pi.preco_p}') == 'on':
+                    sabor[j] = sabor[j] + ' + Catupiry'
+                    pp[1] += 2
 
-            pp[2] *= quant
-            pedido.append([pp, quant])
+                pedido.append([sabor[j], pp, quant])
+                j += 1
+            else:
+                if request.GET.get(f'c{pi.id} {pi.preco_p}') == 'on':
+                    sabor[j-1] = sabor[j-1] + ' + Catupiry' # Seria melhor criar uma variável ' + Catupiry' e add ao template.
+                    pp[1] += 2
+
+                pedido.append([sabor[j-1], pp, quant])
+
             encontrado = True
-            total += pp[2]
+            total += pp[1]
+            verifica = pi.id
 
     if not encontrado:
         pass
@@ -112,6 +159,8 @@ def carrinho_view(request):
         mensagem = mensagem + f'{pe[0][0]} ({pe[0][1]}) x {pe[1]}\n'
 
     mensagem = mensagem + f'\n*Data: {data}*'
+
+    print(pedido)
 
     context = {
         'pedido': pedido,

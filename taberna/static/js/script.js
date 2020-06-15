@@ -5,7 +5,7 @@ let mais = document.getElementById('mais')
 var encontrado = false
 var ident = []
 let quant = ''
-var n = 1
+var n = 2
 var ns = 3
 let pizzas_container = document.getElementById('pizzas')
 var tam = 4
@@ -147,10 +147,13 @@ let mais_uma = function() {
     div.id = `${n}`
     div.class = "pizza"
 
-    div.innerHTML = document.getElementById('0').innerHTML
+    div.innerHTML = document.getElementById('1').innerHTML
 
     div.children[0].children[0].id = `sabor${ns}`
     div.children[0].children[1].id = `sabor${ns+1}`
+
+    div.children[0].children[0].name = `sabor1-${n}`
+    div.children[0].children[1].name = `sabor2-${n}`
 
     div.children[1].children[0].id = `f${ns}`
     div.children[1].children[1].id = `f${ns+1}`

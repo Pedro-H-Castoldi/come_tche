@@ -6,9 +6,9 @@
     <div class="pedido" id="pedido" mensagem = '{{ mensagem }}'>
         <h2>Pedido</h3><br>
         {% for pp in pedido %}
-            <h3>Produto: {{ pp.0.0 }} ({{ pp.0.0 }})</h3><br>
-            <h3>Preço: R${{ pp.0.1 }}</h3><br>
-            <h3>Quantidade: {{ pp.1 }}</h3>
+            <h3>Produto: {{ pp.0 }} ({{ pp.1.0 }})</h3><br>
+            <h3>Preço: R${{ pp.1.1 }}</h3><br>
+            <h3>Quantidade: {{ pp.2 }}</h3>
         {% endfor %}
         
         <br><h3>TOTAL: R${{ total }}</h3>
