@@ -36,6 +36,7 @@ def carrinho_view(request):
     pedido = []
     sabor = []
     encontrado = False
+    catupiry = False
     total = 0
     s = 1
     verifica = ''
@@ -55,20 +56,24 @@ def carrinho_view(request):
             quant = int(request.GET.get(f'{pi.id} {pi.preco_f}'))
             pp[1] = float(pp[1])
 
+            if request.GET.get(f'c{pi.id} {pi.preco_f}') == 'on':
+                catupiry = True
+                pp[1] += 2
+
             pp[1] *= quant
             if verifica != pi.id:
-                if request.GET.get(f'c{pi.id} {pi.preco_f}') == 'on':
-                    sabor[j] = sabor[j] + ' + Catupiry'
-                    pp[1] += 2
-
-                pedido.append([sabor[j], pp, quant])
+                if catupiry:
+                    catupiry = False
+                    pedido.append([f'{sabor[j]} + Catupiry', pp, quant])
+                else:
+                    pedido.append([sabor[j], pp, quant])
                 j += 1
             else:
-                if request.GET.get(f'c{pi.id} {pi.preco_f}') == 'on':
-                    sabor[j-1] = sabor[j-1] + ' + Catupiry'
-                    pp[1] += 2
-
-                pedido.append([sabor[j-1], pp, quant])
+                if catupiry:
+                    catupiry = False
+                    pedido.append([f'{sabor[j - 1]} + Catupiry', pp, quant])
+                else:
+                    pedido.append([sabor[j - 1], pp, quant])
 
             encontrado = True
             total += pp[1]
@@ -79,21 +84,24 @@ def carrinho_view(request):
             quant = int(request.GET.get(f'{pi.id} {pi.preco_g}'))
             pp[1] = float(pp[1])
 
+            if request.GET.get(f'c{pi.id} {pi.preco_g}') == 'on':
+                catupiry = True
+                pp[1] += 2
+
             pp[1] *= quant
-
             if verifica != pi.id:
-                if request.GET.get(f'c{pi.id} {pi.preco_g}') == 'on':
-                    sabor[j] = sabor[j] + ' + Catupiry'
-                    pp[1] += 2
-
-                pedido.append([sabor[j], pp, quant])
+                if catupiry:
+                    catupiry = False
+                    pedido.append([f'{sabor[j]} + Catupiry', pp, quant])
+                else:
+                    pedido.append([sabor[j], pp, quant])
                 j += 1
             else:
-                if request.GET.get(f'c{pi.id} {pi.preco_g}') == 'on':
-                    sabor[j-1] = sabor[j-1] + ' + Catupiry'
-                    pp[1] += 2
-
-                pedido.append([sabor[j-1], pp, quant])
+                if catupiry:
+                    catupiry = False
+                    pedido.append([f'{sabor[j - 1]} + Catupiry', pp, quant])
+                else:
+                    pedido.append([sabor[j - 1], pp, quant])
 
             encontrado = True
             total += pp[1]
@@ -104,20 +112,24 @@ def carrinho_view(request):
             quant = int(request.GET.get(f'{pi.id} {pi.preco_m}'))
             pp[1] = float(pp[1])
 
+            if request.GET.get(f'c{pi.id} {pi.preco_m}') == 'on':
+                catupiry = True
+                pp[1] += 2
+
             pp[1] *= quant
             if verifica != pi.id:
-                if request.GET.get(f'c{pi.id} {pi.preco_m}') == 'on':
-                    sabor[j] = sabor[j] + ' + Catupiry'
-                    pp[1] += 2
-
-                pedido.append([sabor[j], pp, quant])
+                if catupiry:
+                    catupiry = False
+                    pedido.append([f'{sabor[j]} + Catupiry', pp, quant])
+                else:
+                    pedido.append([sabor[j], pp, quant])
                 j += 1
             else:
-                if request.GET.get(f'c{pi.id} {pi.preco_m}') == 'on':
-                    sabor[j-1] = sabor[j-1] + ' + Catupiry'
-                    pp[1] += 2
-
-                pedido.append([sabor[j-1], pp, quant])
+                if catupiry:
+                    catupiry = False
+                    pedido.append([f'{sabor[j - 1]} + Catupiry', pp, quant])
+                else:
+                    pedido.append([sabor[j - 1], pp, quant])
 
             encontrado = True
             total += pp[1]
@@ -128,39 +140,42 @@ def carrinho_view(request):
             quant = int(request.GET.get(f'{pi.id} {pi.preco_p}'))
             pp[1] = float(pp[1])
 
+            if request.GET.get(f'c{pi.id} {pi.preco_p}') == 'on':
+                catupiry = True
+                pp[1] += 2
+
             pp[1] *= quant
             if verifica != pi.id:
-                if request.GET.get(f'c{pi.id} {pi.preco_p}') == 'on':
-                    sabor[j] = sabor[j] + ' + Catupiry'
-                    pp[1] += 2
-
-                pedido.append([sabor[j], pp, quant])
+                if catupiry:
+                    catupiry = False
+                    pedido.append([f'{sabor[j]} + Catupiry', pp, quant])
+                else:
+                    pedido.append([sabor[j], pp, quant])
                 j += 1
             else:
-                if request.GET.get(f'c{pi.id} {pi.preco_p}') == 'on':
-                    sabor[j-1] = sabor[j-1] + ' + Catupiry' # Seria melhor criar uma variável ' + Catupiry' e add ao template.
-                    pp[1] += 2
-
-                pedido.append([sabor[j-1], pp, quant])
+                if catupiry:
+                    catupiry = False
+                    pedido.append([f'{sabor[j - 1]} + Catupiry', pp, quant])
+                else:
+                    pedido.append([sabor[j - 1], pp, quant])
 
             encontrado = True
             total += pp[1]
             verifica = pi.id
 
     if not encontrado:
-        pass
-        #return redirect(to='pizzas')
+        return redirect(to='pizzas')
 
     data = request.GET.get('datetime')
 
     data = f'{data[8:10]}/{data[5:7]}/{data[0:4]} às {data[11:]}'
     mensagem = '*Olá. Eu gostaria de:*\n\n'
     for pe in pedido:
-        mensagem = mensagem + f'{pe[0][0]} ({pe[0][1]}) x {pe[1]}\n'
+        mensagem = mensagem + f'{pe[0]} ({pe[1][0]}) x {pe[2]}\n'
 
     mensagem = mensagem + f'\n*Data: {data}*'
 
-    print(pedido)
+    print(mensagem)
 
     context = {
         'pedido': pedido,

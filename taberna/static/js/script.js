@@ -194,13 +194,13 @@ let mais_uma = function() {
         c[i].addEventListener('click', function(){quant(c[i])})
     }
     tam = c.length
-}
+}   
 
 
 for(let i=0; i < c.length; i++){
     c[i].addEventListener('click', function(){quant(c[i])})
 }
-mais.addEventListener('click', mais_uma)
+document.addEventListener('DOMContentLoaded', function () {
+    mais.addEventListener('click', mais_uma)
+})
 butao.addEventListener('click', encomendar)
-
-// Está clicando 2x na funcão q add quant e catupiry.
