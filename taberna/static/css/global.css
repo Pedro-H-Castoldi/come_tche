@@ -1,0 +1,502 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f3f3f3;
+}
+
+#main-header {
+    font-size: 25px;
+    border-radius: 3px;
+    text-shadow: rgb(49, 49, 49) 1px 1px 1px;
+    width: 99%;
+    background-color: #ea0606;
+    margin: auto;
+    text-align: center;
+    padding: 3px;
+    cursor: pointer;
+}
+
+#main-header a {
+    text-decoration: none;
+    color: #FFF;
+}
+
+#main-header a h1 {
+    margin: 0;
+    height: 110px;
+    padding-top: 25px;
+}
+
+#food {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+
+header .menu {
+    width: 100%;
+    max-width: 350px;
+    margin: auto;
+    padding: 10px 0
+}
+
+header .menu ul {
+    padding: 0;
+    align-items: center;
+    margin: 0;
+    display: flex;
+    list-style: none;
+}
+
+header .menu ul li {
+    flex: 1;
+    background-color: #3c7107;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 50px;
+    margin: 3px;
+    cursor: pointer;
+}
+
+header .menu ul li a {
+    text-decoration: none;
+    font-size: 25px;
+    color: #FFF;
+}
+
+header .menu ul .drinks-a:hover,
+header .menu ul .pizzas-a:hover,
+header .menu ul .food-a:hover{
+    opacity: .9;
+}
+
+header .menu ul .drinks-a:active,
+header .menu ul .pizzas-a:active,
+header .menu ul .food-a:active {
+    background-color: #226922;
+}
+
+section {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+
+section main .message {
+    border: solid 1px #FFF;
+    background-color: rgba(14, 228, 14, 0.904);
+    color: #FFF;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 0 9px;
+}
+
+section main .car {
+    background-color: #48EC35;
+    border: solid 3px #FFF;
+    position: fixed;
+    border-radius: 100%;
+    padding: 10px;
+    margin-left: 510px;
+}
+section main #cart {
+    height: 50px;
+    width: 50px;
+}
+
+section main .content {
+    padding: 10px 20px;
+    background-color: #ea0606;
+    border-radius: 8px;
+    box-shadow: #4f4f50 1px 1px 6px;
+}
+
+section main .content .pizza {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0 5px;
+    background-color: #FFF;
+    border-radius: 15px;
+}
+
+section main .content .pizza #flavors {
+    max-width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+section main .content .pizza #flavors select {
+    width: 200px;
+    margin: 10px 0;
+    background: #ea0606;
+    padding: 10px;
+    border-radius: 15px;
+    color: rgba(255, 255, 255, 0.973);
+    outline: none;
+    font-weight: bold;
+    overflow: hidden;
+    cursor: pointer;
+    text-shadow: rgb(49, 49, 49) 1px 1px 1px;
+    font-size: 19px;
+}
+
+section main .content .pizza #flavors select option {
+    background: #ff2c2c;
+}
+
+section main .content .pizza #flavors .select-1 {
+    margin-right: 5px;
+}
+
+section main .content .pizza .flavors-images {
+    display: flex;
+}
+
+section .content .pizza .flavors-images .img-1 {
+    padding-left: 75px;
+}
+
+section .content .pizza .sizes {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    padding-left: 70px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    list-style: none;
+    text-align: justify;
+}
+
+section .content .pizza .sizes li {
+    padding-bottom: 5px;
+    border-bottom: solid 1px #CCC;
+    transition: .2s;
+}
+
+section .content .pizza .sizes li:hover {
+    background-color: rgba(14, 228, 14, 0.204);
+    border-radius: 5px;
+}
+
+section .content .pizza .sizes li:active {
+    background-color: #FFF;
+    border-radius: 5px;
+}
+
+section .content .pizza .sizes li .content-sizes {
+    display: flex;
+    color: #414142;
+    font-size: 19px;
+    font-weight: bold;
+    padding-top: 10px;
+    cursor: pointer;
+}
+section .content .pizza .sizes li .content-sizes .type {
+    width: 90px;
+    padding: 0;
+}
+
+section .content .pizza .sizes li .content-sizes .price {
+    width: 85px;
+}
+
+section .content .pizza .sizes li .content-sizes div {
+    display: flex;
+    background-color: #29d312;
+    border-radius: 3px;
+    padding: 2px 0;
+}
+
+section .content .pizza .sizes li .content-sizes div .quant {
+    width: 60px;
+    height: 25px;
+    margin: 0 5px;
+}
+
+section .content .pizza .sizes li .content-sizes div p {
+    margin: 3px 0;
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+section .content .more {
+    width: 100%;
+    max-width: 150px;
+    margin: auto;
+    text-align: center;
+}
+
+section .content .more button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: rgba(14, 228, 14, 0.904);
+    color: #FFF;
+    border: none;
+    border-radius: 100%;
+    font-size: 40px;
+    font-weight: bold;
+    box-shadow: #000 1px 1px 5px;
+    cursor: pointer;
+    outline: none;
+    transition: all .6s;
+    
+}
+
+section .content .more button:hover {
+    background: #12a500;
+}
+
+section .content .more button:active {
+    background: rgba(14, 228, 14, 0.904);
+}
+
+section .content .soda-content {
+    width: 100%;
+    margin: 30px 0;
+    padding: 10px 0;
+    background-color: #FFF;
+    border-radius: 15px;
+    text-align: center;
+}
+
+section .content .soda-content #soda-title {
+    width: 50%;
+    margin: auto;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+section .content .soda {
+    width: 100%;
+    margin: auto;
+}
+
+section .content .soda details {
+    flex: 1;
+    padding: 10px 21px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #414142;
+    transition: .2s;
+}
+
+section .content .soda details:hover {
+    background-color: rgba(14, 228, 14, 0.204);
+    border-radius: 5px;
+}
+
+section .content .soda details:active {
+    background-color: #FFF;
+    border-radius: 5px;
+}
+
+section .content .soda details div {
+    width: 100%;
+    max-width: 300px;
+}
+
+section .content .soda details[open] {
+    padding-left: 5px;
+    
+}
+
+section .content .soda details .flavor-soda {
+    background-color:rgb(241, 241, 241);
+    display: flex;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+section .content .soda details p {
+    width: 150px;
+    border-left: solid 4px #ea0606;
+    margin: 0;
+    padding: 10px 5px;
+    font-size: 14px;
+}
+
+section .content .soda details input {
+    font-size: 20px;
+    width: 60px;
+    margin: 0;
+    padding: 0 2px;
+    border: solid 1px rgb(231, 222, 222);
+    outline: none;
+}
+
+section .content .soda details summary {
+    border-bottom: solid 1px #CCC;
+    outline: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+summary:before {
+    content: url("../images/seta2.png"); /* the new icon */
+    color: #12a500;
+    margin-right: 3px;
+}
+
+#order-pizza {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+#order-pizza button {
+    padding: 30px;
+    font-size: 45px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-shadow: #000 1px 1px 1px;
+    box-shadow: #000 1px 1px 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: rgb(240, 240, 240);
+    transition: .2s;
+}
+
+#order-pizza button:hover {
+    background: rgba(255, 255, 2, 0.986);
+    color: #ea0606;
+    text-shadow: #000 1px 1px 1px;
+}
+
+#order-pizza button:active {
+    background: #2a881e;
+    color: #FFF;
+}
+
+#explain {
+    background-color: gray;
+    position: absolute;
+}
+
+footer {
+    border-radius: 3px;
+    text-shadow: rgb(49, 49, 49) 1px 1px 1px;
+    width: 99%;
+    background-color: #4f4f50;
+    color: #FFF;
+    margin: auto;
+    text-align: center;
+    padding: 3px;
+    margin-top: 10px;
+}
+
+section .content .date {
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: #FFF;
+}
+
+section .content .date p {
+    font-weight: bold;
+    font-size: 25px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+section .content .date #datetime {
+    height: 50px;
+    outline: none;
+    font-size: 20px;
+    border: none;
+    color: #414142;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+@media(max-width: 450px) {
+    * {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);  
+    }
+
+    section main .car {
+        margin-left: 77%;
+        margin-top: 70%;
+    }
+
+    section main .content .pizza .flavors-images {
+        width: 300px;
+        margin: auto;
+    }
+    section main .content .pizza .flavors-images .img-1 {
+        padding-left: 0;
+    }
+
+    section .content .pizza .sizes {
+        padding-left: 25px;
+    }
+
+    section .content .pizza .sizes li:hover {
+        opacity: 1;
+    }
+
+    section .content .pizza .sizes li:active {
+        background-color: rgb(218, 216, 216);
+    }
+
+    section .content .pizza .sizes li .content-sizes div {
+        display: flex;
+        background-color: rgba(14, 228, 14, 0.904);
+        border-radius: 3px;
+    }
+
+    
+    section .content .pizza .sizes li .content-sizes div .quant {
+        width: 30px;
+        height: 25px;
+        margin: 0 3px;
+    }
+    
+    section .content .pizza .sizes li .content-sizes div p {
+        margin: 7px 0;
+        color: #000;
+        font-weight: bold;
+        font-size: 11px;
+    }
+    
+    section .content .pizza .sizes li .content-sizes div .catu {
+        margin-top: 7px;
+    }
+    
+
+    section .content .soda {
+        width: 100%;
+        margin: auto;
+    }
+
+    section .content .soda details {
+        transition: .7s;
+    }
+
+    section .content .soda details:active {
+        background-color: rgb(218, 216, 216);
+    }
+}
+
+@media(max-width: 350px) {
+    body {
+        background-color: blue;
+    }
+}

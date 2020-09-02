@@ -31,11 +31,44 @@ class Produto(Base):
 
 class Pizza(Produto):
 
-    preco_f = models.DecimalField('Preço Família', max_digits=8, decimal_places=2)
-    preco_g = models.DecimalField('Preço Grande', max_digits=8, decimal_places=2)
-    preco_m = models.DecimalField('Preço Média', max_digits=8, decimal_places=2)
-    preco_p = models.DecimalField('Preço Pequena', max_digits=8, decimal_places=2)
-
     class Meta:
         verbose_name = 'Pizza'
         verbose_name_plural = 'Pizzas'
+
+    def __str__(self):
+        return self.produto
+
+class PrecoPizza(Base):
+
+    preco_f = models.DecimalField('Preço Família', max_digits=8, decimal_places=2, default=30.00)
+    preco_g = models.DecimalField('Preço Grande', max_digits=8, decimal_places=2, default=25.00)
+    preco_a = models.DecimalField('Preço Média', max_digits=8, decimal_places=2, default=20.00)
+    preco_p = models.DecimalField('Preço Pequena', max_digits=8, decimal_places=2, default=15.00)
+    preco_m = models.DecimalField('Preço Mini', max_digits=8, decimal_places=2, default=6.00)
+
+    class Meta:
+        verbose_name = 'Preço Pizza'
+        verbose_name_plural = 'Preços Pizzas'
+
+    def __str__(self):
+        return 'Preços'
+
+class Refrigerante(Produto):
+
+    CHOICES = [
+        ('1 l', '1 Litro'),
+        ('2 l', '2 Litro'),
+        ('KS', 'KS'),
+        ('Lata', 'Lata'),
+        ('Pequena', 'Pequena'),
+    ]
+
+    tipo = models.CharField('Tipo', choices=CHOICES, max_length=7)
+    preco = models.DecimalField('Preço', max_digits=8, decimal_places=2)
+
+    class Meta:
+        verbose_name = 'Refrigerante'
+        verbose_name_plural = 'Refrigerantes'
+
+    def __str__(self):
+        return self.produto

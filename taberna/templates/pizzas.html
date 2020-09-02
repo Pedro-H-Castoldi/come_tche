@@ -1,99 +1,184 @@
 {% extends 'base.html' %}
 {%load bootstrap4 %}
+{% block title %}ComeTchÊ | Comidas{% endblock %}
+{% block css %}'css/comidas/styles.css'{% endblock %}
 {% block content %}
-<center id="center">
-    <div class="container">
-        <h1>Pizzas</h1>
-        <h3>Faça seu pedido</h3>
-        <div class="form">
-            <form action="{% url 'carrinho' %}" method="get" id="pedir" class="form">
-                {% csrf_token %}
-                <div class="pizzas" id="pizzas">
-                    <div class="pizza" id="1">
-                        <div id="sabores">
-                            <select name="sabor1-1" id="sabor1" onchange="foto(this.id)">
-                                <optgroup label="Sabor 1">
-                                    {% for pi in pizza %}
-                                        <option value="{{ pi.produto }}" id="1">{{ pi.produto }}</option>
-                                    {% endfor %}
-                                </optgroup>
-                            </select>
+<header id="food">
+    <nav class="menu">
+        <ul>
+            <li class="drinks-a"><a href="{% url 'bebidas' %}">Bebidas</a></li>
+            <li class="pizzas-a"><a href="{% url 'pizzas' %}">Pizzas</a></li>
+            <li class="food-a"><a href="{% url 'comidas' %}">Comidas</a></li>
+        </ul>
+    </nav>
+</header>
+<section id="food-s">
+    <main>
+        {% if messages %}
+            {%for m in messages %}
+                <div class="message">
+                    <p>{{ m }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
 
-                            <select name="sabor2-1" id="sabor2" onchange="foto(this.id)">
-                                <optgroup label="Sabor 2">
-                                    {% for pi in pizza %}
-                                        <option value="{{ pi.produto }}" id="2">{{ pi.produto }}</option>
-                                    {% endfor %}
-                                </optgroup>
-                            </select>
+        <a href="{% url 'carrinho' %}">
+            <div class="car">
+                <img src="../static/images/car2.png" alt="Carrinho" id="cart">
+            </div>
+        </a>
+        <form action="{% url 'comidas' %}" class="content" method="POST" id="ask">
+            {% csrf_token %}
+            <div id="pizzas-content">
+                <div class="pizza" id="p1">
+                    <div id="flavors">
+                        <select class="select" name="flavor1_1" id="flavor-1">
+                            <optgroup label="Sabor 1">
+                                {% for pizza in pizzas %}
+                                {% if pizza.estoque %}
+                                <option value="{{ pizza.produto }}">{{ pizza.produto }}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </optgroup>
+                        </select>
+
+                        <select class="select" name="flavor2_1" id="flavor-2">
+                            <optgroup label="Sabor 2">
+                                {% for pizza in pizzas %}
+                                {% if pizza.estoque %}
+                                <option value="{{ pizza.produto }}">{{ pizza.produto }}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="flavors-images">
+                        <div class="img-1">
+                            <img src="../static/images/pizza.jpg" id="img-p1" alt="Image 1">
                         </div>
-
-                        <div class="img_pizza" id="img_pizza">
-                            <img src="../static/images/pizza.jpg" alt="pizza1" id="f1"><img src="../static/images/pizza2.jpg" alt="pizza2" id="f2">
-                        </div>
-
-
-                        <div id="tamanhos">
-
-                            <div class="fam" id="fam1">
-                                <strong>Família ---- R${{ pizza.0.preco_f }}</strong>
-                                <input type="checkbox" name="f1" id="1" value="familia, {{ pizza.0.preco_f }}" class="box">
-                                <strong id="1 {{ pizza.0.preco_f }}"></strong>
-                            </div>
-    
-
-                            <div class="gra" id="gra1">
-                                <strong>Grande ---- R${{ pizza.0.preco_g }}</strong>
-                                <input type="checkbox" name="g1" id="1" value="grande, {{ pizza.0.preco_g }}" class="box">
-                                <strong id="1 {{ pizza.0.preco_g }}"></strong>
-                            </div>
-                            
-
-                            <div class="med" id="med1">
-                                <strong>Média ----- R${{ pizza.0.preco_m }}</strong>
-                                <input type="checkbox" name="m1" id="1" value="media, {{ pizza.0.preco_m }}" class="box">
-                                <strong id="1 {{ pizza.0.preco_m }}"></strong>
-                            </div>
-                            
-
-                            <div class="peq" id="peq1">
-                                <strong>Pequena -- R${{ pizza.0.preco_p }}</strong>
-                                <input type="checkbox" name="p1" id="1" value="pequena, {{ pizza.0.preco_p }}" class="box">
-                                <strong id="1 {{ pizza.0.preco_p }}"></strong>
-                            </div>
-
+                        <div class="img-2">
+                            <img src="../static/images/pizza2.jpg" id="img-p2" alt="Image 2">
                         </div>
                     </div>
-                </div>
 
-                <div class="mais" id="mais">
-                    <button id="mais_uma" type="button">Pedir mais uma pizza +</button>
-                </div>
+                    <ul class="sizes">
 
-                <div class="refrigerante" id="refrigerantes">
-                    <label>
-                        Coca-Cola
-                        <input type="checkbox" name="coca-cola" value="Coca-cola">
-                    </label>
-                    <label>
-                        Pepsi
-                        <input type="checkbox" name="coca-cola" value="Coca-cola">
-                    </label>
-                    <label>
-                        Guaraná
-                        <input type="checkbox" name="coca-cola" value="Coca-cola">
-                    </label>
-                    <label>
-                        Fanta
-                        <input type="checkbox" name="coca-cola" value="Coca-cola">
-                    </label>
-                </div>
+                        <li class="fam" id="fam1">
+                            <label for="check-f1">
+                                <div class="content-sizes">
+                                    <span class="type">Família</span> <span class="price">R${{ price.preco_f }}</span><input type="checkbox" class="box" id="check-f1" name="f1" value="family, {{ price.preco_f }}">
+                                    <div id="amount_f1"></div>
+                                </div>
+                            </label>
+                        </li>
 
-                <div class="ir" id="ir">
-                    <br><input type="submit" value="Pedir" />
+                        <li class="big" id="big1">
+                            <label for="check-b1">
+                                <div class="content-sizes">
+                                    <span class="type">Grande</span> <span class="price">R${{ price.preco_g }}</span><input type="checkbox" class="box" id="check-b1" name="b1" value="big, {{ price.preco_b }}">
+                                    <div id="amount_b1"></div>
+                                </div>
+                            </label>
+                        </li>
+
+                        <li class="ave" id="ave1">
+                            <label for="check-a1">
+                                <div class="content-sizes">
+                                    <span class="type">Média</span> <span class="price">R${{ price.preco_a }}</span><input type="checkbox" class="box" id="check-a1" name="a1" value="average, {{ price.preco_a }}">
+                                    <div id="amount_a1"></div>
+                                </div>
+                            </label>
+                        </li>
+
+                        <li class="sam" id="sam1">
+                            <label for="check-s1">
+                                <div class="content-sizes">
+                                    <span class="type">Pequena</span> <span class="price">R${{ price.preco_p }}</span><input type="checkbox" class="box" id="check-s1" name="s1" value="small, {{ price.preco_s }}">
+                                    <div id="amount_s1"></div>
+                                </div>
+                            </label>
+                        </li>
+
+                        <li class="min" id="min1">
+                            <label for="check-m1">
+                                <div class="content-sizes">
+                                    <span class="type">Mini</span> <span class="price">R${{ price.preco_m }}</span><input type="checkbox" class="box" id="check-m1" name="m1" value="mini, {{ price.preco_m }}">
+                                    <div id="amount_m1"></div>
+                                </div>
+                            </label>
+                        </li>
+
+                    </ul>
                 </div>
-            </form>
-        </div>
-    </div>
-</center>
+            </div>
+
+            <div class="more">
+                <button type="button" id="one-more">+</button>
+            </div>
+
+            <div class="soda-content">
+                <p id="soda-title">Refrigerantes</p>
+                <!-- For com todos os refris-->
+
+                <div class="soda">
+                    <div id="more-than-1l">
+                        <details>
+                            <summary>1L</summary>
+                            {% for so in soda %}
+                                {% if so.tipo == '1 l' and so.estoque == True %}
+                                <div class="flavor-soda">
+                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_1l{{ so.id }}" min="0">
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </details>
+
+                        <details>
+                            <summary>2L</summary>
+                            {% for so in soda %}
+                                {% if so.tipo == '2 l' and so.estoque == True %}
+                                <div class="flavor-soda">
+                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_2l{{ so.id }}" min="0">
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </details>
+                    </div>
+                    <div id="lass-than-1l">
+                        <details>
+                            <summary>KS</summary>
+                            {% for so in soda %}
+                                {% if so.tipo == 'KS' and so.estoque == True %}
+                                <div class="flavor-soda">
+                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_ks{{ so.id }}" min="0">
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </details>
+
+                        <details>
+                            <summary>Mini</summary>
+                            {% for so in soda %}
+                                {% if so.tipo == 'Pequena' and so.estoque == True %}
+                                <div class="flavor-soda">
+                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_mi{{ so.id }}" min="0">
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <div class="date">
+                <p>Horário</p>
+                <input type="datetime-local" id="datetime" name="request_date"equired>
+            </div>
+
+            <div id="order-pizza">
+                <button disabled="true">Pedir</button>
+            </div>
+        </form>
+    </main>
+</section>
 {% endblock %}

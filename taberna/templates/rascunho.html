@@ -158,3 +158,79 @@ for(let i=0; i < c.length; i++){
 }
 
 butao.addEventListener('click', encomendar)
+
+
+
+
+let add_refri = function(refri) {
+    //alert(refri)
+    var re = document.getElementById(`${refri}dl`)
+    let qu1 = document.createElement('input')
+    let qu2 = document.createElement('input')
+    let div = document.createElement('div')
+    let div1 = document.createElement('div')
+    let div2 = document.createElement('div')
+
+
+    qu1.type = "number"
+    qu1.className = "qu"
+    qu1.min = 0
+    qu1.max = 99
+    qu1.name = `${re.id}q1`
+    qu2.type = "number"
+    qu2.className = "qu"
+    qu2.min = 0
+    qu2.max = 99
+    qu2.name = `${re.id}q2`
+
+    div1.className = "dr"
+    div2.className = "dr"
+
+    let ul = `${re.id} 1l (R$ 5,00)` // Quando a API tiver refrigerantes cadastrados, obtem os preços, etc resgatando de lá.
+    let dl = `${re.id} 2l (R$ 10,00)`
+
+    if(ident2.length == 0){
+        ident2.push([re.id, 1])
+        div1.append(ul)
+        div1.append(qu1)
+        div2.append(dl)
+        div2.append(qu2)
+        re.append(div1)
+        re.append(div2)
+    }
+    else{
+        for(let i=0; i<ident2.length; i++){
+            if(ident2[i][0] == re.id){
+                encontrado2 = true
+                if(ident2[i][1] == 0){
+                    ident2[i][1] = 1
+                    div1.append(ul)
+                    div1.append(qu1)
+                    div2.append(dl)
+                    div2.append(qu2)
+                    re.append(div1)
+                    re.append(div2)
+                }
+                else{
+                    ident2[i][1] = 0
+                    var ex = re.parentNode
+                    ex.removeChild(re)
+                    re = document.createElement('div')
+                    re.id = `${ex.id}l`
+                    ex.append(re)
+                }
+            }
+        }
+        if(encontrado2 == false){
+            ident2.push([re.id, 1])
+            div1.append(ul)
+            div1.append(qu1)
+            div2.append(dl)
+            div2.append(qu2)
+            re.append(div1)
+            re.append(div2)
+        }
+    }
+    encontrado2 = false
+    
+}

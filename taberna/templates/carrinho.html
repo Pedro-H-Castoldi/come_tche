@@ -1,21 +1,77 @@
 {% extends 'base.html' %}
 {%load bootstrap4 %}
+{% block title %}ComeTchÊ | Carrinho{% endblock %}
+{% block css %}/static/css/kart/styles.css{% endblock %}
 {% block content %}
-<div class="container">
-    <h1>Carrinho</h1><br><br>
-    <div class="pedido" id="pedido" mensagem = '{{ mensagem }}'>
-        <h2>Pedido</h3><br>
-        {% for pp in pedido %}
-            <h3>Produto: {{ pp.0 }} ({{ pp.1.0 }})</h3><br>
-            <h3>Preço: R${{ pp.1.1 }}</h3><br>
-            <h3>Quantidade: {{ pp.2 }}</h3>
-        {% endfor %}
-        
-        <br><h3>TOTAL: R${{ total }}</h3>
-        <br><h3>Agendado para: {{ data }}</h3>
+<section id="food-s">
+    <header id="sub-header">
+        <h2>Carrinho</h2>
+        {{ order }}
+    </header>
+    <main>
+        <div class="content" id="order-cart" mensagem = '{{ mensagem }}'>
+            <div id="order-title">
+                <h3>Pedido</h3>
+            </div>
+            <div id="order">
+                {% if order %}
+                    {% if order.pz.0 %}
+                        <p class="category">Pizza</p>
+                        {% for pizza in order.pz.0 %}
+                            {% if pizza.4 %}
+                                <div class="order-details">
+                                    <div><img src="../static/images/pizza-food-clipart-md.png" alt="Pizza Carrinho"></div>
+                                    <div>
+                                        <p><strong>{{ pizza.0 }}</strong> <span>{{ pizza.4 }}</span></p>
+                                        <p>Tamanho: <span>{{ pizza.1 }}</span></p>
+                                        <p>Quantidade: <span>{{ pizza.3 }}</span></p>
+                                        <p>Preço: <span>R${{ pizza.2 }}</span></p>
+                                    </div>
+                                </div>
+                            {% else %}
+                            <div class="order-details">
+                                <div><img src="../static/images/pizza-food-clipart-md.png" alt="Pizza Carrinho"></div>
+                                <div>
+                                    <p><strong>{{ pizza.0 }}</strong></p>
+                                    <p>Tamanho: <span>{{ pizza.1 }}</span></p>
+                                    <p>Quantidade: <span>{{ pizza.3 }}</span></p>
+                                    <p>Preço: <span>R${{ pizza.2 }}</span></p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                        
+                    {% endif %}
 
-        <button id="encomendar">Encomendar</button>
-    </div>
-</div>
+                    {% if order.sd %}
+                    <p class="category">Refrigerantes</p>
+                    {% for soda in order.sd %}
+                        <div class="order-details">
+                            <div><img src="../static/images/soda_kart.png" id="soda-kart" alt="Refrigerante Carrinho"></div>
+                            <div>
+                                <p><strong>{{ soda.0 }}</strong></p>
+                                <p>Tamanho: <span>{{ soda.1 }}</span></p>
+                                <p>Quantidade: <span>{{ soda.3 }}</span></p>
+                                <p>Preço: <span>{{ soda.2 }}</span></p>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                    {% endif %}
+
+                    <p id="total">Total: R$9999.00</p>
+
+                    <p id="date">Para: <span>{{ order.dt }}</span></p>
+                {% else %}
+                    <h4>Carrinho vazio..</h4>
+                {% endif %}
+            </div>
+              
+            <div id="order-now">
+                <button>Encomendar <img src="../static/images/whatsapp-logo-4-1.png" alt="logo-WhatsApp"></button>
+            </div> 
+        </div>
+    </main>
+</section>
 
 {% endblock %}
