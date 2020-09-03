@@ -4,19 +4,21 @@
 {% block content %}
     <section class="container">
         <h2>O que Deseja?</h2>
-        <ul class="choice">
-            <li class="bebidas">
-                <a href="{% url 'bebidas' %}" id="drinks">Bebidas</a>
-            </li>
+        <nav class="menu">
+            <ul class="choice">
+                <li class="bebidas">
+                    <a href="{% url 'bebidas' %}" id="drinks">Bebidas</a>
+                </li>
 
-            <li class="choice">
-                <a href="{% url 'pizzas' %}" id="pizzas">Pizzas</a>
-            </li>
+                <li class="choice">
+                    <a href="{% url 'pizzas' %}" id="pizzas">Pizzas</a>
+                </li>
 
-            <li class="choice">
-                <a href="{% url 'comidas' %}" id="pastas">Salgados</a>
-            </li>
-        </ul>
+                <li class="choice">
+                    <a href="{% url 'comidas' %}" id="pastas">Salgados</a>
+                </li>
+            </ul>
+        </nav>
 
     </section>
 {% endblock %}

@@ -33,51 +33,67 @@ body {
 
 #food {
     width: 100%;
-    max-width: 400px;
+    max-width: 550px;
     margin: auto;
 }
 
-header .menu {
+.menu {
     width: 100%;
-    max-width: 350px;
+    max-width: 410px;
     margin: auto;
-    padding: 10px 0
+    padding: 10px 0;
 }
 
-header .menu ul {
-    padding: 0;
+.menu ul {
+    padding: 25px 0;
     align-items: center;
     margin: 0;
     display: flex;
     list-style: none;
 }
 
-header .menu ul li {
+.menu ul li a {
     flex: 1;
-    background-color: #3c7107;
     border-radius: 5px;
-    text-align: center;
-    line-height: 50px;
+    padding: 25px 15px;
     margin: 3px;
-    cursor: pointer;
-}
-
-header .menu ul li a {
     text-decoration: none;
-    font-size: 25px;
-    color: #FFF;
+    font-size: 23.4px;
+    color: #000;
+    text-shadow: rgb(34, 33, 33) 0px 1px 1px;
+    font-weight: bold;
 }
 
-header .menu ul .drinks-a:hover,
-header .menu ul .pizzas-a:hover,
-header .menu ul .food-a:hover{
-    opacity: .9;
+#drinks {
+    background-color: #009246;
+    padding: 25px 20px;
+}
+#pizzas {
+    background-color: #fff;
+    padding: 25px 29px;
+}
+#pastas {
+    background-color: #ea0606;
+    padding: 25px 16px;
 }
 
-header .menu ul .drinks-a:active,
-header .menu ul .pizzas-a:active,
-header .menu ul .food-a:active {
-    background-color: #226922;
+#drinks:hover,
+#pizzas:hover,
+#pastas:hover{
+    background-color: orangered;
+    color: #fff;
+}
+
+#drinks:active{
+    background-color: #009246;
+}
+
+#pizzas:active {
+    background-color: #fff;
+}
+
+#pastas:active {
+    background-color: #ea0606;
 }
 
 section {
@@ -429,6 +445,24 @@ section .content .date #datetime {
 @media(max-width: 450px) {
     * {
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);  
+    }
+
+    #food {
+        max-width: 400px;
+    }
+
+    .menu {
+        max-width: 350px;
+    }
+
+    #drinks {
+        padding: 25px 10px;
+    }
+    #pizzas {
+        padding: 25px 19px;
+    }
+    #pastas {
+        padding: 25px 6px;
     }
 
     section main .car {
