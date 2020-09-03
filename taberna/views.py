@@ -72,7 +72,7 @@ def kart_view(request):
         pizzas = []
         specifications = []
         sodas = []
-        type = price = amount = cont = f1 = f2 = date = 0
+        type = price = amount = cont = f1 = f2 = date = total = 0
         catupiry = False
 
 
@@ -93,16 +93,19 @@ def kart_view(request):
                         price = float(price.replace(',', '.'))
 
                 if pp[0:7] == 'qamount' and pp != 0:
-                    amount = hh
+                    amount = int(hh)
 
                 if pp[0:7] == 'camount':
                     catupiry = True
 
                 if amount != 0:
                     if not catupiry:
+                        price *= amount
+                        total += price
                         specifications.append(f'{f1}/{f2}, {type}, {price}, {amount}'.split(', '))
                     else:
-                        price += 2
+                        price = (price + 2) * amount
+                        total += price
                         specifications.append(f'{f1}/{f2}, {type}, {price}, {amount}, + catupiry'.split(', '))
                         catupiry = False
 
@@ -110,14 +113,17 @@ def kart_view(request):
 
                 if pp[0:4] == 'soda' and hh != '' and hh != '0':
                     flavor_s, size_s, price_s = pp[7:].split(', ')
-                    sodas.append(f'{flavor_s}, {size_s}, R${float(price_s.replace(",", "."))}, {hh}'.split(', '))
+                    price_s = float(price_s.replace(',', '.'))
+                    price_s *= int(hh)
+                    total += price_s
+                    sodas.append(f'{flavor_s}, {size_s}, R${price_s}, {hh}'.split(', '))
 
                 if pp == 'request_date':
                     date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
 
         pizzas.append(specifications)
 
-        order = {'pz':pizzas, 'sd':sodas, 'dt':date}
+        order = {'pz':pizzas, 'sd':sodas, 'dt':date, 'tt': total}
 
         context = {
             'order': order,

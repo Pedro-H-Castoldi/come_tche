@@ -1,5 +1,10 @@
 var n = 1;
 var nn = 3;
+const button = document.querySelector('#order-pizza button');
+
+function order_released() {
+    button.removeAttribute('disabled');
+}
 
 function date_today() {
     let today = new Date;
@@ -59,9 +64,25 @@ function date_today() {
     date.max = `${max_year}-${max_month}-${max_day}T${hours}:${minutes}`;
 }
 
+let amount_soda = document.querySelectorAll('.flavor-soda input');
+amount_soda.forEach(task => {
+    task.addEventListener('change', soda_exist);
+})
+
+function soda_exist() {
+
+    amount_soda = document.querySelectorAll('.flavor-soda input');
+    amount_soda.forEach(task => {
+        if(task.value > 0) {
+            order_released();
+        }
+    })
+}
+
 function go() {
-    const button = document.querySelector('#order-pizza button');
+
     button.disabled = true;
+    soda_exist();
 
     let select = document.querySelectorAll('.select');
     select.forEach(task => {
@@ -105,9 +126,9 @@ function go() {
                 }
                 cont += 5;
             }
-
+            
             if(checked == number_pizza) {
-                button.removeAttribute('disabled');
+                order_released();
             }
             else {
                 button.disabled = true;

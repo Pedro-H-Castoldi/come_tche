@@ -1,0 +1,104 @@
+section {
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 170px;
+}
+
+section h2 {
+    font-size: 50px;
+    margin: 10px;
+    border-bottom: solid 5px #48EC35;
+    padding-bottom: 10px;
+}
+
+section ul {
+    width: 100%;
+    max-width: 625px;
+    display: flex;
+    list-style: none;
+    padding: 50px 0;
+    margin: auto;
+}
+
+section ul li a {
+    width: 100%;
+    max-width: 300px;
+    padding: 45px 44px;
+    margin-left: 2px;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+    text-shadow: #4f4f50 1px 1px 1px;
+    transition: .5s;
+}
+
+#drinks {
+    background-color: #009246;
+}
+
+#pizzas {
+    background-color: #fff;
+    padding: 45px 57px;
+}
+
+#pastas {
+    background-color: #ea0606;
+    padding: 45px 36px;
+}
+
+section ul li #drinks:hover, #pizzas:hover, #pastas:hover {
+    background-color: orangered;
+    color: #fff;
+    text-shadow: #000 1px 1px 1px;
+}
+
+section ul li #drinks:active{
+    background-color: #009246;
+}
+
+section ul li #pizzas:active {
+    background-color: #fff;
+}
+
+section ul li #pastas:active {
+    background-color: #ea0606;
+}
+
+@media(max-width: 450px) {
+
+    section {
+        padding-top: 65px;
+    }
+
+    section h2 {
+        font-size: 40px;
+        margin-bottom: 25px;
+    }
+    
+    section ul {
+        padding: 50px 0;
+    }
+    
+    section ul li a {
+        padding: 45px 20px;
+        font-size: 20px;
+        transition: 0s;
+    }
+    
+    #pizzas {
+        padding: 45px 27px;
+    }
+    
+    #pastas {
+        padding: 45px 15px;
+    }
+
+    section ul li #drinks:active, #pizzas:active, #pastas:active {
+        background-color: orangered;
+        color: #fff;
+        text-shadow: #000 1px 1px 1px;
+    }
+}

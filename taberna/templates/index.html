@@ -1,21 +1,22 @@
 {% extends 'base.html' %}
-{%load bootstrap4 %}
+{% block title %}ComeChÊ | Home{% endblock %}
+{% block css%}/static/css/index/styles.css{% endblock %}
 {% block content %}
-    <div class="container">
-        <h1>O que Deseja?</h1>
-        <div class="escolha">
-            <div class="bebidas">
-                <a href="{% url 'bebidas' %}">Bebidas</a>
-            </div>
+    <section class="container">
+        <h2>O que Deseja?</h2>
+        <ul class="choice">
+            <li class="bebidas">
+                <a href="{% url 'bebidas' %}" id="drinks">Bebidas</a>
+            </li>
 
-            <div class="pizza">
-                <a href="{% url 'pizzas' %}">Pizzas</a>
-            </div>
+            <li class="choice">
+                <a href="{% url 'pizzas' %}" id="pizzas">Pizzas</a>
+            </li>
 
-            <div class="comidas">
-                <a href="{% url 'comidas' %}">Comidas</a>
-            </div>
-        </div>
+            <li class="choice">
+                <a href="{% url 'comidas' %}" id="pastas">Salgados</a>
+            </li>
+        </ul>
 
-    </div>
+    </section>
 {% endblock %}

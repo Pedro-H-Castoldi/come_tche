@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
-{%load bootstrap4 %}
 {% block title %}ComeTchÊ | Carrinho{% endblock %}
 {% block css %}/static/css/kart/styles.css{% endblock %}
 {% block content %}
 <section id="food-s">
     <header id="sub-header">
         <h2>Carrinho</h2>
-        {{ order }}
+        <!-- {{ order }} -->
     </header>
     <main>
         <div class="content" id="order-cart" mensagem = '{{ mensagem }}'>
@@ -21,21 +20,21 @@
                             {% if pizza.4 %}
                                 <div class="order-details">
                                     <div><img src="../static/images/pizza-food-clipart-md.png" alt="Pizza Carrinho"></div>
-                                    <div>
-                                        <p><strong>{{ pizza.0 }}</strong> <span>{{ pizza.4 }}</span></p>
-                                        <p>Tamanho: <span>{{ pizza.1 }}</span></p>
-                                        <p>Quantidade: <span>{{ pizza.3 }}</span></p>
-                                        <p>Preço: <span>R${{ pizza.2 }}</span></p>
+                                    <div class="specifications">
+                                        <p><strong>Sabor:</strong> {{ pizza.0 }} <span>{{ pizza.4 }} (R$2.0)</span></p>
+                                        <p><strong>Tamanho:</strong> <span>{{ pizza.1 }}</span></p>
+                                        <p><strong>Quantidade:</strong> <span>{{ pizza.3 }}</span></p>
+                                        <p><strong>Preço:</strong> <span>R${{ pizza.2 }}</span></p>
                                     </div>
                                 </div>
                             {% else %}
                             <div class="order-details">
                                 <div><img src="../static/images/pizza-food-clipart-md.png" alt="Pizza Carrinho"></div>
-                                <div>
-                                    <p><strong>{{ pizza.0 }}</strong></p>
-                                    <p>Tamanho: <span>{{ pizza.1 }}</span></p>
-                                    <p>Quantidade: <span>{{ pizza.3 }}</span></p>
-                                    <p>Preço: <span>R${{ pizza.2 }}</span></p>
+                                <div class="specifications">
+                                    <p><strong>Sabor:</strong> {{ pizza.0 }}</p>
+                                    <p><strong>Tamanho:</strong> <span>{{ pizza.1 }}</span></p>
+                                    <p><strong>Quantidade:</strong> <span>{{ pizza.3 }}</span></p>
+                                    <p><strong>Preço:</strong> <span>R${{ pizza.2 }}</span></p>
                                 </div>
                             </div>
                             {% endif %}
@@ -48,18 +47,18 @@
                     {% for soda in order.sd %}
                         <div class="order-details">
                             <div><img src="../static/images/soda_kart.png" id="soda-kart" alt="Refrigerante Carrinho"></div>
-                            <div>
-                                <p><strong>{{ soda.0 }}</strong></p>
-                                <p>Tamanho: <span>{{ soda.1 }}</span></p>
-                                <p>Quantidade: <span>{{ soda.3 }}</span></p>
-                                <p>Preço: <span>{{ soda.2 }}</span></p>
+                            <div class="specifications">
+                                <p><strong>Sabor:</strong> {{ soda.0 }}</p>
+                                <p><strong>Tamanho:</strong> <span>{{ soda.1 }}</span></p>
+                                <p><strong>Quantidade:</strong> <span>{{ soda.3 }}</span></p>
+                                <p><strong>Preço:</strong> <span>{{ soda.2 }}</span></p>
                             </div>
                         </div>
 
                     {% endfor %}
                     {% endif %}
 
-                    <p id="total">Total: R$9999.00</p>
+                    <p id="total">Total: R${{ order.tt }}</p>
 
                     <p id="date">Para: <span>{{ order.dt }}</span></p>
                 {% else %}

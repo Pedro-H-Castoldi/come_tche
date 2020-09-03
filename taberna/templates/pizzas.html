@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {%load bootstrap4 %}
 {% block title %}ComeTchÊ | Comidas{% endblock %}
-{% block css %}'css/comidas/styles.css'{% endblock %}
+{% block css %}/static/css/comidas/styles.css{% endblock %}
 {% block content %}
 <header id="food">
     <nav class="menu">
@@ -75,7 +75,7 @@
                         <li class="big" id="big1">
                             <label for="check-b1">
                                 <div class="content-sizes">
-                                    <span class="type">Grande</span> <span class="price">R${{ price.preco_g }}</span><input type="checkbox" class="box" id="check-b1" name="b1" value="big, {{ price.preco_b }}">
+                                    <span class="type">Grande</span> <span class="price">R${{ price.preco_g }}</span><input type="checkbox" class="box" id="check-b1" name="b1" value="big, {{ price.preco_g }}">
                                     <div id="amount_b1"></div>
                                 </div>
                             </label>
@@ -93,7 +93,7 @@
                         <li class="sam" id="sam1">
                             <label for="check-s1">
                                 <div class="content-sizes">
-                                    <span class="type">Pequena</span> <span class="price">R${{ price.preco_p }}</span><input type="checkbox" class="box" id="check-s1" name="s1" value="small, {{ price.preco_s }}">
+                                    <span class="type">Pequena</span> <span class="price">R${{ price.preco_p }}</span><input type="checkbox" class="box" id="check-s1" name="s1" value="small, {{ price.preco_p }}">
                                     <div id="amount_s1"></div>
                                 </div>
                             </label>
@@ -127,7 +127,7 @@
                             {% for so in soda %}
                                 {% if so.tipo == '1 l' and so.estoque == True %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_1l{{ so.id }}" min="0">
+                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -138,7 +138,7 @@
                             {% for so in soda %}
                                 {% if so.tipo == '2 l' and so.estoque == True %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_2l{{ so.id }}" min="0">
+                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_2l{{ so.produto }}, 2L, {{ so.preco }}" min="1">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -150,7 +150,7 @@
                             {% for so in soda %}
                                 {% if so.tipo == 'KS' and so.estoque == True %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_ks{{ so.id }}" min="0">
+                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_ks{{ so.produto }}, KS, {{ so.preco }}" min="1">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -161,7 +161,7 @@
                             {% for so in soda %}
                                 {% if so.tipo == 'Pequena' and so.estoque == True %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_mi{{ so.id }}" min="0">
+                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_mi{{ so.produto }}, Mini, {{ so.preco }}" min="1">
                                 </div>
                                 {% endif %}
                             {% endfor %}

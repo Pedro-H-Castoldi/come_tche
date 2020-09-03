@@ -63,6 +63,15 @@ header h2 {
     margin: 15px 50px;
 }
 
+#order-cart #order .order-details .specifications {
+    flex: 1;
+}
+
+#order-cart #order .order-details .specifications p {
+    border-bottom: solid 1px #000;
+    
+}
+
 #order-cart #order p {
     line-height: 22px;
 }
