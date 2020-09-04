@@ -8,7 +8,7 @@
         <ul>
             <li><a href="{% url 'bebidas' %}" id="drinks">Bebidas</a></li>
             <li><a href="{% url 'pizzas' %}" id="pizzas">Pizzas</a></li>
-            <li><a href="{% url 'comidas' %}" id="pastas">Comidas</a></li>
+            <li><a href="{% url 'comidas' %}" id="pastas">Salgados</a></li>
         </ul>
     </nav>
 </header>
@@ -19,16 +19,81 @@
                 <div class="message">
                     <p>{{ m }}</p>
                 </div>
-            {% endfor %}
+                {% endfor %}
         {% endif %}
-
+        
         <a href="{% url 'carrinho' %}">
             <div class="car">
                 <img src="../static/images/car2.png" alt="Carrinho" id="cart">
             </div>
         </a>
         <form action="{% url 'bebidas' %}" class="content" method="POST" id="ask">
-            <div><p>Bebidas</p></div>
+            <p style="text-align: center;">Cervejas</p>
+            <div class="product-content">
+                {% csrf_token %}
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://i.pinimg.com/474x/74/ce/29/74ce290f54189a4d9be3444a695682be.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p>Cerveja de Garrafa 600ml</p>
+                        <details>
+                            <summary>Quero</summary>
+                                <div class="flavor-drink">
+                                    <p>Brahma - R$7,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+
+                                    <p>Skol - R$7,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+
+                                    <p>Bohemia - R$7,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+
+                                    <p>Itaipava - R$7,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+                                </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://images.tcdn.com.br/img/img_prod/603715/garrafa_caculinha_300ml_envase_cerveja_artesanal_280_1_20180120105114.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p>Cervejinha 300ml</p>
+                        <details>
+                            <summary>Quero</summary>
+                                <div class="flavor-drink">
+                                    <p>Brahma - R$3,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+
+                                    <p>Skol - R$3,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+
+                                    <p>Bohemia - R$3,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+
+                                    <p>Itaipava - R$3,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+                                </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://image.freepik.com/vetores-gratis/modelo-de-lata-refrigerante-ou-cerveja-de-aluminio-brilhante-em-branco_88653-860.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p>Cerveja de Lata 350ml</p>
+                        <details>
+                            <summary>Quero</summary>
+                                <div class="flavor-drink">
+                                    <p>Brahma - R$4,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+
+                                    <p>Skol - R$4,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+
+                                    <p>Bohemia - R$4,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+
+                                    <p>Itaipava - R$4,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+                                </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
         </form>
 
 {% endblock %}

@@ -74,7 +74,7 @@ body {
 }
 #pastas {
     background-color: #ea0606;
-    padding: 25px 16px;
+    padding: 25px 13px;
 }
 
 #drinks:hover,
@@ -112,6 +112,14 @@ section main .message {
     padding: 0 9px;
 }
 
+section main .content .product-content {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0 5px;
+    background-color: #FFF;
+    border-radius: 15px;
+}
+
 section main .car {
     background-color: #48EC35;
     border: solid 3px #FFF;
@@ -130,146 +138,6 @@ section main .content {
     background-color: #ea0606;
     border-radius: 8px;
     box-shadow: #4f4f50 1px 1px 6px;
-}
-
-section main .content .pizza {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 0 5px;
-    background-color: #FFF;
-    border-radius: 15px;
-}
-
-section main .content .pizza #flavors {
-    max-width: 100%;
-    margin: auto;
-    text-align: center;
-}
-
-section main .content .pizza #flavors select {
-    width: 200px;
-    margin: 10px 0;
-    background: #ea0606;
-    padding: 10px;
-    border-radius: 15px;
-    color: rgba(255, 255, 255, 0.973);
-    outline: none;
-    font-weight: bold;
-    overflow: hidden;
-    cursor: pointer;
-    text-shadow: rgb(49, 49, 49) 1px 1px 1px;
-    font-size: 19px;
-}
-
-section main .content .pizza #flavors select option {
-    background: #ff2c2c;
-}
-
-section main .content .pizza #flavors .select-1 {
-    margin-right: 5px;
-}
-
-section main .content .pizza .flavors-images {
-    display: flex;
-}
-
-section .content .pizza .flavors-images .img-1 {
-    padding-left: 75px;
-}
-
-section .content .pizza .sizes {
-    width: 100%;
-    max-width: 400px;
-    margin: auto;
-    padding-left: 70px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    list-style: none;
-    text-align: justify;
-}
-
-section .content .pizza .sizes li {
-    padding-bottom: 5px;
-    border-bottom: solid 1px #CCC;
-    transition: .2s;
-}
-
-section .content .pizza .sizes li:hover {
-    background-color: rgba(14, 228, 14, 0.204);
-    border-radius: 5px;
-}
-
-section .content .pizza .sizes li:active {
-    background-color: #FFF;
-    border-radius: 5px;
-}
-
-section .content .pizza .sizes li .content-sizes {
-    display: flex;
-    color: #414142;
-    font-size: 19px;
-    font-weight: bold;
-    padding-top: 10px;
-    cursor: pointer;
-}
-section .content .pizza .sizes li .content-sizes .type {
-    width: 90px;
-    padding: 0;
-}
-
-section .content .pizza .sizes li .content-sizes .price {
-    width: 85px;
-}
-
-section .content .pizza .sizes li .content-sizes div {
-    display: flex;
-    background-color: #29d312;
-    border-radius: 3px;
-    padding: 2px 0;
-}
-
-section .content .pizza .sizes li .content-sizes div .quant {
-    width: 60px;
-    height: 25px;
-    margin: 0 5px;
-}
-
-section .content .pizza .sizes li .content-sizes div p {
-    margin: 3px 0;
-    color: #000;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-section .content .more {
-    width: 100%;
-    max-width: 150px;
-    margin: auto;
-    text-align: center;
-}
-
-section .content .more button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: rgba(14, 228, 14, 0.904);
-    color: #FFF;
-    border: none;
-    border-radius: 100%;
-    font-size: 40px;
-    font-weight: bold;
-    box-shadow: #000 1px 1px 5px;
-    cursor: pointer;
-    outline: none;
-    transition: all .6s;
-    
-}
-
-section .content .more button:hover {
-    background: #12a500;
-}
-
-section .content .more button:active {
-    background: rgba(14, 228, 14, 0.904);
 }
 
 section .content .soda-content {
@@ -363,6 +231,7 @@ summary:before {
     margin-right: 3px;
 }
 
+
 #order-pizza {
     width: 100%;
     max-width: 400px;
@@ -402,18 +271,6 @@ summary:before {
     position: absolute;
 }
 
-footer {
-    border-radius: 3px;
-    text-shadow: rgb(49, 49, 49) 1px 1px 1px;
-    width: 99%;
-    background-color: #4f4f50;
-    color: #FFF;
-    margin: auto;
-    text-align: center;
-    padding: 3px;
-    margin-top: 10px;
-}
-
 section .content .date {
     width: 100%;
     max-width: 300px;
@@ -442,6 +299,18 @@ section .content .date #datetime {
     cursor: pointer;
 }
 
+footer {
+    border-radius: 3px;
+    text-shadow: rgb(49, 49, 49) 1px 1px 1px;
+    width: 99%;
+    background-color: #4f4f50;
+    color: #FFF;
+    margin: auto;
+    text-align: center;
+    padding: 3px;
+    margin-top: 10px;
+}
+
 @media(max-width: 450px) {
     * {
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);  
@@ -462,58 +331,13 @@ section .content .date #datetime {
         padding: 25px 19px;
     }
     #pastas {
-        padding: 25px 6px;
+        padding: 25px 3px;
     }
 
     section main .car {
         margin-left: 77%;
         margin-top: 70%;
     }
-
-    section main .content .pizza .flavors-images {
-        width: 300px;
-        margin: auto;
-    }
-    section main .content .pizza .flavors-images .img-1 {
-        padding-left: 0;
-    }
-
-    section .content .pizza .sizes {
-        padding-left: 25px;
-    }
-
-    section .content .pizza .sizes li:hover {
-        opacity: 1;
-    }
-
-    section .content .pizza .sizes li:active {
-        background-color: rgb(218, 216, 216);
-    }
-
-    section .content .pizza .sizes li .content-sizes div {
-        display: flex;
-        background-color: rgba(14, 228, 14, 0.904);
-        border-radius: 3px;
-    }
-
-    
-    section .content .pizza .sizes li .content-sizes div .quant {
-        width: 30px;
-        height: 25px;
-        margin: 0 3px;
-    }
-    
-    section .content .pizza .sizes li .content-sizes div p {
-        margin: 7px 0;
-        color: #000;
-        font-weight: bold;
-        font-size: 11px;
-    }
-    
-    section .content .pizza .sizes li .content-sizes div .catu {
-        margin-top: 7px;
-    }
-    
 
     section .content .soda {
         width: 100%;

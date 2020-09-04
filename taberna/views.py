@@ -18,11 +18,7 @@ def bebidas_view(request):
 
 def comidas_view(request):
 
-    context = {
-        'pizzas': Pizza.objects.order_by('?').all(),
-        'price': PrecoPizza.objects.all()[0],
-        'soda':  Refrigerante.objects.all(),
-    }
+    context = {}
 
     def add_kart():
         messages.success(request,"Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
@@ -39,28 +35,24 @@ def comidas_view(request):
     return render(request, 'comidas.html', context)
 
 def pizza_view(request):
-
     context = {
         'pizzas': Pizza.objects.order_by('?').all(),
         'price': PrecoPizza.objects.all()[0],
         'soda': Refrigerante.objects.all(),
     }
 
-    if PrecoPizza.objects.all():
-        context['preco'] = PrecoPizza.objects.all()[0]
+    def add_kart():
+        messages.success(request,
+                         "Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
+        form = request.POST
+        pedido.append(form)
 
-    return render(request, 'pizzas.html', context)
-
-def pizza_view(request):
-
-    context = {
-        'pizzas': Pizza.objects.order_by('?').all(),
-        'price': PrecoPizza.objects.all()[0],
-        'soda': Refrigerante.objects.all(),
-    }
-
-    if PrecoPizza.objects.all():
-        context['preco'] = PrecoPizza.objects.all()[0]
+    if str(request.method) == 'POST':
+        if pedido:
+            if request.POST != pedido[-1]:
+                add_kart()
+        else:
+            add_kart()
 
     return render(request, 'pizzas.html', context)
 

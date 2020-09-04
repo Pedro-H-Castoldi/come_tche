@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}ComeTchÊ | Carrinho{% endblock %}
-{% block css %}/static/css/kart/styles.css{% endblock %}
+{% block css %}/static/css/cart/styles.css{% endblock %}
 {% block content %}
 <section id="food-s">
     <header id="sub-header">
@@ -46,7 +46,7 @@
                     <p class="category">Refrigerantes</p>
                     {% for soda in order.sd %}
                         <div class="order-details">
-                            <div><img src="../static/images/soda_kart.png" id="soda-kart" alt="Refrigerante Carrinho"></div>
+                            <div><img src="../static/images/soda_kart.png" id="soda-cart" alt="Refrigerante Carrinho"></div>
                             <div class="specifications">
                                 <p><strong>Sabor:</strong> {{ soda.0 }}</p>
                                 <p><strong>Tamanho:</strong> <span>{{ soda.1 }}</span></p>

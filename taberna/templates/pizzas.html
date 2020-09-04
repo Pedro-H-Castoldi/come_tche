@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {%load bootstrap4 %}
 {% block title %}ComeTchÊ | Comidas{% endblock %}
-{% block css %}/static/css/comidas/styles.css{% endblock %}
+{% block css %}/static/css/pizzas/styles.css{% endblock %}
 {% block content %}
 <header id="food">
     <nav class="menu">
         <ul>
             <li><a href="{% url 'bebidas' %}" id="drinks">Bebidas</a></li>
             <li><a href="{% url 'pizzas' %}" id="pizzas">Pizzas</a></li>
-            <li><a href="{% url 'comidas' %}" id="pastas">Comidas</a></li>
+            <li><a href="{% url 'comidas' %}" id="pastas">Salgados</a></li>
         </ul>
     </nav>
 </header>
@@ -27,10 +27,10 @@
                 <img src="../static/images/car2.png" alt="Carrinho" id="cart">
             </div>
         </a>
-        <form action="{% url 'comidas' %}" class="content" method="POST" id="ask">
+        <form action="{% url 'pizzas' %}" class="content" method="POST" id="ask">
             {% csrf_token %}
             <div id="pizzas-content">
-                <div class="pizza" id="p1">
+                <div class="product-content" id="p1">
                     <div id="flavors">
                         <select class="select" name="flavor1_1" id="flavor-1">
                             <optgroup label="Sabor 1">

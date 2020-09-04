@@ -1,0 +1,7 @@
+section main .content .drink {
+    display: flex;
+}
+
+section main .content .drink .drink-img {
+    width: 250px;
+}

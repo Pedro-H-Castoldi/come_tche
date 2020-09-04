@@ -142,7 +142,7 @@ let one_more = document.querySelector('#one-more').addEventListener('click', fun
     let pizza_template = document.querySelector('#p1');
 
     let new_pizza = document.createElement('div');
-    new_pizza.className = "pizza";
+    new_pizza.className = "product-content";
     new_pizza.id = "p2";
 
     new_pizza.innerHTML = pizza_template.innerHTML;
