@@ -1,6 +1,6 @@
 from django.views.generic import FormView, TemplateView
 from django.shortcuts import render
-from .models import Pizza, PrecoPizza, Refrigerante
+from .models import Pizza, PrecoPizza, Refrigerante, Drink
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.http import HttpResponse
@@ -14,11 +14,17 @@ def index_view(request):
 
 def bebidas_view(request):
 
-    return render(request, 'bebidas.html')
+    context = {
+        'drinks': Drink.objects.all()
+    }
+
+    return render(request, 'bebidas.html', context)
 
 def comidas_view(request):
 
-    context = {}
+    context = {
+        'soda': Drink.objects.filter(category='soda')
+    }
 
     def add_kart():
         messages.success(request,"Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
@@ -38,7 +44,7 @@ def pizza_view(request):
     context = {
         'pizzas': Pizza.objects.order_by('?').all(),
         'price': PrecoPizza.objects.all()[0],
-        'soda': Refrigerante.objects.all(),
+        'soda': Drink.objects.filter(category='soda'),
     }
 
     def add_kart():

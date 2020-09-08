@@ -72,3 +72,27 @@ class Refrigerante(Produto):
 
     def __str__(self):
         return self.produto
+
+class Drink(Produto):
+
+    CHOICES = [
+        ('beer', 'Cerveja'),
+        ('whisky', 'Whisky'),
+        ('vodka', 'Vodka'),
+        ('energetic', 'Energético'),
+        ('cognac', 'Conhaque'),
+        ('cachaça', 'Cachaça'),
+        ('rum', 'Rum'),
+        ('soda', 'Refrigerante'),
+        ('varied', 'Variados'),
+    ]
+    category = models.CharField('Categoria', choices=CHOICES, max_length=10)
+    price = models.DecimalField('Preço', max_digits=8, decimal_places=2)
+    liters = models.DecimalField('Litros/Ml', max_digits=8, decimal_places=2)
+
+    class Meta:
+        verbose_name = 'Bebida'
+        verbose_name_plural = 'Bebidas'
+
+    def __str__(self):
+        return self.produto

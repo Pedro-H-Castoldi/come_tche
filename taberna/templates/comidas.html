@@ -41,9 +41,9 @@
                         <details>
                             <summary>1L</summary>
                             {% for so in soda %}
-                                {% if so.tipo == '1 l' and so.estoque == True %}
+                                {% if so.liters == 1 and so.estoque %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.price }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -52,9 +52,9 @@
                         <details>
                             <summary>2L</summary>
                             {% for so in soda %}
-                                {% if so.tipo == '2 l' and so.estoque == True %}
+                                {% if so.liters == 2 and so.estoque %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_2l{{ so.produto }}, 2L, {{ so.preco }}" min="1">
+                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_2l{{ so.produto }}, 2L, {{ so.price }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -62,11 +62,22 @@
                     </div>
                     <div id="lass-than-1l">
                         <details>
+                            <summary>Lata</summary>
+                            {% for so in soda %}
+                                {% if so.liters == 350 and so.estoque %}
+                                <div class="flavor-soda">
+                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_ca{{ so.produto }}, Latinha, {{ so.price }}" min="0">
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </details>
+
+                        <details>
                             <summary>KS</summary>
                             {% for so in soda %}
-                                {% if so.tipo == 'KS' and so.estoque == True %}
+                                {% if so.liters == 290 and so.estoque %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_ks{{ so.produto }}, KS, {{ so.preco }}" min="1">
+                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_ks{{ so.produto }}, KS, {{ so.price }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -75,9 +86,9 @@
                         <details>
                             <summary>Mini</summary>
                             {% for so in soda %}
-                                {% if so.tipo == 'Pequena' and so.estoque == True %}
+                                {% if so.liters > 5 and so.liters <= 250 and so.estoque %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.preco }}</p><input type="number" name="soda_mi{{ so.produto }}, Mini, {{ so.preco }}" min="1">
+                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_mi{{ so.produto }}, Mini, {{ so.price }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -91,7 +102,7 @@
                 <input type="datetime-local" id="datetime" name="request_date"equired>
             </div>
 
-            <div id="order-pizza">
+            <div id="order-now">
                 <button disabled="true">Pedir</button>
             </div>
         </form>

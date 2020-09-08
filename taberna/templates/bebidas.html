@@ -28,25 +28,25 @@
             </div>
         </a>
         <form action="{% url 'bebidas' %}" class="content" method="POST" id="ask">
-            <p style="text-align: center;">Cervejas</p>
+            {% csrf_token %}
+            <p class="drink-type">Cervejas</p>
             <div class="product-content">
-                {% csrf_token %}
                 <div class="drink">
                     <div class="drink-img">
-                        <img src="https://i.pinimg.com/474x/74/ce/29/74ce290f54189a4d9be3444a695682be.jpg" alt="Cerveja" class="drink-img">
+                        <img src="https://images.tcdn.com.br/img/img_prod/603715/garrafa_caculinha_300ml_envase_cerveja_artesanal_280_1_20180120105114.jpg" alt="Cerveja" class="drink-img">
                     </div>
                     <div class="drink-details">
-                        <p>Cerveja de Garrafa 600ml</p>
+                        <p class="drink-title">Cerveja de 600ml</p>
                         <details>
-                            <summary>Quero</summary>
-                                <div class="flavor-drink">
-                                    <p>Brahma - R$7,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
-
-                                    <p>Skol - R$7,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
-
-                                    <p>Bohemia - R$7,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
-
-                                    <p>Itaipava - R$7,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    {% for drink in drinks %}
+                                        {% if drink.category == 'beer' and drink.liters == 600 and drink.estoque %}
+                                            <div class="drink-amount">
+                                                <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                         </details>
                     </div>
@@ -57,17 +57,19 @@
                         <img src="https://images.tcdn.com.br/img/img_prod/603715/garrafa_caculinha_300ml_envase_cerveja_artesanal_280_1_20180120105114.jpg" alt="Cerveja" class="drink-img">
                     </div>
                     <div class="drink-details">
-                        <p>Cervejinha 300ml</p>
+                        <p class="drink-title">Cervejinha 300ml</p>
                         <details>
-                            <summary>Quero</summary>
-                                <div class="flavor-drink">
-                                    <p>Brahma - R$3,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
-
-                                    <p>Skol - R$3,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
-
-                                    <p>Bohemia - R$3,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
-
-                                    <p>Itaipava - R$3,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    <div class="drink-flavor">
+                                        {% for drink in drinks %}
+                                            {% if drink.category == 'beer' and drink.liters == 300 and drink.estoque %}
+                                                <div class="drink-amount">
+                                                    <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
                                 </div>
                         </details>
                     </div>
@@ -78,22 +80,321 @@
                         <img src="https://image.freepik.com/vetores-gratis/modelo-de-lata-refrigerante-ou-cerveja-de-aluminio-brilhante-em-branco_88653-860.jpg" alt="Cerveja" class="drink-img">
                     </div>
                     <div class="drink-details">
-                        <p>Cerveja de Lata 350ml</p>
+                        <p class="drink-title">Cerveja de Lata 350ml</p>
                         <details>
-                            <summary>Quero</summary>
-                                <div class="flavor-drink">
-                                    <p>Brahma - R$4,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
-
-                                    <p>Skol - R$4,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
-
-                                    <p>Bohemia - R$4,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
-
-                                    <p>Itaipava - R$4,00</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="1">
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    <div class="drink-flavor">
+                                        {% for drink in drinks %}
+                                            {% if drink.category == 'beer' and drink.liters == 350 and drink.estoque %}
+                                                <div class="drink-amount">
+                                                    <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
                                 </div>
                         </details>
                     </div>
                 </div>
             </div>
+
+
+            <p class="drink-type">Bebidas Quentes</p>
+            <div class="product-content">
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://images.tcdn.com.br/img/img_prod/603715/garrafa_caculinha_300ml_envase_cerveja_artesanal_280_1_20180120105114.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p class="drink-title">whiskies</p>
+                        <details>
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    <div class="drink-flavor">
+                                        {% for drink in drinks %}
+                                            {% if drink.category == 'whisky' and drink.estoque %}
+                                                <div class="drink-amount">
+                                                    <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://images.tcdn.com.br/img/img_prod/603715/garrafa_caculinha_300ml_envase_cerveja_artesanal_280_1_20180120105114.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p class="drink-title">Cachaças</p>
+                        <details>
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    <div class="drink-flavor">
+                                        {% for drink in drinks %}
+                                            {% if drink.category == 'cachaça' and drink.estoque %}
+                                                <div class="drink-amount">
+                                                    <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://image.freepik.com/vetores-gratis/modelo-de-lata-refrigerante-ou-cerveja-de-aluminio-brilhante-em-branco_88653-860.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p class="drink-title">Rum</p>
+                        <details>
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    <div class="drink-flavor">
+                                        {% for drink in drinks %}
+                                            {% if drink.category == 'rum' and drink.estoque %}
+                                                <div class="drink-amount">
+                                                    <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://image.freepik.com/vetores-gratis/modelo-de-lata-refrigerante-ou-cerveja-de-aluminio-brilhante-em-branco_88653-860.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p class="drink-title">Vodka</p>
+                        <details>
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    <div class="drink-flavor">
+                                        {% for drink in drinks %}
+                                            {% if drink.category == 'vodka' and drink.estoque %}
+                                                <div class="drink-amount">
+                                                    <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://image.freepik.com/vetores-gratis/modelo-de-lata-refrigerante-ou-cerveja-de-aluminio-brilhante-em-branco_88653-860.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p class="drink-title">Conhaque</p>
+                        <details>
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    <div class="drink-flavor">
+                                        {% for drink in drinks %}
+                                            {% if drink.category == 'cognac' and drink.estoque %}
+                                                <div class="drink-amount">
+                                                    <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+
+            <p class="drink-type">Refrigerantes</p>
+            <div class="product-content">
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://image.freepik.com/vetores-gratis/modelo-de-lata-refrigerante-ou-cerveja-de-aluminio-brilhante-em-branco_88653-860.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p class="drink-title">2 Litros</p>
+                        <details>
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    <div class="drink-flavor">
+                                        {% for drink in drinks %}
+                                            {% if drink.category == 'soda' and drink.liters == 2 and drink.estoque %}
+                                                <div class="drink-amount">
+                                                    <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                        </details>
+                    </div>
+                </div>
+    
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://image.freepik.com/vetores-gratis/modelo-de-lata-refrigerante-ou-cerveja-de-aluminio-brilhante-em-branco_88653-860.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p class="drink-title">1 Litro</p>
+                        <details>
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    <div class="drink-flavor">
+                                        {% for drink in drinks %}
+                                            {% if drink.category == 'soda' and drink.liters == 1 and drink.estoque %}
+                                                <div class="drink-amount">
+                                                    <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://image.freepik.com/vetores-gratis/modelo-de-lata-refrigerante-ou-cerveja-de-aluminio-brilhante-em-branco_88653-860.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p class="drink-title">Latinha 350ml</p>
+                        <details>
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    <div class="drink-flavor">
+                                        {% for drink in drinks %}
+                                            {% if drink.category == 'soda' and drink.liters == 350 and drink.estoque %}
+                                                <div class="drink-amount">
+                                                    <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://image.freepik.com/vetores-gratis/modelo-de-lata-refrigerante-ou-cerveja-de-aluminio-brilhante-em-branco_88653-860.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p class="drink-title">KS 290ml</p>
+                        <details>
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    <div class="drink-flavor">
+                                        {% for drink in drinks %}
+                                            {% if drink.category == 'soda' and drink.liters == 290 and drink.estoque %}
+                                                <div class="drink-amount">
+                                                    <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://image.freepik.com/vetores-gratis/modelo-de-lata-refrigerante-ou-cerveja-de-aluminio-brilhante-em-branco_88653-860.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p class="drink-title">Mini</p>
+                        <details>
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    <div class="drink-flavor">
+                                        {% for drink in drinks %}
+                                            {% if drink.category == 'soda' and drink.liters > 5 and drink.liters <= 250 and drink.estoque %}
+                                                <div class="drink-amount">
+                                                    <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+
+            <p class="drink-type">Diversos</p>
+            <div class="product-content">
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://image.freepik.com/vetores-gratis/modelo-de-lata-refrigerante-ou-cerveja-de-aluminio-brilhante-em-branco_88653-860.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p class="drink-title">Energéticos</p>
+                        <details>
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    <div class="drink-flavor">
+                                        {% for drink in drinks %}
+                                            {% if drink.category == 'energetic' and drink.estoque %}
+                                                <div class="drink-amount">
+                                                    <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                        </details>
+                    </div>
+                </div>
+    
+                <div class="drink">
+                    <div class="drink-img">
+                        <img src="https://image.freepik.com/vetores-gratis/modelo-de-lata-refrigerante-ou-cerveja-de-aluminio-brilhante-em-branco_88653-860.jpg" alt="Cerveja" class="drink-img">
+                    </div>
+                    <div class="drink-details">
+                        <p class="drink-title">Variados</p>
+                        <details>
+                            <summary>Tipos</summary>
+                                <div class="drink-flavor">
+                                    <div class="drink-flavor">
+                                        {% for drink in drinks %}
+                                            {% if drink.category == 'varied' and drink.estoque %}
+                                                <div class="drink-amount">
+                                                    <p>{{ drink.produto }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.preco }}" min="0" max="100" placeholder="Quant">
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div id="order-now">
+                <button disabled="true">Pedir</button>
+            </div>
         </form>
+    </main>
+</section>
 
 {% endblock %}
+
+{% block js %}/static/js/bebidas/script.js{% endblock %}

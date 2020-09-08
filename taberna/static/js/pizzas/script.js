@@ -1,6 +1,7 @@
 var n = 1;
 var nn = 3;
-const button = document.querySelector('#order-pizza button');
+let number_pizza = 0;
+const button = document.querySelector('#order-now button');
 
 function order_released() {
     button.removeAttribute('disabled');
@@ -71,12 +72,19 @@ amount_soda.forEach(task => {
 
 function soda_exist() {
 
-    amount_soda = document.querySelectorAll('.flavor-soda input');
+    let found = false;
     amount_soda.forEach(task => {
         if(task.value > 0) {
-            order_released();
+            found = true;
         }
     })
+
+    if(found) {
+        order_released();
+    }
+    else {
+        button.disabled = true;
+    }
 }
 
 function go() {
@@ -102,7 +110,7 @@ function go() {
     })
 
     let c_size = document.querySelectorAll('.content-sizes');
-    let number_pizza = c_size.length / 5;
+    number_pizza = c_size.length / 5;
     
     c_size.forEach(task => {
         task.children[2].addEventListener('click', e => {
@@ -131,7 +139,7 @@ function go() {
                 order_released();
             }
             else {
-                button.disabled = true;
+                soda_exist();
             }
         })
     })
@@ -142,10 +150,16 @@ let one_more = document.querySelector('#one-more').addEventListener('click', fun
     let pizza_template = document.querySelector('#p1');
 
     let new_pizza = document.createElement('div');
+    let close_pizza = document.createElement('div');
+
+    close_pizza.className = "close-element";
+    close_pizza.innerHTML = "X";
+
     new_pizza.className = "product-content";
     new_pizza.id = "p2";
 
     new_pizza.innerHTML = pizza_template.innerHTML;
+    new_pizza.append(close_pizza);
     n++;
 
     new_pizza.children[0].children[0].name = `flavor1_${n}`;
@@ -196,6 +210,17 @@ let one_more = document.querySelector('#one-more').addEventListener('click', fun
 
     pizzas_content.append(new_pizza);
     nn += 2;
+
+    let closePizzaNow = document.querySelectorAll('.close-element');
+
+    closePizzaNow.forEach(task => {
+        task.addEventListener('click', e => {
+            e.target.parentNode.remove();
+            number_pizza--;
+            soda_exist();
+        })
+    } )
+
     go();
 })
 
