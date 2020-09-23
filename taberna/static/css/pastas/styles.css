@@ -1,0 +1,69 @@
+section main .content .product-content {
+    padding-bottom: 20px;
+}
+
+section main .pasta-title {
+    font-size: 55px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+    color: #fff;
+}
+
+section main .pasta {
+    border-bottom: solid 2px #414142;
+    text-align: center;
+    padding: 5px 0;
+}
+
+section main .pasta .pasta-type {
+    margin: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 40px;
+    color: #414142;
+}
+
+section main .pasta .pasta-details {
+    width: 100%;
+    max-width: 360px;
+    padding-top: 15px;
+    padding-bottom: 35px;
+    margin: auto;
+}
+
+section main .pasta .pasta-details details summary {
+    border-bottom: solid 2px #ea0606;
+    padding: 5px;
+    color: #414142;
+    font-size: 25px;
+    outline: none;
+    cursor: pointer;
+}
+
+section main .pasta .pasta-details .pasta-flavors {
+    padding: 5px;
+}
+
+section main .pasta .pasta-details .pasta-flavors div {
+    border-bottom: solid 1px #414142;
+    display: flex;
+    padding: 10px 0;
+}
+
+section main .pasta .pasta-details .pasta-flavors p {
+    width: 100%;
+    max-width: 290px;
+    margin: 5px 0;
+    font-size: 20px;
+}
+
+section main .pasta .pasta-details .pasta-flavors input {
+    width: 100%;
+    max-width: 55px;
+    padding: 5px;
+    border: solid 1px red;
+    border-radius: 5px;
+    font-size: 12px;
+    outline: none;
+}

@@ -6,9 +6,9 @@
 <header id="food">
     <nav class="menu">
         <ul>
-            <li><a href="{% url 'bebidas' %}" id="drinks">Bebidas</a></li>
+            <li><a href="{% url 'drinks' %}" id="drinks">Bebidas</a></li>
             <li><a href="{% url 'pizzas' %}" id="pizzas">Pizzas</a></li>
-            <li><a href="{% url 'comidas' %}" id="pastas">Salgados</a></li>
+            <li><a href="{% url 'pastas' %}" id="pastas">Salgados</a></li>
         </ul>
     </nav>
 </header>
@@ -22,7 +22,7 @@
             {% endfor %}
         {% endif %}
 
-        <a href="{% url 'carrinho' %}">
+        <a href="{% url 'cart' %}">
             <div class="car">
                 <img src="../static/images/car2.png" alt="Carrinho" id="cart">
             </div>
@@ -35,8 +35,8 @@
                         <select class="select" name="flavor1_1" id="flavor-1">
                             <optgroup label="Sabor 1">
                                 {% for pizza in pizzas %}
-                                {% if pizza.estoque %}
-                                <option value="{{ pizza.produto }}">{{ pizza.produto }}</option>
+                                {% if pizza.stock %}
+                                <option value="{{ pizza.product }}">{{ pizza.product }}</option>
                                 {% endif %}
                                 {% endfor %}
                             </optgroup>
@@ -45,8 +45,8 @@
                         <select class="select" name="flavor2_1" id="flavor-2">
                             <optgroup label="Sabor 2">
                                 {% for pizza in pizzas %}
-                                {% if pizza.estoque %}
-                                <option value="{{ pizza.produto }}">{{ pizza.produto }}</option>
+                                {% if pizza.stock %}
+                                <option value="{{ pizza.product }}">{{ pizza.product }}</option>
                                 {% endif %}
                                 {% endfor %}
                             </optgroup>
@@ -66,7 +66,7 @@
                         <li class="fam" id="fam1">
                             <label for="check-f1">
                                 <div class="content-sizes">
-                                    <span class="type">Família</span> <span class="price">R${{ price.preco_f }}</span><input type="checkbox" class="box" id="check-f1" name="f1" value="family, {{ price.preco_f }}">
+                                    <span class="type">Família</span> <span class="price">R${{ price.price_f }}</span><input type="checkbox" class="box" id="check-f1" name="f1" value="family, {{ price.price_f }}">
                                     <div id="amount_f1"></div>
                                 </div>
                             </label>
@@ -75,7 +75,7 @@
                         <li class="big" id="big1">
                             <label for="check-b1">
                                 <div class="content-sizes">
-                                    <span class="type">Grande</span> <span class="price">R${{ price.preco_g }}</span><input type="checkbox" class="box" id="check-b1" name="b1" value="big, {{ price.preco_g }}">
+                                    <span class="type">Grande</span> <span class="price">R${{ price.price_b }}</span><input type="checkbox" class="box" id="check-b1" name="b1" value="big, {{ price.price_b }}">
                                     <div id="amount_b1"></div>
                                 </div>
                             </label>
@@ -84,7 +84,7 @@
                         <li class="ave" id="ave1">
                             <label for="check-a1">
                                 <div class="content-sizes">
-                                    <span class="type">Média</span> <span class="price">R${{ price.preco_a }}</span><input type="checkbox" class="box" id="check-a1" name="a1" value="average, {{ price.preco_a }}">
+                                    <span class="type">Média</span> <span class="price">R${{ price.price_a }}</span><input type="checkbox" class="box" id="check-a1" name="a1" value="average, {{ price.price_a }}">
                                     <div id="amount_a1"></div>
                                 </div>
                             </label>
@@ -93,7 +93,7 @@
                         <li class="sam" id="sam1">
                             <label for="check-s1">
                                 <div class="content-sizes">
-                                    <span class="type">Pequena</span> <span class="price">R${{ price.preco_p }}</span><input type="checkbox" class="box" id="check-s1" name="s1" value="small, {{ price.preco_p }}">
+                                    <span class="type">Pequena</span> <span class="price">R${{ price.price_s }}</span><input type="checkbox" class="box" id="check-s1" name="s1" value="small, {{ price.price_s }}">
                                     <div id="amount_s1"></div>
                                 </div>
                             </label>
@@ -102,7 +102,7 @@
                         <li class="min" id="min1">
                             <label for="check-m1">
                                 <div class="content-sizes">
-                                    <span class="type">Mini</span> <span class="price">R${{ price.preco_m }}</span><input type="checkbox" class="box" id="check-m1" name="m1" value="mini, {{ price.preco_m }}">
+                                    <span class="type">Mini</span> <span class="price">R${{ price.price_m }}</span><input type="checkbox" class="box" id="check-m1" name="m1" value="mini, {{ price.price_m }}">
                                     <div id="amount_m1"></div>
                                 </div>
                             </label>
@@ -118,16 +118,15 @@
 
             <div class="soda-content">
                 <p id="soda-title">Refrigerantes</p>
-                <!-- For com todos os refris-->
 
                 <div class="soda">
                     <div id="more-than-1l">
                         <details>
                             <summary>1L</summary>
                             {% for so in soda %}
-                                {% if so.liters == 1 and so.estoque %}
+                                {% if so.liters == 1 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.price }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_1l{{ so.product }}, 1L, {{ so.price }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -136,9 +135,9 @@
                         <details>
                             <summary>2L</summary>
                             {% for so in soda %}
-                                {% if so.liters == 2 and so.estoque %}
+                                {% if so.liters == 2 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_2l{{ so.produto }}, 2L, {{ so.price }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_2l{{ so.product }}, 2L, {{ so.price }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -148,9 +147,9 @@
                         <details>
                             <summary>Lata</summary>
                             {% for so in soda %}
-                                {% if so.liters == 350 and so.estoque %}
+                                {% if so.liters == 350 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_ca{{ so.produto }}, Latinha, {{ so.price }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_ca{{ so.product }}, Latinha, {{ so.price }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -159,9 +158,9 @@
                         <details>
                             <summary>KS</summary>
                             {% for so in soda %}
-                                {% if so.liters == 290 and so.estoque %}
+                                {% if so.liters == 290 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_ks{{ so.produto }}, KS, {{ so.price }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_ks{{ so.product }}, KS, {{ so.price }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -170,9 +169,9 @@
                         <details>
                             <summary>Mini</summary>
                             {% for so in soda %}
-                                {% if so.liters > 5 and so.liters <= 250 and so.estoque %}
+                                {% if so.liters > 5 and so.liters <= 250 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_mi{{ so.produto }}, Mini, {{ so.price }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_mi{{ so.product }}, Mini, {{ so.price }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}

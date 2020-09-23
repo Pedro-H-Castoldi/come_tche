@@ -9,25 +9,24 @@ def get_filename(_intance, filename):
 
 class Base(models.Model):
 
-    criado = models.DateField('Data de criação', auto_now_add=True)
-    modificado = models.DateField('Modificado', auto_now=True)
-    ativo = models.BooleanField('Ativo?', default=True)
+    created = models.DateField('Data de criação', auto_now_add=True)
+    modified = models.DateField('Modificado', auto_now=True)
 
     class Meta:
         abstract = True
 
 class Produto(Base):
 
-    produto = models.CharField('Produto', max_length=50)
-    estoque = models.BooleanField('Estoque')
-    imagem = StdImageField('Imagem', upload_to=get_filename, variations={'thumb': (124, 124)})
+    product = models.CharField('Produto', max_length=50)
+    stock = models.BooleanField('Estoque', default=True)
+    image = StdImageField('Imagem', upload_to=get_filename, variations={'thumb': (124, 124)})
 
     class Meta:
         verbose_name = 'Produto'
         verbose_name_plural = 'Produtos'
 
     def __str__(self):
-        return self.produto
+        return self.product
 
 class Pizza(Produto):
 
@@ -36,15 +35,15 @@ class Pizza(Produto):
         verbose_name_plural = 'Pizzas'
 
     def __str__(self):
-        return self.produto
+        return self.product
 
 class PrecoPizza(Base):
 
-    preco_f = models.DecimalField('Preço Família', max_digits=8, decimal_places=2, default=30.00)
-    preco_g = models.DecimalField('Preço Grande', max_digits=8, decimal_places=2, default=25.00)
-    preco_a = models.DecimalField('Preço Média', max_digits=8, decimal_places=2, default=20.00)
-    preco_p = models.DecimalField('Preço Pequena', max_digits=8, decimal_places=2, default=15.00)
-    preco_m = models.DecimalField('Preço Mini', max_digits=8, decimal_places=2, default=6.00)
+    price_f = models.DecimalField('Preço Família', max_digits=8, decimal_places=2, default=30.00)
+    price_b = models.DecimalField('Preço Grande', max_digits=8, decimal_places=2, default=25.00)
+    price_a = models.DecimalField('Preço Média', max_digits=8, decimal_places=2, default=20.00)
+    price_s = models.DecimalField('Preço Pequena', max_digits=8, decimal_places=2, default=15.00)
+    price_m = models.DecimalField('Preço Mini', max_digits=8, decimal_places=2, default=6.00)
 
     class Meta:
         verbose_name = 'Preço Pizza'
@@ -63,15 +62,15 @@ class Refrigerante(Produto):
         ('Pequena', 'Pequena'),
     ]
 
-    tipo = models.CharField('Tipo', choices=CHOICES, max_length=7)
-    preco = models.DecimalField('Preço', max_digits=8, decimal_places=2)
+    type = models.CharField('Tipo', choices=CHOICES, max_length=7)
+    price = models.DecimalField('Preço', max_digits=8, decimal_places=2)
 
     class Meta:
         verbose_name = 'Refrigerante'
         verbose_name_plural = 'Refrigerantes'
 
     def __str__(self):
-        return self.produto
+        return self.product
 
 class Drink(Produto):
 
@@ -95,4 +94,16 @@ class Drink(Produto):
         verbose_name_plural = 'Bebidas'
 
     def __str__(self):
-        return self.produto
+        return self.product
+
+class Pasta(Produto):
+
+    flavor = models.CharField('Sabor', max_length=100)
+    price = models.DecimalField('Preço', max_digits=8, decimal_places=2)
+
+    class Meta:
+        verbose_name = 'Salgado'
+        verbose_name_plural = 'Salgados'
+
+    def __str__(self):
+        return self.product
