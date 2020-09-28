@@ -1,6 +1,6 @@
 from django.views.generic import FormView, TemplateView
 from django.shortcuts import render
-from .models import Pizza, PrecoPizza, Drink
+from .models import Pizza, PrecoPizza, Drink, Pasta
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.http import HttpResponse
@@ -23,6 +23,7 @@ def drinks_view(request):
 def pastas_view(request):
 
     context = {
+        'pastas': Pasta.objects.all(),
         'soda': Drink.objects.filter(category='soda')
     }
 
@@ -76,7 +77,6 @@ def kart_view(request):
 
         for p in pedido:
             for pp, hh in p.items():
-                print(f'{pp}: {hh}')
                 if pp[0:6] == 'flavor':
                     if cont == 0:
                         f1 = hh
@@ -120,11 +120,28 @@ def kart_view(request):
                     date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
 
         pizzas.append(specifications)
+        order = {'pz': pizzas, 'sd': sodas, 'dt': date, 'tt': total}
 
-        order = {'pz':pizzas, 'sd':sodas, 'dt':date, 'tt': total}
+        message = '*Olá. Eu gostaria de:*\n\n'
+        for pe in order:
+            if pe == 'pz':
+                for each_order in order[pe][0]:
+                    if len(each_order) == 5:
+                        message += f'Pizza: {each_order[0]} {each_order[4]} (R$2.0) - {each_order[1]} x {each_order[3]} ({each_order[2]})\n\n'
+                    else:
+                        message += f'Pizza: {each_order[0]} - {each_order[1]} x {each_order[3]} ({each_order[2]})\n\n'
+
+            if pe == 'sd':
+                for each_order in order[pe]:
+                        message += f'Refrigerante: {each_order[0]} {each_order[1]} x {each_order[3]} ({each_order[2]})\n\n'
+
+        message += f'Total: {order["tt"]}\n\n'
+        message += f'Data: {order["dt"]}'
+
 
         context = {
             'order': order,
+            'message': message,
         }
 
     return render(request, 'cart.html', context)

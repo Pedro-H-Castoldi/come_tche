@@ -25,11 +25,22 @@ section main .pasta .pasta-type {
 }
 
 section main .pasta .pasta-details {
-    width: 100%;
-    max-width: 360px;
     padding-top: 15px;
     padding-bottom: 35px;
     margin: auto;
+}
+
+section main .pasta .pasta-details details {
+    width: 100%;
+    max-width: 145px;
+    margin: auto;
+
+}
+
+section main .pasta .pasta-details details[open] {
+    width: 100%;
+    max-width: 360px;
+
 }
 
 section main .pasta .pasta-details details summary {
@@ -49,21 +60,28 @@ section main .pasta .pasta-details .pasta-flavors div {
     border-bottom: solid 1px #414142;
     display: flex;
     padding: 10px 0;
+    text-align: initial;
 }
 
 section main .pasta .pasta-details .pasta-flavors p {
     width: 100%;
     max-width: 290px;
     margin: 5px 0;
-    font-size: 20px;
+    font-size: 17px;
+    line-height: 25px;
+}
+
+section main .pasta .pasta-details .pasta-flavors span {
+    font-weight: bold;
 }
 
 section main .pasta .pasta-details .pasta-flavors input {
     width: 100%;
     max-width: 55px;
+    height: 33px;
     padding: 5px;
     border: solid 1px red;
     border-radius: 5px;
-    font-size: 12px;
+    font-size: 16px;
     outline: none;
 }

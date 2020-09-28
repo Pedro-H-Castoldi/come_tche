@@ -31,6 +31,7 @@
             {% csrf_token %}
             <div class="pasta-title">Salgados</div>
             <div class="product-content">
+                {% if pastas.0.product == 'Pastel' %} <!-- Ver isso -->
                 <div class="pasta">
                     <p class="pasta-type">Pastel</p>
                     <div class="salgado-img">
@@ -40,97 +41,20 @@
                         <details>
                             <summary>Sabores</summary>
                             <div class="pasta-flavors">
+                                {% for pasta in pastas %}
+                                {% if pasta.stock and pasta.product == 'Pastel' %}
                                 <div>
-                                    <p>Carne - R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
+                                    <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input type="number" min="0" max="100" placeholder="Quant">
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
                                 </div>
-
-                                <div>
-                                    <p>Carne - R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                </div>
-                                
-                                <div>
-                                    <p>Frango - R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                </div>
-                                
-                                <div>
-                                    <p>Queijo - R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                </div>
-                                
-                                <div>
-                                    <p>Presunto - R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                </div>
-
-                                <div>
-                                    <p>Misto - R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                </div>
-                                
-                                <div>
-                                    <p>Misto + Carne - R$7.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                </div>
-                                
-                                <div>
-                                    <p>Frango + Queijo - R$7.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                </div>
-                                
-                                <div>
-                                    <p>Carne + Queijo - R$7.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                </div>
-                                
-                                <div>
-                                    <p>Carne + Frango - R$7.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                </div>
-                            </div>
-                        </details>
-                    </div>
+                            </details>
+                        </div>
+                    </div> 
                 </div>
-
-                <div class="pasta">
-                    <p class="pasta-type">Esfirra</p>
-                    <div class="salgado-img">
-                        <img src="https://portal-amb-imgs.clubedaana.com.br/2018/11/pastel-de-feira-1024x768.jpg" alt="Pastel" style="width: 200px;">
-                    </div>
-                    <div class="pasta-details">
-                        <details>
-                            <summary>Sabores</summary>
-                            <div class="pasta-flavors">
-                                <p>Carne - R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Frango- R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Queijo- R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Presunto- R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Misto- R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Misto + Carne- R$7.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Frango + Queijo- R$7.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Carne + Queijo- R$7.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Carne + Frango- R$7.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                            </div>
-                        </details>
-                    </div>
-                </div>
-
-                <div class="pasta">
-                    <p class="pasta-type">Enroladinho</p>
-                    <div class="salgado-img">
-                        <img src="https://portal-amb-imgs.clubedaana.com.br/2018/11/pastel-de-feira-1024x768.jpg" alt="Pastel" style="width: 200px;">
-                    </div>
-                    <div class="pasta-details">
-                        <details>
-                            <summary>Sabores</summary>
-                            <div class="pasta-flavors">
-                                <p>Carne - R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Frango- R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Queijo- R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Presunto- R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Misto- R$5.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Misto + Carne- R$7.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Frango + Queijo- R$7.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Carne + Queijo- R$7.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                                <p>Carne + Frango- R$7.00</p><input type="number" min="0" max="100" placeholder="Quant">
-                            </div>
-                        </details>
-                    </div>
-                </div>
-            </div>
-            <div class="soda-content">
+                {% endif %}
+                <div class="soda-content">
                 <p id="soda-title">Refrigerantes</p>
         
 
