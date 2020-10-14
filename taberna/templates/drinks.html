@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{%load bootstrap4 %}
+{% load i18n %}
 {% block title %}ComeTchÊ | Bebidas{% endblock %}
 {% block css %}/static/css/drinks/styles.css{% endblock %}
 {% block content %}
@@ -43,7 +43,7 @@
                                     {% for drink in drinks %}
                                         {% if drink.category == 'beer' and drink.liters == 600 and drink.stock %}
                                             <div class="drink-amount">
-                                                <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="beer_600ml{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-Cerveja {{ drink.product }}, 600ml, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                             </div>
                                         {% endif %}
                                     {% endfor %}
@@ -65,7 +65,7 @@
                                         {% for drink in drinks %}
                                             {% if drink.category == 'beer' and drink.liters == 300 and drink.stock %}
                                                 <div class="drink-amount">
-                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="beer_300ml{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-Cerveja {{ drink.product }}, 300ml, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -88,7 +88,7 @@
                                         {% for drink in drinks %}
                                             {% if drink.category == 'beer' and drink.liters == 350 and drink.stock %}
                                                 <div class="drink-amount">
-                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="beer_350ml{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-Cerveja {{ drink.product }}, 350ml, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -115,7 +115,7 @@
                                         {% for drink in drinks %}
                                             {% if drink.category == 'whisky' and drink.stock %}
                                                 <div class="drink-amount">
-                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="whisky{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-Whisky {{ drink.product }}, 1L, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -138,7 +138,7 @@
                                         {% for drink in drinks %}
                                             {% if drink.category == 'cachaça' and drink.stock %}
                                                 <div class="drink-amount">
-                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="cachaca{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-Cachaça {{ drink.product }}, 1L, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -161,7 +161,7 @@
                                         {% for drink in drinks %}
                                             {% if drink.category == 'rum' and drink.stock %}
                                                 <div class="drink-amount">
-                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="rum{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-Rum {{ drink.product }}, 1L, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -184,7 +184,7 @@
                                         {% for drink in drinks %}
                                             {% if drink.category == 'vodka' and drink.stock %}
                                                 <div class="drink-amount">
-                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="vodka{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-Vodka {{ drink.product }}, 1L, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -207,7 +207,7 @@
                                         {% for drink in drinks %}
                                             {% if drink.category == 'cognac' and drink.stock %}
                                                 <div class="drink-amount">
-                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="cognac{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-Cognac {{ drink.product }}, 1L, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -234,7 +234,7 @@
                                         {% for drink in drinks %}
                                             {% if drink.category == 'soda' and drink.liters == 2 and drink.stock %}
                                                 <div class="drink-amount">
-                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="soda_2l{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-{{ drink.product }}, 2L, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -257,7 +257,7 @@
                                         {% for drink in drinks %}
                                             {% if drink.category == 'soda' and drink.liters == 1 and drink.stock %}
                                                 <div class="drink-amount">
-                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="soda_1l{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-{{ drink.product }}, 1L, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -280,7 +280,7 @@
                                         {% for drink in drinks %}
                                             {% if drink.category == 'soda' and drink.liters == 350 and drink.stock %}
                                                 <div class="drink-amount">
-                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="soda_ca{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-{{ drink.product }}, Latinha, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -303,7 +303,7 @@
                                         {% for drink in drinks %}
                                             {% if drink.category == 'soda' and drink.liters == 290 and drink.stock %}
                                                 <div class="drink-amount">
-                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="soda_ks{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-{{ drink.product }}, KS, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -326,7 +326,7 @@
                                         {% for drink in drinks %}
                                             {% if drink.category == 'soda' and drink.liters > 5 and drink.liters <= 250 and drink.stock %}
                                                 <div class="drink-amount">
-                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="soda_mi{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-{{ drink.product }}, Mini, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -354,7 +354,7 @@
                                         {% for drink in drinks %}
                                             {% if drink.category == 'energetic' and drink.stock %}
                                                 <div class="drink-amount">
-                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="energetic{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-Energético {{ drink.product }}, 1L, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
@@ -377,7 +377,7 @@
                                         {% for drink in drinks %}
                                             {% if drink.category == 'varied' and drink.stock %}
                                                 <div class="drink-amount">
-                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="varied{{ drink.product }}, 1L, {{ drink.price }}" min="0" max="100" placeholder="Quant">
+                                                    <p>{{ drink.product }} - R${{ drink.price }}</p><input type="number" name="drink-{{ drink.product }}, 1L, {{ drink.price }}, {{ drink.image.thumb.url }}" min="0" max="100" placeholder="Quant">
                                                 </div>
                                             {% endif %}
                                         {% endfor %}

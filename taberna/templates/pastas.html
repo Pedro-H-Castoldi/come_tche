@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {%load bootstrap4 %}
+{% load i18n %}
 {% block title %}ComeTchÊ | Comidas{% endblock %}
 {% block css %}/static/css/pastas/styles.css{% endblock %}
 {% block content %}
@@ -31,41 +32,133 @@
             {% csrf_token %}
             <div class="pasta-title">Salgados</div>
             <div class="product-content">
-                {% if pastas.0.product == 'Pastel' %} <!-- Ver isso -->
+                {% if pastas.pastel %}
                 <div class="pasta">
                     <p class="pasta-type">Pastel</p>
-                    <div class="salgado-img">
-                        <img src="https://portal-amb-imgs.clubedaana.com.br/2018/11/pastel-de-feira-1024x768.jpg" alt="Pastel" style="width: 200px;">
+                    <div class="pasta-img">
+                        <img src="https://portal-amb-imgs.clubedaana.com.br/2018/11/pastel-de-feira-1024x768.jpg" alt="Pastel">
                     </div>
                     <div class="pasta-details">
                         <details>
                             <summary>Sabores</summary>
                             <div class="pasta-flavors">
-                                {% for pasta in pastas %}
-                                {% if pasta.stock and pasta.product == 'Pastel' %}
-                                <div>
-                                    <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input type="number" min="0" max="100" placeholder="Quant">
-                                    </div>
+                                {% for pasta in pastas.pastel %}
+                                    {% if pasta.stock %}
+                                        <div>
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="pasta-pastel{{ pasta.id }}, {{ pasta.product }}, {{ pasta.flavor }}, {{ pasta.price }}, {{ pasta.image.thumb.url }}" type="number" min="0" max="100" placeholder="Quant">
+                                        </div>
                                     {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </details>
-                        </div>
+                                {% endfor %}
+                            </div>
+                        </details>
                     </div> 
                 </div>
                 {% endif %}
-                <div class="soda-content">
+
+                {% if pastas.esfirra %}
+                <div class="pasta">
+                    <p class="pasta-type">Esfirra</p>
+                    <div class="pasta-img">
+                        <img src="https://site-amb-s3.clubedaana.com.br/prod/imagens/receita/4909/esfirra-facil-de-carne-ou-queijo-4799.jpg" alt="Pastel">
+                    </div>
+                    <div class="pasta-details">
+                        <details>
+                            <summary>Sabores</summary>
+                            <div class="pasta-flavors">
+                                {% for pasta in pastas.esfirra %}
+                                    {% if pasta.stock %}
+                                        <div>
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="pasta-esfirra{{ pasta.id }}, {{ pasta.product }}, {{ pasta.flavor }}, {{ pasta.price }}, {{ pasta.image.thumb.url }}" type="number" min="0" max="100" placeholder="Quant">
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </details>
+                    </div> 
+                </div>
+                {% endif %}
+
+                {% if pastas.coxinha %}
+                <div class="pasta">
+                    <p class="pasta-type">Coxinha</p>
+                    <div class="pasta-img">
+                        <img src="https://s2.glbimg.com/OA5eE_C4dKT8G9PwTc8oVZ9GbaQ=/0x0:630x385/984x0/smart/filters:strip_icc()/s.glbimg.com/po/rc/media/2014/06/04/11_00_55_179_receita_tradicional_de_coxinha.jpg" alt="Pastel">
+                    </div>
+                    <div class="pasta-details">
+                        <details>
+                            <summary>Sabores</summary>
+                            <div class="pasta-flavors">
+                                {% for pasta in pastas.coxinha %}
+                                    {% if pasta.stock %}
+                                        <div>
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="pasta-coxinha{{ pasta.id }}, {{ pasta.product }}, {{ pasta.flavor }}, {{ pasta.price }}, {{ pasta.image.thumb.url }}"type="number" min="0" max="100" placeholder="Quant">
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </details>
+                    </div> 
+                </div>
+                {% endif %}
+
+                {% if pastas.enroladinho %}
+                <div class="pasta">
+                    <p class="pasta-type">Enroladinho</p>
+                    <div class="pasta-img">
+                        <img src="https://xtudoreceitas.com/wp-content/uploads/Corn-Dog-Enroladinho-de-Salsicha-Frito-no-Palito.jpg" alt="Pastel">
+                    </div>
+                    <div class="pasta-details">
+                        <details>
+                            <summary>Sabores</summary>
+                            <div class="pasta-flavors">
+                                {% for pasta in pastas.enroladinho %}
+                                    {% if pasta.stock %}
+                                        <div>
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="pasta-enroladinho{{ pasta.id }}, {{ pasta.product }}, {{ pasta.flavor }}, {{ pasta.price }}, {{ pasta.image.thumb.url }}"type="number" min="0" max="100" placeholder="Quant">
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </details>
+                    </div> 
+                </div>
+                {% endif %}
+
+                {% if pastas.sundry %}
+                <div class="pasta">
+                    <p class="pasta-type">Diversos</p>
+                    <div class="pasta-img">
+                        <img src="https://panfleteria.sfo2.digitaloceanspaces.com/uploads/ofertas/img/Panfleteria_Joel_Salgados_torta_salgados_foto04.jpg" alt="Pastel">
+                    </div>
+                    <div class="pasta-details">
+                        <details>
+                            <summary>Sabores</summary>
+                            <div class="pasta-flavors">
+                                {% for pasta in pastas.sundry %}
+                                    {% if pasta.stock %}
+                                        <div>
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="pasta-sundry{{ pasta.id }}, {{ pasta.product }}, {{ pasta.flavor }}, {{ pasta.price }}, {{ pasta.image.thumb.url }}"type="number" min="0" max="100" placeholder="Quant">
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </details>
+                    </div> 
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="soda-content">
                 <p id="soda-title">Refrigerantes</p>
-        
 
                 <div class="soda">
                     <div id="more-than-1l">
                         <details>
                             <summary>1L</summary>
                             {% for so in soda %}
-                                {% if so.liters == 1 and so.estoque %}
+                                {% if so.liters == 1 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_1l{{ so.produto }}, 1L, {{ so.price }}" min="0" max="100">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_1l{{ so.product }}, 1L, {{ so.price }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -74,9 +167,9 @@
                         <details>
                             <summary>2L</summary>
                             {% for so in soda %}
-                                {% if so.liters == 2 and so.estoque %}
+                                {% if so.liters == 2 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_2l{{ so.produto }}, 2L, {{ so.price }}" min="0" max="100">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_2l{{ so.product }}, 2L, {{ so.price }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -86,9 +179,9 @@
                         <details>
                             <summary>Lata</summary>
                             {% for so in soda %}
-                                {% if so.liters == 350 and so.estoque %}
+                                {% if so.liters == 350 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_ca{{ so.produto }}, Latinha, {{ so.price }}" min="0" max="100">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_ca{{ so.product }}, Latinha, {{ so.price }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -97,9 +190,9 @@
                         <details>
                             <summary>KS</summary>
                             {% for so in soda %}
-                                {% if so.liters == 290 and so.estoque %}
+                                {% if so.liters == 290 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_ks{{ so.produto }}, KS, {{ so.price }}" min="0" max="100">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_ks{{ so.product }}, KS, {{ so.price }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -108,9 +201,9 @@
                         <details>
                             <summary>Mini</summary>
                             {% for so in soda %}
-                                {% if so.liters > 5 and so.liters <= 250 and so.estoque %}
+                                {% if so.liters > 5 and so.liters <= 250 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.produto }} - R${{ so.price }}</p><input type="number" name="soda_mi{{ so.produto }}, Mini, {{ so.price }}" min="0" max="100">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_mi{{ so.product }}, Mini, {{ so.price }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -118,14 +211,14 @@
                     </div>
                 </div>
             </div>
-
+        
             <div class="date">
                 <p>Horário</p>
                 <input type="datetime-local" id="datetime" name="request_date"equired>
             </div>
 
             <div id="order-now">
-                <button disabled="true">Pedir</button>
+                <button>Pedir</button>
             </div>
         </form>
     </main>

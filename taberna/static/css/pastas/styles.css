@@ -24,6 +24,10 @@ section main .pasta .pasta-type {
     color: #414142;
 }
 
+section main .pasta .pasta-img img {
+    width: 200px;
+}
+
 section main .pasta .pasta-details {
     padding-top: 15px;
     padding-bottom: 35px;

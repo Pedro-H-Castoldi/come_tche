@@ -5,39 +5,93 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import redirect
+import re
 
 pedido = []
 
-def index_view(request):
 
+def make_cart(request):
+    if str(request.method) == 'POST':
+        if pedido:
+            if request.POST != pedido[-1]:
+                add_cart(request)
+        else:
+            add_cart(request)
+
+def add_cart(request):
+    messages.success(request,"Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
+    form = request.POST
+    pedido.append(form)
+
+def make_message(order):
+    message = '*Olá. Eu gostaria de:*\n\n'
+    for pe in order:
+        if pe == 'pz':
+            for each_order in order[pe][0]:
+                if len(each_order) == 5:
+                    message += f'Pizza: {each_order[0]} {each_order[4]} (R$2.0) - {each_order[1]} x {each_order[3]} ({each_order[2]})\n\n'
+                else:
+                    message += f'Pizza: {each_order[0]} - {each_order[1]} x {each_order[3]} ({each_order[2]})\n\n'
+
+        elif pe == 'dk':
+            for each_order in order[pe]:
+                message += f'{each_order[0]}: {each_order[1]} x {each_order[4]} ({each_order[2]})\n\n'
+
+        elif pe == 'pa':
+            for pasta in order[pe].values():
+                for each_order in pasta:
+                    message += f'{each_order[0]}: {each_order[1]} x {each_order[4]} ({each_order[2]})\n\n'
+
+    message += f'Total: {order["tt"]}\n\n'
+    message += f'Data: {order["dt"]}'
+
+    print(message)
+
+    return message
+
+def index_view(request):
     return render(request, 'index.html')
 
 def drinks_view(request):
-
     context = {
         'drinks': Drink.objects.all()
     }
+    make_cart(request)
 
     return render(request, 'drinks.html', context)
 
 def pastas_view(request):
+    pastas = Pasta.objects.all()
+    pastas_types = {}
+    pastel = []
+    sfiha = []
+    enroladinho = []
+    coxinha = []
+    sundry = []
+
+    for pasta in pastas:
+        if pasta.product.lower() == 'pastel':
+            pastel.append(pasta)
+            pastas_types['pastel'] = pastel
+        elif pasta.product.lower() == 'esfirra':
+            sfiha.append(pasta)
+            pastas_types['esfirra'] = sfiha
+        elif pasta.product.lower() == 'coxinha':
+            coxinha.append(pasta)
+            pastas_types['coxinha'] = coxinha
+        elif pasta.product.lower() == 'enroladinho':
+            enroladinho.append(pasta)
+            pastas_types['enroladinho'] = enroladinho
+        else:
+            sundry.append(pasta)
+            pastas_types['sundry'] = sundry
 
     context = {
-        'pastas': Pasta.objects.all(),
-        'soda': Drink.objects.filter(category='soda')
+        'pastas': pastas_types,
+        'soda': Drink.objects.filter(category='soda'),
     }
 
-    def add_kart():
-        messages.success(request,"Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
-        form = request.POST
-        pedido.append(form)
-
-    if str(request.method) == 'POST':
-        if pedido:
-            if request.POST != pedido[-1]:
-                add_kart()
-        else:
-            add_kart()
+    make_cart(request)
 
     return render(request, 'pastas.html', context)
 
@@ -48,18 +102,7 @@ def pizza_view(request):
         'soda': Drink.objects.filter(category='soda'),
     }
 
-    def add_kart():
-        messages.success(request,
-                         "Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
-        form = request.POST
-        pedido.append(form)
-
-    if str(request.method) == 'POST':
-        if pedido:
-            if request.POST != pedido[-1]:
-                add_kart()
-        else:
-            add_kart()
+    make_cart(request)
 
     return render(request, 'pizzas.html', context)
 
@@ -70,10 +113,15 @@ def kart_view(request):
     if pedido:
         pizzas = []
         specifications = []
-        sodas = []
+        drinks = []
         type = price = amount = cont = f1 = f2 = date = total = 0
         catupiry = False
-
+        pastas = {}
+        pastel_cart = []
+        coxinha_cart = []
+        sfiha_cart = []
+        enroladinho_cart = []
+        sundry_cart = []
 
         for p in pedido:
             for pp, hh in p.items():
@@ -108,36 +156,48 @@ def kart_view(request):
                         catupiry = False
 
                 amount = 0
-
-                if pp[0:4] == 'soda' and hh != '' and hh != '0':
-                    flavor_s, size_s, price_s = pp[7:].split(', ')
-                    price_s = float(price_s.replace(',', '.'))
-                    price_s *= int(hh)
-                    total += price_s
-                    sodas.append(f'{flavor_s}, {size_s}, R${price_s}, {hh}'.split(', '))
+                if pp[:5] == 'drink' and hh != '' and hh != '0':
+                    category_d, size_d, price_d, photo_d = pp[6:].split(', ')
+                    price_d = float(price_d.replace(',', '.'))
+                    price_d *= int(hh)
+                    total += price_d
+                    drinks.append(f'{category_d}, {size_d}, R${price_d}, {photo_d}, {hh}'.split(', '))
 
                 if pp == 'request_date':
                     date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
 
+
+
+                if pp[:5] == 'pasta' and hh != '' and int(hh) > 0:
+                    pasta_pp = pp.split(', ')[1:]
+
+                    price_pasta = float(pasta_pp[2].replace(',', '.'))
+                    price_pasta *= int(hh)
+
+                    total += price_pasta
+
+                    if 'pastel' in pp:
+                        pastel_cart.append([pasta_pp[0], pasta_pp[1], f'R${pasta_pp[2]}', pasta_pp[3], hh])
+                        pastas['pastel'] = pastel_cart
+                    elif 'esfirra' in pp:
+                        sfiha_cart.append([pasta_pp[0], pasta_pp[1], f'R${pasta_pp[2]}', pasta_pp[3], hh])
+                        pastas['sfiha'] = sfiha_cart
+                    elif 'enroladinho' in pp:
+                        enroladinho_cart.append([pasta_pp[0], pasta_pp[1], f'R${pasta_pp[2]}', pasta_pp[3], hh])
+                        pastas['enroladinho'] = enroladinho_cart
+                    elif 'coxinha' in pp:
+                        coxinha_cart.append([pasta_pp[0], pasta_pp[1], f'R${pasta_pp[2]}', pasta_pp[3], hh])
+                        pastas['coxinha'] = coxinha_cart
+                    elif 'sundry' in pp:
+                        sundry_cart.append([pasta_pp[0], pasta_pp[1], f'R${pasta_pp[2]}', pasta_pp[3], hh])
+                        pastas['sundry'] = sundry_cart
+
         pizzas.append(specifications)
-        order = {'pz': pizzas, 'sd': sodas, 'dt': date, 'tt': total}
+        print(drinks)
 
-        message = '*Olá. Eu gostaria de:*\n\n'
-        for pe in order:
-            if pe == 'pz':
-                for each_order in order[pe][0]:
-                    if len(each_order) == 5:
-                        message += f'Pizza: {each_order[0]} {each_order[4]} (R$2.0) - {each_order[1]} x {each_order[3]} ({each_order[2]})\n\n'
-                    else:
-                        message += f'Pizza: {each_order[0]} - {each_order[1]} x {each_order[3]} ({each_order[2]})\n\n'
+        order = {'pz': pizzas, 'dk': drinks, 'pa': pastas, 'dt': date, 'tt': total}
 
-            if pe == 'sd':
-                for each_order in order[pe]:
-                        message += f'Refrigerante: {each_order[0]} {each_order[1]} x {each_order[3]} ({each_order[2]})\n\n'
-
-        message += f'Total: {order["tt"]}\n\n'
-        message += f'Data: {order["dt"]}'
-
+        message = make_message(order)
 
         context = {
             'order': order,
@@ -145,286 +205,3 @@ def kart_view(request):
         }
 
     return render(request, 'cart.html', context)
-
-
-"""def carrinho_view(request):
-    order = {}
-    pizzas = []
-    specifications = []
-    pizza = []
-    sodas = []
-    dates = []
-    type_price = 0
-    amount = 0
-    catupiry = False
-
-    for p in pedido:
-        for pp, hh in p.items():
-            if pp[0:6] == 'flavor':
-                pizzas.append(hh)
-
-            if hh != '':
-                if len(hh.split(' ')) == 2:
-                    type_price = hh.split(', ')
-                    type_price[1] = float(type_price[1].replace(',', '.'))
-
-            if pp[0:7] == 'qamount' and pp != 0:
-                amount = hh
-
-            if pp[0:7] == 'camount':
-                catupiry = True
-
-            if amount != 0:
-                if catupiry:
-                    specifications.append([type_price, amount, catupiry])
-                else:
-                    specifications.append([type_price, amount])
-
-            catupiry = False
-            amount = 0
-
-            if pp[0:4] == 'soda' and hh != '' and hh != '0':
-                sodas.append(f'{pp[7:]}, {hh}')
-
-            if pp == 'request_date':
-                dates.append(hh)
-
-    if pizzas:
-        for i in range(1, len(pizzas), 2):
-            pizza.append(f'{pizzas[i-1]}/{pizzas[i]}')
-
-    order = {'pz':pizza, 'sp':specifications, 'sd':sodas, 'dt':dates}
-
-    for k in order:
-        print()
-
-    context = {
-        'order': order,
-    }
-
-    return render(request, 'carrinho.html', context)"""
-
-
-
-
-
-
-"""
-    def form_valid(self, form):
-        form.pedido()
-
-        pizza = form.cleaned_data['pizza']
-        email = form.cleaned_data['email']
-
-        print(f'Boa refeição {email} {pizza}')
-
-        messages.success(self.request, 'Deu certo')
-        return super(IndexView, self).form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, 'Deu errado')
-        return super(IndexView, self).form_invalid(form)
-        
-        
-        
-        
-        
-        sabor = []
-    refrigerantes = []
-    encontrado = False
-    catupiry = False
-    total = 0
-    s = 1
-    verifica = ''
-
-    pizzas = Pizza.objects.order_by('pk').all()
-    preco_p = PrecoPizza.objects.all()[0]
-
-    while request.GET.get(f'sabor1-{s}') != None:
-        s1 = request.GET.get(f'sabor1-{s}')
-        s2 = request.GET.get(f'sabor2-{s}')
-        sabor.append(f'Pizza {s1} / {s2}')
-        s += 1
-
-    j = 0
-    for pi in pizzas:
-        if request.GET.get(f'f{pi.id}'):
-            pp = request.GET.get(f'f{pi.id}').split(',')
-            quant = int(request.GET.get(f'{pi.id} {preco_p.preco_f}'))
-            pp[1] = float(pp[1])
-
-            if request.GET.get(f'c{pi.id} {preco_p.preco_f}') == 'on':
-                catupiry = True
-                pp[1] += 2
-
-            pp[1] *= quant
-            if verifica != pi.id:
-                if catupiry:
-                    catupiry = False
-                    pedido.append([f'{sabor[j]} + Catupiry', pp, quant])
-                else:
-                    pedido.append([sabor[j], pp, quant])
-                j += 1
-            else:
-                if catupiry:
-                    catupiry = False
-                    pedido.append([f'{sabor[j - 1]} + Catupiry', pp, quant])
-                else:
-                    pedido.append([sabor[j - 1], pp, quant])
-
-            encontrado = True
-            total += pp[1]
-            verifica = pi.id
-
-        if request.GET.get(f'g{pi.id}'):
-            pp = request.GET.get(f'g{pi.id}').split(',')
-            quant = int(request.GET.get(f'{pi.id} {preco_p.preco_g}'))
-            pp[1] = float(pp[1])
-
-            if request.GET.get(f'c{pi.id} {preco_p.preco_g}') == 'on':
-                catupiry = True
-                pp[1] += 2
-
-            pp[1] *= quant
-            if verifica != pi.id:
-                if catupiry:
-                    catupiry = False
-                    pedido.append([f'{sabor[j]} + Catupiry', pp, quant])
-                else:
-                    pedido.append([sabor[j], pp, quant])
-                j += 1
-            else:
-                if catupiry:
-                    catupiry = False
-                    pedido.append([f'{sabor[j - 1]} + Catupiry', pp, quant])
-                else:
-                    pedido.append([sabor[j - 1], pp, quant])
-
-            encontrado = True
-            total += pp[1]
-            verifica = pi.id
-
-        if request.GET.get(f'm{pi.id}'):
-            pp = request.GET.get(f'm{pi.id}').split(',')
-            quant = int(request.GET.get(f'{pi.id} {preco_p.preco_m}'))
-            pp[1] = float(pp[1])
-
-            if request.GET.get(f'c{pi.id} {preco_p.preco_m}') == 'on':
-                catupiry = True
-                pp[1] += 2
-
-            pp[1] *= quant
-            if verifica != pi.id:
-                if catupiry:
-                    catupiry = False
-                    pedido.append([f'{sabor[j]} + Catupiry', pp, quant])
-                else:
-                    pedido.append([sabor[j], pp, quant])
-                j += 1
-            else:
-                if catupiry:
-                    catupiry = False
-                    pedido.append([f'{sabor[j - 1]} + Catupiry', pp, quant])
-                else:
-                    pedido.append([sabor[j - 1], pp, quant])
-
-            encontrado = True
-            total += pp[1]
-            verifica = pi.id
-
-        if request.GET.get(f'p{pi.id}'):
-            pp = request.GET.get(f'p{pi.id}').split(',')
-            quant = int(request.GET.get(f'{pi.id} {preco_p.preco_p}'))
-            pp[1] = float(pp[1])
-
-            if request.GET.get(f'c{pi.id} {preco_p.preco_p}') == 'on':
-                catupiry = True
-                pp[1] += 2
-
-            pp[1] *= quant
-            if verifica != pi.id:
-                if catupiry:
-                    catupiry = False
-                    pedido.append([f'{sabor[j]} + Catupiry', pp, quant])
-                else:
-                    pedido.append([sabor[j], pp, quant])
-                j += 1
-            else:
-                if catupiry:
-                    catupiry = False
-                    pedido.append([f'{sabor[j - 1]} + Catupiry', pp, quant])
-                else:
-                    pedido.append([sabor[j - 1], pp, quant])
-
-            encontrado = True
-            total += pp[1]
-            verifica = pi.id
-
-    if not encontrado:
-        return redirect(to='pizzas')
-
-    if request.GET.get('coca-cola'):
-        refri = request.GET.get('coca-cola')
-        if request.GET.get('cocadlq1'):
-            q1 = int(request.GET.get('cocadlq1'))
-            refrigerantes.append(f'{refri} 1l x {q1} (R$ {5.0 * q1})')
-            total += (5.0 * q1)
-        if request.GET.get('cocadlq2'):
-            q2 = int(request.GET.get('cocadlq2'))
-            refrigerantes.append(f'{refri} 2l x {q2} (R$ {10.0 * q2})')
-            total += (10.0 * q2)
-
-    if request.GET.get('pepsi'):
-        refri = request.GET.get('pepsi')
-        if request.GET.get('pepsidlq1'):
-            q1 = int(request.GET.get('pepsidlq1'))
-            refrigerantes.append(f'{refri} 1l x {q1} (R$ {5.0 * q1})')
-            total += (5.0 * q1)
-        if request.GET.get('pepsidlq2'):
-            q2 = int(request.GET.get('pepsidlq2'))
-            refrigerantes.append(f'{refri} 2l x {q2} (R$ {10.0 * q2})')
-            total += (10.0 * q2)
-
-    if request.GET.get('guarana'):
-        refri = request.GET.get('guarana')
-        if request.GET.get('guaranadlq1'):
-            q1 = int(request.GET.get('guaranadlq1'))
-            refrigerantes.append(f'{refri} 1l x {q1} (R$ {5.0 * q1})')
-            total += (5.0 * q1)
-        if request.GET.get('guaranadlq2'):
-            q2 = int(request.GET.get('guaranadlq2'))
-            refrigerantes.append(f'{refri} 2l x {q2} (R$ {10.0 * q2})')
-            total += (10.0 * q2)
-
-    if request.GET.get('fanta-laranja'):
-        refri = request.GET.get('fanta-laranja')
-        if request.GET.get('fanta-laranja'):
-            q1 = int(request.GET.get('fantadlq1'))
-            refrigerantes.append(f'{refri} 1l x {q1} (R$ {5.0 * q1})')
-            total += (5.0 * q1)
-        if request.GET.get('fantadlq2'):
-            q2 = int(request.GET.get('fantadlq2'))
-            refrigerantes.append(f'{refri} 2l x {q2} (R$ {10.0 * q2})')
-            total += (10.0 * q2)
-
-    data = request.GET.get('datetime')
-
-    data = f'{data[8:10]}/{data[5:7]}/{data[0:4]} às {data[11:]}'
-    mensagem = '*Olá. Eu gostaria de:*\n\n'
-    for pe in pedido:
-        mensagem = mensagem + f'{pe[0]} ({pe[1][0]}) x {pe[2]}\n'
-
-    mensagem = mensagem + f'\n*Data: {data}*'
-
-    print(mensagem)
-
-    context = {
-        'pedido': pedido,
-        'total': total,
-        'data': data,
-        'mensagem': mensagem,
-        'refrigerantes': refrigerantes,
-    }
-
-    
-    """

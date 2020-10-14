@@ -120,6 +120,7 @@ header h2 {
 
 #order-now button:hover {
     background-color: #00e676;
+    color: #FFF;
     filter: saturate(1.5);
 }
 
