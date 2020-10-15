@@ -1,0 +1,1 @@
+web: gunicorn come_tche.wsgi --log-file -
