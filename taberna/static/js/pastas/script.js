@@ -40,8 +40,15 @@ function date_today() {
         max_day = 30;
     }
 
-    if(minutes < 10) {
-        minutes = `0${minutes}`;
+    if(minutes + 20 < 60) {
+        minutes = minutes + 20;
+    }
+
+    else {
+        minutes = (minutes + 20) - 60;
+        if(minutes < 10) {
+            minutes = `0${minutes}`;
+        }
     }
     
     date.min = `${today.getFullYear()}-${month}-${day}T${hours}:${minutes}`;

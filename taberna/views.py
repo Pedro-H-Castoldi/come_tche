@@ -45,8 +45,6 @@ def make_message(order):
     message += f'Total: {order["tt"]}\n\n'
     message += f'Data: {order["dt"]}'
 
-    print(message)
-
     return message
 
 def index_view(request):
@@ -164,8 +162,19 @@ def kart_view(request):
                     drinks.append(f'{category_d}, {size_d}, R${price_d}, {photo_d}, {hh}'.split(', '))
 
                 if pp == 'request_date':
-                    date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
-
+                    if date:
+                        if int(hh[8:10]) > int(date.split('/')[0]):
+                            date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
+                        elif int(hh[5:7]) > int(date.split('/')[1]):
+                            date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
+                        elif int(hh[0:4]) > int(date.split('/')[2][:4]):
+                            date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
+                        elif int(hh[11:13]) > int(date.split('/')[2][8:10]):
+                            date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
+                        elif int(hh[14:]) > int(date.split('/')[2][11:]):
+                            date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
+                    else:
+                        date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
 
 
                 if pp[:5] == 'pasta' and hh != '' and int(hh) > 0:
@@ -193,7 +202,6 @@ def kart_view(request):
                         pastas['sundry'] = sundry_cart
 
         pizzas.append(specifications)
-        print(drinks)
 
         order = {'pz': pizzas, 'dk': drinks, 'pa': pastas, 'dt': date, 'tt': total}
 

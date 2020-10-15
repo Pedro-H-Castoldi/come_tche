@@ -83,6 +83,7 @@ class Drink(Produto):
         ('cachaça', 'Cachaça'),
         ('rum', 'Rum'),
         ('soda', 'Refrigerante'),
+        ('wine', 'Vinho'),
         ('varied', 'Variados'),
     ]
     category = models.CharField('Categoria', choices=CHOICES, max_length=10)
