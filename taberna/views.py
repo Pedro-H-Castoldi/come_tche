@@ -7,21 +7,23 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 import re
 
-pedido = []
+class AddCart:
+    list_orders = []
+    def __init__(self, request):
+        self.add(request)
 
+    def add(self, request):
+        if str(request.method) == 'POST':
+            messages.success(request,
+                             "Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
+            form = request.POST
+            AddCart.list_orders.append(form)
 
-def make_cart(request):
+"""def add_cart(request):
     if str(request.method) == 'POST':
-        if pedido:
-            if request.POST != pedido[-1]:
-                add_cart(request)
-        else:
-            add_cart(request)
-
-def add_cart(request):
-    messages.success(request,"Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
-    form = request.POST
-    pedido.append(form)
+        messages.success(request,"Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
+        form = request.POST
+        order.append(form)"""
 
 def make_message(order):
     message = '*Olá. Eu gostaria de:*\n\n'
@@ -45,6 +47,8 @@ def make_message(order):
     message += f'Total: {order["tt"]}\n\n'
     message += f'Data: {order["dt"]}'
 
+    print(message)
+
     return message
 
 def index_view(request):
@@ -54,7 +58,7 @@ def drinks_view(request):
     context = {
         'drinks': Drink.objects.all()
     }
-    make_cart(request)
+    drink_order = AddCart(request)
 
     return render(request, 'drinks.html', context)
 
@@ -89,7 +93,7 @@ def pastas_view(request):
         'soda': Drink.objects.filter(category='soda'),
     }
 
-    make_cart(request)
+    pasta_order = AddCart(request)
 
     return render(request, 'pastas.html', context)
 
@@ -100,7 +104,7 @@ def pizza_view(request):
         'soda': Drink.objects.filter(category='soda'),
     }
 
-    make_cart(request)
+    pizza_order = AddCart(request)
 
     return render(request, 'pizzas.html', context)
 
@@ -108,7 +112,7 @@ def kart_view(request):
 
     context = {}
 
-    if pedido:
+    if AddCart.list_orders:
         pizzas = []
         specifications = []
         drinks = []
@@ -121,7 +125,7 @@ def kart_view(request):
         enroladinho_cart = []
         sundry_cart = []
 
-        for p in pedido:
+        for p in AddCart.list_orders:
             for pp, hh in p.items():
                 if pp[0:6] == 'flavor':
                     if cont == 0:
@@ -162,19 +166,8 @@ def kart_view(request):
                     drinks.append(f'{category_d}, {size_d}, R${price_d}, {photo_d}, {hh}'.split(', '))
 
                 if pp == 'request_date':
-                    if date:
-                        if int(hh[8:10]) > int(date.split('/')[0]):
-                            date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
-                        elif int(hh[5:7]) > int(date.split('/')[1]):
-                            date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
-                        elif int(hh[0:4]) > int(date.split('/')[2][:4]):
-                            date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
-                        elif int(hh[11:13]) > int(date.split('/')[2][8:10]):
-                            date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
-                        elif int(hh[14:]) > int(date.split('/')[2][11:]):
-                            date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
-                    else:
-                        date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
+                    date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
+
 
 
                 if pp[:5] == 'pasta' and hh != '' and int(hh) > 0:
@@ -202,6 +195,7 @@ def kart_view(request):
                         pastas['sundry'] = sundry_cart
 
         pizzas.append(specifications)
+        print(drinks)
 
         order = {'pz': pizzas, 'dk': drinks, 'pa': pastas, 'dt': date, 'tt': total}
 
