@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}ComeTchÊ | Cadastro{% endblock %}
+{% block css %}/static/css/login/styles.css{% endblock %}
+{% block content %}
+
+<section class="content-center">
+    <div class="text-center">
+        <a href="https://www.hcode.com.br" target="_blank">
+            <img src="/static/images/taberna_grill.jpg" alt="Logo Taberna Grill">
+        </a>
+    </div>
+
+    <form method="POST" id="form-login">
+        {% csrf_token %}
+
+        <div>
+            <p>Primeiro nome</p>
+            <input type="text" name="first_name" maxlength="30" id="email" placeholder="Primeiro nome..." required>
+        </div>
+
+        <div>
+            <p>Sobrenome</p>
+            <input type="text" name="last_name" maxlength="150" id="email" placeholder="Sobrenome..." required>
+        </div>
+        <div>
+            <p>Username</p>
+            <input type="text" name="username" maxlength="150" id="email" placeholder="Username..." required>
+            <p>Permitido apenas letras, números e @/./+/-/_ sem espaços.</p>
+        </div>
+
+        <div>
+            <p>E-mail</p>
+            <input type="email" name="email" id="email" placeholder="E-mail..." required>
+        </div>
+
+        <div>
+            <p>Senha</p>
+            <input type="password" name="password1" id="password" placeholder="Senha..." required>
+        </div>
+
+        <div>
+            <p>Confirme a senha</p>
+            <input type="password" name="password2" id="password" placeholder="Confirmar senha..." required>
+        </div>
+
+        <div>
+            <button type="submit" id="button">Cadastrar</button>
+        </div>
+    </form>
+</section>
+
+{% endblock %}

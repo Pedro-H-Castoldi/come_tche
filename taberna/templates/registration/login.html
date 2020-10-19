@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}ComeTchÊ | Login{% endblock %}
+{% block css %}/static/css/login/styles.css{% endblock %}
+{% block content %}
+
+<section class="content-center">
+    <div class="text-center">
+        <a href="https://www.hcode.com.br" target="_blank">
+            <img src="/static/images/taberna_grill.jpg" alt="Logo Taberna Grill">
+        </a>
+    </div>
+
+    <form method="POST" id="form-login">
+        {% csrf_token %}
+        <div>
+            <input type="text" name="username" maxlength="150" id="email" placeholder="Digite seu e-mail" required>
+        </div>
+
+        <div>
+            <input type="password" name="password" id="password" placeholder="Digite a senha" required>
+        </div>
+
+        <div>
+            <button type="submit" id="button">Entrar</button>
+        </div>
+    </form>
+</section>
+
+{% endblock %}

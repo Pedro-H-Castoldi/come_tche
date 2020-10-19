@@ -1,7 +1,7 @@
 var n = 1;
 var nn = 3;
 let number_pizza = 0;
-const button = document.querySelector('#order-now button');
+const button = document.querySelector('#authenticated');
 
 function order_released() {
     button.removeAttribute('disabled');
@@ -62,7 +62,7 @@ function date_today() {
     
     date.min = `${today.getFullYear()}-${month}-${day}T${hours}:${minutes}`;
     date.value = `${today.getFullYear()}-${month}-${day}T${hours}:${minutes}`;
-    date.max = `${max_year}-${max_month}-${max_day}T${hours}:${minutes}`;
+    date.max = `${max_year}-${max_month}-${max_day}T23:59`;
 }
 
 let amount_soda = document.querySelectorAll('.flavor-soda input');

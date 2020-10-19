@@ -1,3 +1,27 @@
+const button = document.querySelector('#authenticated');
+
+let pastaOrder = document.querySelectorAll('.pasta-flavors input');
+pastaOrder.forEach(task => {
+    task.addEventListener('change', pasta_exist);
+})
+
+function pasta_exist() {
+
+    let found = false;
+    pastaOrder.forEach(task => {
+        if(task.value > 0) {
+            found = true;
+        }
+    })
+
+    if(found) {
+        button.disabled = false;
+    }
+    else {
+        button.disabled = true;
+    }
+}
+
 function date_today() {
     let today = new Date;
     let date = document.querySelector('#datetime');
@@ -53,7 +77,7 @@ function date_today() {
     
     date.min = `${today.getFullYear()}-${month}-${day}T${hours}:${minutes}`;
     date.value = `${today.getFullYear()}-${month}-${day}T${hours}:${minutes}`;
-    date.max = `${max_year}-${max_month}-${max_day}T${hours}:${minutes}`;
+    date.max = `${max_year}-${max_month}-${max_day}T23:59`;
 }
 
 date_today();

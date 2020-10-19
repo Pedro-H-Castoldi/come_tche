@@ -1,12 +1,13 @@
 from django.views.generic import FormView, TemplateView
 from django.shortcuts import render
-from .models import Pizza, PrecoPizza, Drink, Pasta
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.http import HttpResponse
-from django.shortcuts import redirect
-import re
+from django.contrib.auth.decorators import login_required
 
+from .models import Pizza, PrecoPizza, Drink, Pasta
+
+
+@login_required()
 class AddCart:
     list_orders = []
     def __init__(self, request):
@@ -24,6 +25,7 @@ class AddCart:
         messages.success(request,"Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
         form = request.POST
         order.append(form)"""
+
 
 def make_message(order):
     message = '*Olá. Eu gostaria de:*\n\n'
@@ -108,6 +110,7 @@ def pizza_view(request):
 
     return render(request, 'pizzas.html', context)
 
+@login_required()
 def kart_view(request):
 
     context = {}

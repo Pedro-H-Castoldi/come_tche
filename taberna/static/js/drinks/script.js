@@ -1,4 +1,4 @@
-const button = document.querySelector('#order-now button');
+const button = document.querySelector('#authenticated');
 
 let drinkOrder = document.querySelectorAll('.drink-amount input');
 drinkOrder.forEach(task => {
@@ -77,7 +77,7 @@ function date_today() {
     
     date.min = `${today.getFullYear()}-${month}-${day}T${hours}:${minutes}`;
     date.value = `${today.getFullYear()}-${month}-${day}T${hours}:${minutes}`;
-    date.max = `${max_year}-${max_month}-${max_day}T${hours}:${minutes}`;
+    date.max = `${max_year}-${max_month}-${max_day}T23:59`;
 }
 
 date_today();
