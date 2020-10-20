@@ -3,22 +3,29 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import User
 from .models import Pizza, PrecoPizza, Drink, Pasta
 
-
-@login_required()
 class AddCart:
-    list_orders = []
-    def __init__(self, request):
-        self.add(request)
+    dic_orders = {}
+    list_order = []
 
     def add(self, request):
         if str(request.method) == 'POST':
             messages.success(request,
                              "Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
-            form = request.POST
-            AddCart.list_orders.append(form)
+
+            if len(self.list_order) == 0:
+                self.add_cart_now(request)
+            elif self.list_order[-1] != request.POST:
+                self.add_cart_now(request)
+
+    def add_cart_now(self, request):
+        form = request.POST
+        self.list_order.append(form)
+        AddCart.dic_orders[str(request.user)] = self.list_order
+
+add_cart = AddCart()
 
 """def add_cart(request):
     if str(request.method) == 'POST':
@@ -49,8 +56,6 @@ def make_message(order):
     message += f'Total: {order["tt"]}\n\n'
     message += f'Data: {order["dt"]}'
 
-    print(message)
-
     return message
 
 def index_view(request):
@@ -60,7 +65,7 @@ def drinks_view(request):
     context = {
         'drinks': Drink.objects.all()
     }
-    drink_order = AddCart(request)
+    add_cart.add(request)
 
     return render(request, 'drinks.html', context)
 
@@ -95,7 +100,7 @@ def pastas_view(request):
         'soda': Drink.objects.filter(category='soda'),
     }
 
-    pasta_order = AddCart(request)
+    add_cart.add(request)
 
     return render(request, 'pastas.html', context)
 
@@ -106,7 +111,7 @@ def pizza_view(request):
         'soda': Drink.objects.filter(category='soda'),
     }
 
-    pizza_order = AddCart(request)
+    add_cart.add(request)
 
     return render(request, 'pizzas.html', context)
 
@@ -115,7 +120,7 @@ def kart_view(request):
 
     context = {}
 
-    if AddCart.list_orders:
+    if str(request.user) in add_cart.dic_orders:
         pizzas = []
         specifications = []
         drinks = []
@@ -128,7 +133,9 @@ def kart_view(request):
         enroladinho_cart = []
         sundry_cart = []
 
-        for p in AddCart.list_orders:
+        order = add_cart.dic_orders[str(request.user)]
+        print(order)
+        for p in order:
             for pp, hh in p.items():
                 if pp[0:6] == 'flavor':
                     if cont == 0:
@@ -170,8 +177,6 @@ def kart_view(request):
 
                 if pp == 'request_date':
                     date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
-
-
 
                 if pp[:5] == 'pasta' and hh != '' and int(hh) > 0:
                     pasta_pp = pp.split(', ')[1:]
