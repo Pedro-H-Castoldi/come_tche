@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from stdimage.models import StdImageField
 import uuid
 
@@ -52,25 +53,6 @@ class PrecoPizza(Base):
     def __str__(self):
         return 'Preços'
 
-class Refrigerante(Produto):
-
-    CHOICES = [
-        ('1 l', '1 Litro'),
-        ('2 l', '2 Litro'),
-        ('KS', 'KS'),
-        ('Lata', 'Lata'),
-        ('Pequena', 'Pequena'),
-    ]
-
-    type = models.CharField('Tipo', choices=CHOICES, max_length=7)
-    price = models.DecimalField('Preço', max_digits=8, decimal_places=2)
-
-    class Meta:
-        verbose_name = 'Refrigerante'
-        verbose_name_plural = 'Refrigerantes'
-
-    def __str__(self):
-        return self.product
 
 class Drink(Produto):
 
@@ -108,3 +90,20 @@ class Pasta(Produto):
 
     def __str__(self):
         return self.product
+
+
+class Cart(Base):
+    user = models.CharField('User', max_length=255)
+    product = models.CharField('Produto', max_length=255)
+    product_id = models.PositiveIntegerField('Produto ID')
+    price = models.FloatField('Preço')
+    amount = models.PositiveIntegerField('Quantidade')
+    image = models.CharField('Imagem', max_length=2000)
+
+    class Meta:
+        verbose_name = 'Pedido'
+        verbose_name_plural = 'Pedidos'
+
+    def __str__(self):
+        return self.user
+

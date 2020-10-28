@@ -4,9 +4,9 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Pizza, PrecoPizza, Drink, Pasta
+from .models import Pizza, PrecoPizza, Drink, Pasta, Cart
 
-class AddCart:
+"""class AddCart:
     dic_orders = {}
     list_order = []
 
@@ -25,7 +25,7 @@ class AddCart:
         self.list_order.append(form)
         AddCart.dic_orders[str(request.user)] = self.list_order
 
-add_cart = AddCart()
+add_cart = AddCart()"""
 
 """def add_cart(request):
     if str(request.method) == 'POST':
@@ -33,6 +33,7 @@ add_cart = AddCart()
         form = request.POST
         order.append(form)"""
 
+dic_order = {}
 
 def make_message(order):
     message = '*Olá. Eu gostaria de:*\n\n'
@@ -65,7 +66,23 @@ def drinks_view(request):
     context = {
         'drinks': Drink.objects.all()
     }
-    add_cart.add(request)
+
+    if str(request.method) == 'POST':
+        form = request.POST
+        for i in form:
+            if form[i] != '' and len(i) < 5:
+                drink = Drink.objects.get(pk=i)
+                a = Cart(
+                    user=request.user,
+                    product=drink.product,
+                    product_id=drink.id,
+                    price=drink.price,
+                    amount=form[i],
+                    image=drink.image,
+                )
+
+                Cart.save(a)
+
 
     return render(request, 'drinks.html', context)
 
@@ -100,7 +117,7 @@ def pastas_view(request):
         'soda': Drink.objects.filter(category='soda'),
     }
 
-    add_cart.add(request)
+    #add_cart.add(request)
 
     return render(request, 'pastas.html', context)
 
@@ -111,107 +128,14 @@ def pizza_view(request):
         'soda': Drink.objects.filter(category='soda'),
     }
 
-    add_cart.add(request)
+    #add_cart.add(request)
 
     return render(request, 'pizzas.html', context)
 
 @login_required()
 def kart_view(request):
-
-    context = {}
-
-    if str(request.user) in add_cart.dic_orders:
-        pizzas = []
-        specifications = []
-        drinks = []
-        type = price = amount = cont = f1 = f2 = date = total = 0
-        catupiry = False
-        pastas = {}
-        pastel_cart = []
-        coxinha_cart = []
-        sfiha_cart = []
-        enroladinho_cart = []
-        sundry_cart = []
-
-        order = add_cart.dic_orders[str(request.user)]
-        print(order)
-        for p in order:
-            for pp, hh in p.items():
-                if pp[0:6] == 'flavor':
-                    if cont == 0:
-                        f1 = hh
-                        cont = 1
-                    else:
-                        f2 = hh
-                        cont = 0
-
-                if hh != '':
-                    if len(hh.split(' ')) == 2:
-                        type, price = hh.split(', ')
-                        price = float(price.replace(',', '.'))
-
-                if pp[0:7] == 'qamount' and pp != 0:
-                    amount = int(hh)
-
-                if pp[0:7] == 'camount':
-                    catupiry = True
-
-                if amount != 0:
-                    if not catupiry:
-                        price *= amount
-                        total += price
-                        specifications.append(f'{f1}/{f2}, {type}, {price}, {amount}'.split(', '))
-                    else:
-                        price = (price + 2) * amount
-                        total += price
-                        specifications.append(f'{f1}/{f2}, {type}, {price}, {amount}, + catupiry'.split(', '))
-                        catupiry = False
-
-                amount = 0
-                if pp[:5] == 'drink' and hh != '' and hh != '0':
-                    category_d, size_d, price_d, photo_d = pp[6:].split(', ')
-                    price_d = float(price_d.replace(',', '.'))
-                    price_d *= int(hh)
-                    total += price_d
-                    drinks.append(f'{category_d}, {size_d}, R${price_d}, {photo_d}, {hh}'.split(', '))
-
-                if pp == 'request_date':
-                    date = f'{hh[8:10]}/{hh[5:7]}/{hh[0:4]} às {hh[11:]}'
-
-                if pp[:5] == 'pasta' and hh != '' and int(hh) > 0:
-                    pasta_pp = pp.split(', ')[1:]
-
-                    price_pasta = float(pasta_pp[2].replace(',', '.'))
-                    price_pasta *= int(hh)
-
-                    total += price_pasta
-
-                    if 'pastel' in pp:
-                        pastel_cart.append([pasta_pp[0], pasta_pp[1], f'R${pasta_pp[2]}', pasta_pp[3], hh])
-                        pastas['pastel'] = pastel_cart
-                    elif 'esfirra' in pp:
-                        sfiha_cart.append([pasta_pp[0], pasta_pp[1], f'R${pasta_pp[2]}', pasta_pp[3], hh])
-                        pastas['sfiha'] = sfiha_cart
-                    elif 'enroladinho' in pp:
-                        enroladinho_cart.append([pasta_pp[0], pasta_pp[1], f'R${pasta_pp[2]}', pasta_pp[3], hh])
-                        pastas['enroladinho'] = enroladinho_cart
-                    elif 'coxinha' in pp:
-                        coxinha_cart.append([pasta_pp[0], pasta_pp[1], f'R${pasta_pp[2]}', pasta_pp[3], hh])
-                        pastas['coxinha'] = coxinha_cart
-                    elif 'sundry' in pp:
-                        sundry_cart.append([pasta_pp[0], pasta_pp[1], f'R${pasta_pp[2]}', pasta_pp[3], hh])
-                        pastas['sundry'] = sundry_cart
-
-        pizzas.append(specifications)
-        print(drinks)
-
-        order = {'pz': pizzas, 'dk': drinks, 'pa': pastas, 'dt': date, 'tt': total}
-
-        message = make_message(order)
-
-        context = {
-            'order': order,
-            'message': message,
-        }
+    context = {
+        'order': Cart.objects.filter(user=request.user)
+    }
 
     return render(request, 'cart.html', context)

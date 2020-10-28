@@ -21,7 +21,32 @@
             </div>
             <div id="order">
                 {% if order %}
-                    {% if order.pz.0 %}
+                    {% for i in order %}
+                        <p>{{ i.user }}</p>
+                        <p>{{ i.product }}</p>
+                        <p>{{ i.product_id }}</p>
+                        <p>{{ i.price }}</p>
+                        <p>{{ i.amount }}</p>
+                        <p>{{ i.image }}</p>
+                    {% endfor %}
+                {% else %}
+                    <h4>Carrinho vazio..</h4>
+                {% endif %}
+            </div>
+              
+            <div id="order-now">
+                <button>Encomendar <img src="../static/images/whatsapp-logo-4-1.png" alt="logo-WhatsApp"></button>
+            </div> 
+        </div>
+    </main>
+</section>
+
+{% endblock %}
+
+{% block js %}/static/js/cart/script.js{% endblock %}
+
+<!--
+    {% if order.pz.0 %}
                         <p class="category">Pizzas</p>
                         {% for pizza in order.pz.0 %}
                             {% if pizza.4 %}
@@ -140,19 +165,5 @@
 
                     <p id="total">Total: R${{ order.tt }}</p>
 
-                    <p id="date">Para: <span>{{ order.dt }}</span></p>
-                {% else %}
-                    <h4>Carrinho vazio..</h4>
-                {% endif %}
-            </div>
-              
-            <div id="order-now">
-                <button>Encomendar <img src="../static/images/whatsapp-logo-4-1.png" alt="logo-WhatsApp"></button>
-            </div> 
-        </div>
-    </main>
-</section>
-
-{% endblock %}
-
-{% block js %}/static/js/cart/script.js{% endblock %}
+                    <p id="date">Para: <span>{{ order.dt }}</span></p>/
+-->
