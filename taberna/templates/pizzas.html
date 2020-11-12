@@ -68,7 +68,7 @@
                         <li class="fam" id="fam1">
                             <label for="check-f1">
                                 <div class="content-sizes">
-                                    <span class="type">Família</span> <span class="price">R${{ price.price_f }}</span><input type="checkbox" class="box" id="check-f1" name="f1" value="family, {{ price.price_f }}">
+                                    <span class="type">Família</span> <span class="price">R${{ price.price_f }}</span><input type="checkbox" class="box" id="check-f1" name="F1" value="family, {{ price.price_f }}">
                                     <div id="amount_f1"></div>
                                 </div>
                             </label>
@@ -77,7 +77,7 @@
                         <li class="big" id="big1">
                             <label for="check-b1">
                                 <div class="content-sizes">
-                                    <span class="type">Grande</span> <span class="price">R${{ price.price_b }}</span><input type="checkbox" class="box" id="check-b1" name="b1" value="big, {{ price.price_b }}">
+                                    <span class="type">Grande</span> <span class="price">R${{ price.price_b }}</span><input type="checkbox" class="box" id="check-b1" name="B1" value="big, {{ price.price_b }}">
                                     <div id="amount_b1"></div>
                                 </div>
                             </label>
@@ -86,7 +86,7 @@
                         <li class="ave" id="ave1">
                             <label for="check-a1">
                                 <div class="content-sizes">
-                                    <span class="type">Média</span> <span class="price">R${{ price.price_a }}</span><input type="checkbox" class="box" id="check-a1" name="a1" value="average, {{ price.price_a }}">
+                                    <span class="type">Média</span> <span class="price">R${{ price.price_a }}</span><input type="checkbox" class="box" id="check-a1" name="A1" value="average, {{ price.price_a }}">
                                     <div id="amount_a1"></div>
                                 </div>
                             </label>
@@ -95,7 +95,7 @@
                         <li class="sam" id="sam1">
                             <label for="check-s1">
                                 <div class="content-sizes">
-                                    <span class="type">Pequena</span> <span class="price">R${{ price.price_s }}</span><input type="checkbox" class="box" id="check-s1" name="s1" value="small, {{ price.price_s }}">
+                                    <span class="type">Pequena</span> <span class="price">R${{ price.price_s }}</span><input type="checkbox" class="box" id="check-s1" name="S1" value="small, {{ price.price_s }}">
                                     <div id="amount_s1"></div>
                                 </div>
                             </label>
@@ -104,7 +104,7 @@
                         <li class="min" id="min1">
                             <label for="check-m1">
                                 <div class="content-sizes">
-                                    <span class="type">Mini</span> <span class="price">R${{ price.price_m }}</span><input type="checkbox" class="box" id="check-m1" name="m1" value="mini, {{ price.price_m }}">
+                                    <span class="type">Mini</span> <span class="price">R${{ price.price_m }}</span><input type="checkbox" class="box" id="check-m1" name="M1" value="mini, {{ price.price_m }}">
                                     <div id="amount_m1"></div>
                                 </div>
                             </label>
@@ -128,7 +128,7 @@
                             {% for so in soda %}
                                 {% if so.liters == 1 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="drink-{{ so.product }}, 1L, {{ so.price }}, {{ so.image.thumb.url }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -139,7 +139,7 @@
                             {% for so in soda %}
                                 {% if so.liters == 2 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="drink-{{ so.product }}, 2L, {{ so.price }}, {{ so.image.thumb.url }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -151,7 +151,7 @@
                             {% for so in soda %}
                                 {% if so.liters == 350 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="drink-{{ so.product }}, Latinha, {{ so.price }}, {{ so.image.thumb.url }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -162,7 +162,7 @@
                             {% for so in soda %}
                                 {% if so.liters == 290 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="drink-{{ so.product }}, KS, {{ so.price }}, {{ so.image.thumb.url }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -173,7 +173,7 @@
                             {% for so in soda %}
                                 {% if so.liters > 5 and so.liters <= 250 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="drink-{{ so.product }}, Mini, {{ so.price }}, {{ so.image.thumb.url }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}

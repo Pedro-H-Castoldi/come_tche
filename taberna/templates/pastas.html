@@ -47,7 +47,7 @@
                                 {% for pasta in pastas.pastel %}
                                     {% if pasta.stock %}
                                         <div>
-                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="pasta-pastel{{ pasta.id }}, {{ pasta.product }}, {{ pasta.flavor }}, {{ pasta.price }}, {{ pasta.image.thumb.url }}" type="number" min="0" max="100" placeholder="Quant">
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}" type="number" min="0" max="100" placeholder="Quant">
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -70,7 +70,7 @@
                                 {% for pasta in pastas.esfirra %}
                                     {% if pasta.stock %}
                                         <div>
-                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="pasta-esfirra{{ pasta.id }}, {{ pasta.product }}, {{ pasta.flavor }}, {{ pasta.price }}, {{ pasta.image.thumb.url }}" type="number" min="0" max="100" placeholder="Quant">
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}" type="number" min="0" max="100" placeholder="Quant">
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -93,7 +93,7 @@
                                 {% for pasta in pastas.coxinha %}
                                     {% if pasta.stock %}
                                         <div>
-                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="pasta-coxinha{{ pasta.id }}, {{ pasta.product }}, {{ pasta.flavor }}, {{ pasta.price }}, {{ pasta.image.thumb.url }}"type="number" min="0" max="100" placeholder="Quant">
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}"type="number" min="0" max="100" placeholder="Quant">
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -116,7 +116,7 @@
                                 {% for pasta in pastas.enroladinho %}
                                     {% if pasta.stock %}
                                         <div>
-                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="pasta-enroladinho{{ pasta.id }}, {{ pasta.product }}, {{ pasta.flavor }}, {{ pasta.price }}, {{ pasta.image.thumb.url }}"type="number" min="0" max="100" placeholder="Quant">
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}"type="number" min="0" max="100" placeholder="Quant">
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -139,7 +139,7 @@
                                 {% for pasta in pastas.sundry %}
                                     {% if pasta.stock %}
                                         <div>
-                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="pasta-sundry{{ pasta.id }}, {{ pasta.product }}, {{ pasta.flavor }}, {{ pasta.price }}, {{ pasta.image.thumb.url }}"type="number" min="0" max="100" placeholder="Quant">
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}"type="number" min="0" max="100" placeholder="Quant">
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -160,7 +160,7 @@
                             {% for so in soda %}
                                 {% if so.liters == 1 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_1l{{ so.product }}, 1L, {{ so.price }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -171,7 +171,7 @@
                             {% for so in soda %}
                                 {% if so.liters == 2 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_2l{{ so.product }}, 2L, {{ so.price }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -183,7 +183,7 @@
                             {% for so in soda %}
                                 {% if so.liters == 350 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_ca{{ so.product }}, Latinha, {{ so.price }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -194,7 +194,7 @@
                             {% for so in soda %}
                                 {% if so.liters == 290 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_ks{{ so.product }}, KS, {{ so.price }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}
@@ -205,7 +205,7 @@
                             {% for so in soda %}
                                 {% if so.liters > 5 and so.liters <= 250 and so.stock %}
                                 <div class="flavor-soda">
-                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="soda_mi{{ so.product }}, Mini, {{ so.price }}" min="0">
+                                    <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
                             {% endfor %}

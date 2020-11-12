@@ -36,7 +36,7 @@ class Pizza(Produto):
         verbose_name_plural = 'Pizzas'
 
     def __str__(self):
-        return self.product
+        return 'pizza'
 
 class PrecoPizza(Base):
 
@@ -77,7 +77,7 @@ class Drink(Produto):
         verbose_name_plural = 'Bebidas'
 
     def __str__(self):
-        return self.product
+        return 'Bebida'
 
 class Pasta(Produto):
 
@@ -89,13 +89,16 @@ class Pasta(Produto):
         verbose_name_plural = 'Salgados'
 
     def __str__(self):
-        return self.product
+        return 'Salgado'
 
 
 class Cart(Base):
     user = models.CharField('User', max_length=255)
     product = models.CharField('Produto', max_length=255)
     product_id = models.PositiveIntegerField('Produto ID')
+    product_type = models.CharField('Tipo', max_length=25)
+    details = models.CharField('Detalhes', max_length=25)
+    measure = models.CharField('Medida', max_length=25)
     price = models.FloatField('Preço')
     amount = models.PositiveIntegerField('Quantidade')
     image = models.CharField('Imagem', max_length=2000)
@@ -104,6 +107,18 @@ class Cart(Base):
         verbose_name = 'Pedido'
         verbose_name_plural = 'Pedidos'
 
+
     def __str__(self):
         return self.user
+
+class Date(models.Model):
+    user = models.CharField('User', max_length=255)
+    date = models.CharField('Date', max_length=20)
+
+    class Meta:
+        verbose_name = 'Data'
+        verbose_name_plural = 'Datas'
+
+    def __str__(self):
+        return f'{self.user} | {self.date}'
 

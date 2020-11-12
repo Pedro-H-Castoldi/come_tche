@@ -27,6 +27,9 @@ function date_today() {
             max_month = parseInt(month) + 1;
         }
     }
+    else if (month < 12) {
+        max_month = parseInt(month) + 1;
+    }
 
     if(month == 12) {
         max_month = '01';
@@ -45,8 +48,12 @@ function date_today() {
             max_day = 28;
         }
     }
-    else if( (day == 31 && max_month == '04') || (day == 31 && max_month == '06') || (day == 31 && max_month == '09') || (day == 31 && max_month == 11) ) {
+    else if( (day == 31 && max_month == '04') || (day == 31 && max_month == '06') || (day == 31 && max_month == '09') || (day == 31 && max_month == '11') ) {
         max_day = 30;
+    }
+
+    else {
+        max_day = 31
     }
 
     if(hours < 23) {
@@ -55,7 +62,6 @@ function date_today() {
     else {
         hours = '00';
     }
-
     if(minutes < 10) {
         minutes = `0${minutes}`;
     }
@@ -176,35 +182,35 @@ let one_more = document.querySelector('#one-more').addEventListener('click', fun
     new_pizza.children[2].children[0].id = `fam${n}`;
     new_pizza.children[2].children[0].children[0].htmlFor = `check-f${n}`;
     new_pizza.children[2].children[0].children[0].children[0].children[2].id = `check-f${n}`;
-    new_pizza.children[2].children[0].children[0].children[0].children[2].name = `f${n}`;
+    new_pizza.children[2].children[0].children[0].children[0].children[2].name = `F${n}`;
     new_pizza.children[2].children[0].children[0].children[0].children[3].id = `amount_f${n}`;
     new_pizza.children[2].children[0].children[0].children[0].children[3].innerHTML = "";
 
     new_pizza.children[2].children[1].id = `big${n}`;
     new_pizza.children[2].children[1].children[0].htmlFor = `check-b${n}`;
     new_pizza.children[2].children[1].children[0].children[0].children[2].id = `check-b${n}`;
-    new_pizza.children[2].children[1].children[0].children[0].children[2].name = `b${n}`;
+    new_pizza.children[2].children[1].children[0].children[0].children[2].name = `B${n}`;
     new_pizza.children[2].children[1].children[0].children[0].children[3].id = `amount_b${n}`;
     new_pizza.children[2].children[1].children[0].children[0].children[3].innerHTML = "";
 
     new_pizza.children[2].children[2].id = `ave${n}`;
     new_pizza.children[2].children[2].children[0].htmlFor = `check-a${n}`;
     new_pizza.children[2].children[2].children[0].children[0].children[2].id = `check-a${n}`;
-    new_pizza.children[2].children[2].children[0].children[0].children[2].name = `a${n}`;
+    new_pizza.children[2].children[2].children[0].children[0].children[2].name = `A${n}`;
     new_pizza.children[2].children[2].children[0].children[0].children[3].id = `amount_a${n}`;
     new_pizza.children[2].children[2].children[0].children[0].children[3].innerHTML = "";
 
     new_pizza.children[2].children[3].id = `sam${n}`;
     new_pizza.children[2].children[3].children[0].htmlFor = `check-s${n}`;
     new_pizza.children[2].children[3].children[0].children[0].children[2].id = `check-s${n}`;
-    new_pizza.children[2].children[3].children[0].children[0].children[2].name = `s${n}`;
+    new_pizza.children[2].children[3].children[0].children[0].children[2].name = `S${n}`;
     new_pizza.children[2].children[3].children[0].children[0].children[3].id = `amount_s${n}`;
     new_pizza.children[2].children[3].children[0].children[0].children[3].innerHTML = "";
 
     new_pizza.children[2].children[4].id = `min${n}`;
     new_pizza.children[2].children[4].children[0].htmlFor = `check-m${n}`;
     new_pizza.children[2].children[4].children[0].children[0].children[2].id = `check-m${n}`;
-    new_pizza.children[2].children[4].children[0].children[0].children[2].name = `m${n}`;
+    new_pizza.children[2].children[4].children[0].children[0].children[2].name = `M${n}`;
     new_pizza.children[2].children[4].children[0].children[0].children[3].id = `amount_m${n}`;
     new_pizza.children[2].children[4].children[0].children[0].children[3].innerHTML = "";
 
@@ -216,7 +222,7 @@ let one_more = document.querySelector('#one-more').addEventListener('click', fun
     closePizzaNow.forEach(task => {
         task.addEventListener('click', e => {
             e.target.parentNode.remove();
-            number_pizza--;
+            --number_pizza;
             soda_exist();
         })
     } )

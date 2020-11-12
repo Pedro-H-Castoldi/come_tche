@@ -1,61 +1,168 @@
 from django.views.generic import FormView, TemplateView
-from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from .models import Pizza, PrecoPizza, Drink, Pasta, Cart
+from .models import Pizza, PrecoPizza, Drink, Pasta, Cart, Date
 
-"""class AddCart:
-    dic_orders = {}
-    list_order = []
+def add_date(dates):
+    definitive_date = ''
+    for date in dates:
+        if definitive_date == '':
+            definitive_date = date.date
+        else:
+            if date.date != definitive_date:
+                if int(date.date.split('/')[1]) > int(definitive_date.split('/')[1]):
+                    if int(date.date.split('/')[1]) == 12 and int(definitive_date.split('/')[1]) == 1:
+                        pass
+                    else:
+                        definitive_date = date.date
+                elif int(date.date.split('/')[1]) == int(definitive_date.split('/')[1]):
+                    if int(date.date.split('/')[2][8:10]) > int(definitive_date.split('/')[2][8:10]):
+                        definitive_date = date.date
+                    elif int(date.date.split('/')[2][8:10]) == int(definitive_date.split('/')[2][8:10]):
+                        if int(date.date.split('/')[2][11:]) > int(definitive_date.split('/')[2][11:]):
+                            definitive_date = date.date
+    return definitive_date
 
-    def add(self, request):
-        if str(request.method) == 'POST':
-            messages.success(request,
-                             "Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
+def add_cart(request, soda_pizza=False):
+    if not soda_pizza:
+        messages.success(request,
+                         "Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
 
-            if len(self.list_order) == 0:
-                self.add_cart_now(request)
-            elif self.list_order[-1] != request.POST:
-                self.add_cart_now(request)
+    form = request.POST
+    measure = details = data = date = ''
 
-    def add_cart_now(self, request):
-        form = request.POST
-        self.list_order.append(form)
-        AddCart.dic_orders[str(request.user)] = self.list_order
+    for i in form:
+        identify = i.split(', ')
 
-add_cart = AddCart()"""
+        if i == 'request_date':
+            date = f'{form[i][8:10]}/{form[i][5:7]}/{form[i][0:4]} às {form[i][11:]}'
 
-"""def add_cart(request):
-    if str(request.method) == 'POST':
-        messages.success(request,"Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
-        form = request.POST
-        order.append(form)"""
-
-dic_order = {}
-
-def make_message(order):
-    message = '*Olá. Eu gostaria de:*\n\n'
-    for pe in order:
-        if pe == 'pz':
-            for each_order in order[pe][0]:
-                if len(each_order) == 5:
-                    message += f'Pizza: {each_order[0]} {each_order[4]} (R$2.0) - {each_order[1]} x {each_order[3]} ({each_order[2]})\n\n'
+        if form[i] != '' and len(identify) == 2:
+            if identify[0] == 'd':
+                data = Drink.objects.get(pk=int(identify[1]))
+                details = data.category
+                if data.liters > 5:
+                    measure = f'{data.liters:.0f}ml'
                 else:
-                    message += f'Pizza: {each_order[0]} - {each_order[1]} x {each_order[3]} ({each_order[2]})\n\n'
+                    measure = f'{data.liters:.0f}l'
 
-        elif pe == 'dk':
-            for each_order in order[pe]:
-                message += f'{each_order[0]}: {each_order[1]} x {each_order[4]} ({each_order[2]})\n\n'
+            elif identify[0] == 'p':
+                data = Pasta.objects.get(pk=int(identify[1]))
+                details = data.flavor
 
-        elif pe == 'pa':
-            for pasta in order[pe].values():
-                for each_order in pasta:
-                    message += f'{each_order[0]}: {each_order[1]} x {each_order[4]} ({each_order[2]})\n\n'
+            cart = Cart(
+                user=request.user,
+                product=data.product,
+                product_id=data.id,
+                product_type=data,
+                details=details,
+                measure=measure,
+                price=data.price * int(form[i]),
+                amount=form[i],
+                image=data.image.thumb.url,
+            )
+            Cart.save(cart)
+    order_date = Date(
+        user=request.user,
+        date=date,
+    )
+    Date.save(order_date)
 
-    message += f'Total: {order["tt"]}\n\n'
-    message += f'Data: {order["dt"]}'
+def add_pizzar_cart(request):
+    messages.success(request,"Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
+    form = request.POST
+    date = product = details = measure = flavor1 = flavor2 = price = amount = ''
+    for i in form:
+        identify = i.split(', ')
+
+        if i == 'request_date':
+            date = f'{form[i][8:10]}/{form[i][5:7]}/{form[i][0:4]} às {form[i][11:]}'
+
+
+        if identify[0] == 'd' and form[i] != '':
+            add_cart(request, True)
+        elif 'flavor1' in i:
+            flavor1 = form[i]
+        elif 'flavor2' in i:
+            flavor2 = form[i]
+
+        elif i[0] == 'F' and int(i[1:]) > 0:
+            product = f'{flavor1}/{flavor2}'
+            measure = 'Família'
+            price = form[i].split(', ')[1]
+            price = float(price.replace(',', '.'))
+
+        elif i[0] == 'B' and int(i[1:]) > 0:
+            product = f'{flavor1}/{flavor2}'
+            measure = 'Grande'
+            price = form[i].split(', ')[1]
+            price = float(price.replace(',', '.'))
+
+        elif i[0] == 'A' and int(i[1:]) > 0:
+            product = f'{flavor1}/{flavor2}'
+            measure = 'Média'
+            price = form[i].split(', ')[1]
+            price = float(price.replace(',', '.'))
+
+        elif i[0] == 'S' and int(i[1:]) > 0:
+            product = f'{flavor1}/{flavor2}'
+            measure = 'Pequena'
+            price = form[i].split(', ')[1]
+            price = float(price.replace(',', '.'))
+
+        elif i[0] == 'M' and int(i[1:]) > 0:
+            product = f'{flavor1}/{flavor2}'
+            measure = 'Mini'
+            price = form[i].split(', ')[1]
+            price = float(price.replace(',', '.'))
+
+        elif 'camount' in i:
+            details = ' + catupiry'
+            price += 2
+
+        elif 'qamount' in i:
+            amount = int(form[i])
+            price *= amount
+
+        if amount != '':
+            cart = Cart(
+                user=request.user,
+                product=product,
+                product_id=0,
+                product_type='Pizza',
+                details=details,
+                measure=measure,
+                price=float(price),
+                amount=amount,
+                image='',
+            )
+            Cart.save(cart)
+            amount = ''
+
+    order_date = Date(
+        user=request.user,
+        date=date,
+    )
+    Date.save(order_date)
+
+def make_message(orders, total, date, user):
+    message = f'*Olá sou {user}. Eu gostaria de:*\n\n'
+    for order in orders:
+        if order.product_type == 'Pizza':
+            if 'catupiry' in order.details:
+                message += f'Pizza: {order.product} + catupiry (R$2,0) - {order.measure} x {order.amount} (R${order.price})\n\n'
+            else:
+                message += f'Pizza: {order.product} {order.measure} x {order.amount} (R${order.price})\n\n'
+
+        elif order.product_type == 'Bebida':
+            message += f'{order.details} {order.product} {order.measure} x {order.amount} (R${order.price})\n\n'
+
+        elif order.product_type == 'Salgado':
+            message += f'{order.product} de {order.details} x {order.amount} (R${order.price})\n\n'
+
+    message += f'*Total: {total}*\n\n'
+    message += f'*Data: {date}*'
 
     return message
 
@@ -68,20 +175,7 @@ def drinks_view(request):
     }
 
     if str(request.method) == 'POST':
-        form = request.POST
-        for i in form:
-            if form[i] != '' and len(i) < 5:
-                drink = Drink.objects.get(pk=i)
-                a = Cart(
-                    user=request.user,
-                    product=drink.product,
-                    product_id=drink.id,
-                    price=drink.price,
-                    amount=form[i],
-                    image=drink.image,
-                )
-
-                Cart.save(a)
+        add_cart(request)
 
 
     return render(request, 'drinks.html', context)
@@ -117,7 +211,8 @@ def pastas_view(request):
         'soda': Drink.objects.filter(category='soda'),
     }
 
-    #add_cart.add(request)
+    if str(request.method) == 'POST':
+        add_cart(request)
 
     return render(request, 'pastas.html', context)
 
@@ -128,14 +223,37 @@ def pizza_view(request):
         'soda': Drink.objects.filter(category='soda'),
     }
 
-    #add_cart.add(request)
+    if str(request.method) == 'POST':
+        add_pizzar_cart(request)
 
     return render(request, 'pizzas.html', context)
 
 @login_required()
 def kart_view(request):
-    context = {
-        'order': Cart.objects.filter(user=request.user)
-    }
+    context = {}
+    orders = Cart.objects.filter(user=request.user)
+    dates = Date.objects.filter(user=request.user)
+
+    if orders:
+        total = 0
+        order_date = ''
+        for order in orders:
+            total += order.price
+
+        order_date = add_date(dates)
+        message = make_message(orders, total, order_date, request.user)
+
+        context = {
+            'orders': orders,
+            'total': total,
+            'date': order_date,
+            'message': message,
+            'user': request.user,
+        }
+
+        if str(request.method) == 'POST':
+            orders.delete()
+            dates.delete()
+            return redirect(to='index')
 
     return render(request, 'cart.html', context)

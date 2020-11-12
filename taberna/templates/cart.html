@@ -15,155 +15,129 @@
         <h2>Carrinho</h2>
     </header>
     <main>
-        <div class="content" id="order-cart" data-message='{{ message }}' data-order='{{ order }}'>
-            <div id="order-title">
-                <h3>Pedido</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="content" id="order-cart" data-message='{{ message }}' data-order='{{ orders }}'>
+                <div id="order-title">
+                    <h3>Pedido</h3>
+                </div>
+                <div id="order">
+                    {% if orders %}
+                        {% for order in orders %}
+                            {% if order.product_type == 'Pizza' %}
+                                <p class="category">Pizzas</p>
+                                    {% if 'catupiry' in order.details %}
+                                        <div class="order-details">
+                                            <div><img src="../static/images/pizza-food-clipart-md.png" alt="Pizza Carrinho"></div>
+                                            <div class="specifications">
+                                                <p><strong>Sabor:</strong> {{ order.product }} <span>+ catupiry (R$2.0)</span></p>
+                                                <p><strong>Tamanho:</strong> <span>{{ order.measure }}</span></p>
+                                                <p><strong>Quantidade:</strong> <span>{{ order.amount }}</span></p>
+                                                <p><strong>Preço:</strong> <span>R${{ order.price }}</span></p>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                    <div class="order-details">
+                                        <div><img src="../static/images/pizza-food-clipart-md.png" alt="Pizza Carrinho"></div>
+                                        <div class="specifications">
+                                            <p><strong>Sabor:</strong> {{ order.product }}</p>
+                                            <p><strong>Tamanho:</strong> <span>{{ order.measure }}</span></p>
+                                            <p><strong>Quantidade:</strong> <span>{{ order.amount }}</span></p>
+                                            <p><strong>Preço:</strong> <span>R${{ order.price }}</span></p>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                            {% endif %}
+
+                            {% if order.product_type == 'Bebida' %}
+                                <p class="category">Bebida</p>
+                                    <div class="order-details">
+                                        <div><img src="{{ order.image }}" id="soda-cart" alt="Refrigerante Carrinho"></div>
+                                        <div class="specifications">
+                                            <p><strong>Tipo:</strong> {{ order.details }} {{ order.product }}</p>
+                                            <p><strong>L/mg:</strong> <span>{{ order.measure }}</span></p>
+                                            <p><strong>Quantidade:</strong> <span>{{ order.amount }}</span></p>
+                                            <p><strong>Preço:</strong> <span>R${{ order.price }}</span></p>
+                                        </div>
+                                    </div>
+                            {% endif %}
+                    
+                            {% if order.product_type == 'Salgado' %}
+                                <p class="category">Salgado</p>
+                                {% if order.product == 'Pastel' %}
+                                    <div class="order-details">
+                                        <div><img src="{{ order.image }}" id="soda-cart" alt="Pastel Carrinho"></div>
+                                        <div class="specifications">
+                                            <p><strong>Tipo:</strong> {{ order.product }}</p>
+                                            <p><strong>Sabor:</strong> {{ order.details }}</p>
+                                            <p><strong>Quantidade:</strong> <span>{{ order.amount }}</span></p>
+                                            <p><strong>Preço:</strong> <span>R${{ order.price }}</span></p>
+                                        </div>
+                                    </div>
+
+                                {% elif order.product == 'Esfirra' %}
+                                    <div class="order-details">
+                                        <div><img src="{{ order.image }}" id="soda-cart" alt="Sfirra Carrinho"></div>
+                                        <div class="specifications">
+                                            <p><strong>Tipo:</strong> {{ order.product }}</p>
+                                            <p><strong>Sabor:</strong> {{ order.details }}</p>
+                                            <p><strong>Quantidade:</strong> <span>{{ order.amount }}</span></p>
+                                            <p><strong>Preço:</strong> <span>R${{ order.price }}</span></p>
+                                        </div>
+                                    </div>
+                    
+                                {% elif order.product == 'Coxinha' %}
+                                    <div class="order-details">
+                                        <div><img src="{{ order.image }}" id="soda-cart" alt="Coxinha Carrinho"></div>
+                                        <div class="specifications">
+                                            <p><strong>Tipo:</strong> {{ order.product }}</p>
+                                            <p><strong>Sabor:</strong> {{ order.details }}</p>
+                                            <p><strong>Quantidade:</strong> <span>{{ order.amount }}</span></p>
+                                            <p><strong>Preço:</strong> <span>R${{ order.price }}</span></p>
+                                        </div>
+                                    </div>
+                                
+                                {% elif order.product == 'Enroladinho' %}
+                                    <div class="order-details">
+                                        <div><img src="{{ order.image }}" id="soda-cart" alt="Enroladinho Carrinho"></div>
+                                        <div class="specifications">
+                                            <p><strong>Tipo:</strong> {{ order.product }}</p>
+                                            <p><strong>Sabor:</strong> {{ order.details }}</p>
+                                            <p><strong>Quantidade:</strong> <span>{{ order.amount }}</span></p>
+                                            <p><strong>Preço:</strong> <span>R${{ order.price }}</span></p>
+                                        </div>
+                                    </div>
+
+                                {% else %}
+                                    <div class="order-details">
+                                        <div><img src="{{ order.image }}" id="soda-cart" alt="Refrigerante Carrinho"></div>
+                                        <div class="specifications">
+                                            <p><strong>Tipo:</strong> {{ order.product }}</p>
+                                            <p><strong>Sabor:</strong> {{ order.details }}</p>
+                                            <p><strong>Quantidade:</strong> <span>{{ order.amount }}</span></p>
+                                            <p><strong>Preço:</strong> <span>R${{ order.price }}</span></p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+
+                            <p id="total">Total: R${{ total }}</p>
+
+                    <p id="date">Para: <span>{{ date }}</span></p>
+                    {% else %}
+                        <h4>Carrinho vazio..</h4>
+                    {% endif %}
+                </div>
+                
+                <div id="order-now">
+                    <button type="submit">Encomendar <img src="../static/images/whatsapp-logo-4-1.png" alt="logo-WhatsApp"></button>
+                </div> 
             </div>
-            <div id="order">
-                {% if order %}
-                    {% for i in order %}
-                        <p>{{ i.user }}</p>
-                        <p>{{ i.product }}</p>
-                        <p>{{ i.product_id }}</p>
-                        <p>{{ i.price }}</p>
-                        <p>{{ i.amount }}</p>
-                        <p>{{ i.image }}</p>
-                    {% endfor %}
-                {% else %}
-                    <h4>Carrinho vazio..</h4>
-                {% endif %}
-            </div>
-              
-            <div id="order-now">
-                <button>Encomendar <img src="../static/images/whatsapp-logo-4-1.png" alt="logo-WhatsApp"></button>
-            </div> 
-        </div>
+        </form>
     </main>
 </section>
 
 {% endblock %}
 
 {% block js %}/static/js/cart/script.js{% endblock %}
-
-<!--
-    {% if order.pz.0 %}
-                        <p class="category">Pizzas</p>
-                        {% for pizza in order.pz.0 %}
-                            {% if pizza.4 %}
-                                <div class="order-details">
-                                    <div><img src="../static/images/pizza-food-clipart-md.png" alt="Pizza Carrinho"></div>
-                                    <div class="specifications">
-                                        <p><strong>Sabor:</strong> {{ pizza.0 }} <span>{{ pizza.4 }} (R$2.0)</span></p>
-                                        <p><strong>Tamanho:</strong> <span>{{ pizza.1 }}</span></p>
-                                        <p><strong>Quantidade:</strong> <span>{{ pizza.3 }}</span></p>
-                                        <p><strong>Preço:</strong> <span>R${{ pizza.2 }}</span></p>
-                                    </div>
-                                </div>
-                            {% else %}
-                            <div class="order-details">
-                                <div><img src="../static/images/pizza-food-clipart-md.png" alt="Pizza Carrinho"></div>
-                                <div class="specifications">
-                                    <p><strong>Sabor:</strong> {{ pizza.0 }}</p>
-                                    <p><strong>Tamanho:</strong> <span>{{ pizza.1 }}</span></p>
-                                    <p><strong>Quantidade:</strong> <span>{{ pizza.3 }}</span></p>
-                                    <p><strong>Preço:</strong> <span>R${{ pizza.2 }}</span></p>
-                                </div>
-                            </div>
-                            {% endif %}
-                        {% endfor %}
-                        
-                    {% endif %}
-
-                    {% if order.dk %}
-                    <p class="category">Bebidas</p>
-                    {% for soda in order.dk %}
-                        <div class="order-details">
-                            <div><img src="{{ soda.3 }}" id="soda-cart" alt="Refrigerante Carrinho"></div>
-                            <div class="specifications">
-                                <p><strong>Tipo:</strong> {{ soda.0 }}</p>
-                                <p><strong>Tamanho:</strong> <span>{{ soda.1 }}</span></p>
-                                <p><strong>Quantidade:</strong> <span>{{ soda.4 }}</span></p>
-                                <p><strong>Preço:</strong> <span>{{ soda.2 }}</span></p>
-                            </div>
-                        </div>
-
-                    {% endfor %}
-                    {% endif %}
-                    
-                    {% if order.pa %}
-                        <p class="category">Massas</p>
-                        {% if order.pa.pastel %}
-                            {% for pasta in order.pa.pastel %}
-                                <div class="order-details">
-                                    <div><img src="{{ pasta.3 }}" id="soda-cart" alt="Refrigerante Carrinho"></div>
-                                    <div class="specifications">
-                                        <p><strong>Tipo:</strong> {{ pasta.0 }}</p>
-                                        <p><strong>Sabor:</strong> {{ pasta.1 }}</p>
-                                        <p><strong>Quantidade:</strong> <span>{{ pasta.4 }}</span></p>
-                                        <p><strong>Preço:</strong> <span>{{ pasta.2 }}</span></p>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-
-                        {% if order.pa.sfiha %}
-                            {% for pasta in order.pa.sfiha %}
-                                <div class="order-details">
-                                    <div><img src="{{ pasta.3 }}" id="soda-cart" alt="Refrigerante Carrinho"></div>
-                                    <div class="specifications">
-                                        <p><strong>Tipo:</strong> {{ pasta.0 }}</p>
-                                        <p><strong>Sabor:</strong> {{ pasta.1 }}</p>
-                                        <p><strong>Quantidade:</strong> <span>{{ pasta.4 }}</span></p>
-                                        <p><strong>Preço:</strong> <span>{{ pasta.2 }}</span></p>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-
-                        {% if order.pa.coxinha %}
-                            {% for pasta in order.pa.coxinha %}
-                                <div class="order-details">
-                                    <div><img src="{{ pasta.3 }}" id="soda-cart" alt="Refrigerante Carrinho"></div>
-                                    <div class="specifications">
-                                        <p><strong>Tipo:</strong> {{ pasta.0 }}</p>
-                                        <p><strong>Sabor:</strong> {{ pasta.1 }}</p>
-                                        <p><strong>Quantidade:</strong> <span>{{ pasta.4 }}</span></p>
-                                        <p><strong>Preço:</strong> <span>{{ pasta.2 }}</span></p>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-
-                        {% if order.pa.enroladinho %}
-                            {% for pasta in order.pa.enroladinho %}
-                                <div class="order-details">
-                                    <div><img src="{{ pasta.3 }}" id="soda-cart" alt="Refrigerante Carrinho"></div>
-                                    <div class="specifications">
-                                        <p><strong>Tipo:</strong> {{ pasta.0 }}</p>
-                                        <p><strong>Sabor:</strong> {{ pasta.1 }}</p>
-                                        <p><strong>Quantidade:</strong> <span>{{ pasta.4 }}</span></p>
-                                        <p><strong>Preço:</strong> <span>{{ pasta.2 }}</span></p>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-
-                        {% if order.pa.sundry %}
-                            {% for pasta in order.pa.sundry %}
-                                <div class="order-details">
-                                    <div><img src="{{ pasta.3 }}" id="soda-cart" alt="Refrigerante Carrinho"></div>
-                                    <div class="specifications">
-                                        <p><strong>Tipo:</strong> {{ pasta.0 }}</p>
-                                        <p><strong>Sabor:</strong> {{ pasta.1 }}</p>
-                                        <p><strong>Quantidade:</strong> <span>{{ pasta.4 }}</span></p>
-                                        <p><strong>Preço:</strong> <span>{{ pasta.2 }}</span></p>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endif %}
-
-                    <p id="total">Total: R${{ order.tt }}</p>
-
-                    <p id="date">Para: <span>{{ order.dt }}</span></p>/
--->
