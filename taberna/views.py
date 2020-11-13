@@ -176,6 +176,7 @@ def drinks_view(request):
 
     if str(request.method) == 'POST':
         add_cart(request)
+        return redirect(to='drinks')
 
 
     return render(request, 'drinks.html', context)
@@ -213,6 +214,7 @@ def pastas_view(request):
 
     if str(request.method) == 'POST':
         add_cart(request)
+        return redirect(to='pastas')
 
     return render(request, 'pastas.html', context)
 
@@ -225,6 +227,7 @@ def pizza_view(request):
 
     if str(request.method) == 'POST':
         add_pizzar_cart(request)
+        return redirect(to='pizzas')
 
     return render(request, 'pizzas.html', context)
 

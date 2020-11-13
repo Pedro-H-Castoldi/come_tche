@@ -97,3 +97,8 @@ section ul li #pastas:active {
         text-shadow: #000 1px 1px 1px;
     }
 }
+@media(width: 375px) {
+    section .menu {
+        margin-left: 13px;
+    }
+}
