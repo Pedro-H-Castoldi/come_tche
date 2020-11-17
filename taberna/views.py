@@ -147,7 +147,7 @@ def add_pizzar_cart(request):
     Date.save(order_date)
 
 def make_message(orders, total, date, user):
-    message = f'*Olá sou {user}. Eu gostaria de:*\n\n'
+    message = f'*Olá sou {user.first_name} {user.last_name}. Eu gostaria de:*\n\n'
     for order in orders:
         if order.product_type == 'Pizza':
             if 'catupiry' in order.details:
@@ -161,7 +161,7 @@ def make_message(orders, total, date, user):
         elif order.product_type == 'Salgado':
             message += f'{order.product} de {order.details} x {order.amount} (R${order.price})\n\n'
 
-    message += f'*Total: {total}*\n\n'
+    message += f'*Total: R${total}*\n\n'
     message += f'*Data: {date}*'
 
     return message
@@ -233,6 +233,7 @@ def pizza_view(request):
 
 @login_required()
 def kart_view(request):
+    print(dir(request.user))
     context = {}
     orders = Cart.objects.filter(user=request.user)
     dates = Date.objects.filter(user=request.user)

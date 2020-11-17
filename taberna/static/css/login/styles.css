@@ -29,6 +29,14 @@ body {
     padding: 20px;
 }
 
+.help-block, .errorlist, .nonfield {
+    padding: 5px;
+    background-color: #ff2700;
+    color: white;
+    border: solid 3px #ffdcdcc9;
+    border-radius: 5px;
+}
+
 .content-center input,
 .content-center button {
     width: 100%;
@@ -46,6 +54,28 @@ body {
     border-bottom-color: #f47920;
 }
 
+.content-center #hint_id_username, #hint_id_password2 {
+    background-color: #eaeaea;
+    font-size: 12px;
+    margin-bottom: 15px;
+    color: #929798;
+    border: solid 1px whitesmoke;
+}
+
+.content-center #hint_id_password1 {
+    background-color: #eaeaea;
+    font-size: 12px;
+    margin-top: 0;
+    border: solid 1px whitesmoke;
+}
+
+.content-center #hint_id_password1 ul {
+    padding-left: 15px;
+    color: #929798;
+}
+.content-center #hint_id_password1 ul li {
+    padding: 3px;
+}
 .content-center button {
     background-color: #ea0606;
     color: #FFF;
