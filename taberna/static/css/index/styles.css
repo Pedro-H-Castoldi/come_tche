@@ -18,6 +18,7 @@ section h2 {
 section .menu {
     max-width: 633px;
     padding: 50px 0;
+    margin: auto;
 }
 
 section .menu ul li a {
@@ -69,14 +70,9 @@ section ul li #pastas:active {
         margin-bottom: 25px;
     }
     
-    section .menu {
-        padding: 50px 0;
-    }
-    
     section .menu ul li a {
         font-size: 20px;
         transition: 0s;
-        margin: 0 1.4px;
     }
 
     #drinks {
@@ -95,10 +91,5 @@ section ul li #pastas:active {
         background-color: orangered;
         color: #fff;
         text-shadow: #000 1px 1px 1px;
-    }
-}
-@media(width: 375px) {
-    section .menu {
-        margin-left: 13px;
     }
 }
