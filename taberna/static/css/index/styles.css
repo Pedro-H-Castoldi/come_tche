@@ -63,11 +63,17 @@ section ul li #pastas:active {
 
     section {
         padding-top: 65px;
+        padding-left: 40px;
+        padding-right: 40px;
     }
 
     section h2 {
         font-size: 40px;
         margin-bottom: 25px;
+    }
+
+    section .menu {
+        margin: auto;
     }
     
     section .menu ul li a {
