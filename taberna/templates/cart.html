@@ -28,7 +28,7 @@
                                 <p class="category">Pizzas</p>
                                     {% if 'catupiry' in order.details %}
                                         <div class="order-details">
-                                            <div><img src="../static/images/pizza-food-clipart-md.png" alt="Pizza Carrinho"></div>
+                                            <div><img src="../static/images/pizza-food-clipart-md.png" id="pizza-id" alt="Pizza Carrinho"></div>
                                             <div class="specifications">
                                                 <p><strong>Sabor:</strong> {{ order.product }} <span>+ catupiry (R$2.0)</span></p>
                                                 <p><strong>Tamanho:</strong> <span>{{ order.measure }}</span></p>
@@ -38,7 +38,7 @@
                                         </div>
                                     {% else %}
                                     <div class="order-details">
-                                        <div><img src="../static/images/pizza-food-clipart-md.png" alt="Pizza Carrinho"></div>
+                                        <div><img src="../static/images/pizza-food-clipart-md.png" id="pizza-id" alt="Pizza Carrinho"></div>
                                         <div class="specifications">
                                             <p><strong>Sabor:</strong> {{ order.product }}</p>
                                             <p><strong>Tamanho:</strong> <span>{{ order.measure }}</span></p>
@@ -52,7 +52,7 @@
                             {% if order.product_type == 'Bebida' %}
                                 <p class="category">Bebida</p>
                                     <div class="order-details">
-                                        <div><img src="{{ order.image }}" id="soda-cart" alt="Refrigerante Carrinho"></div>
+                                        <div><img src="{{ order.image }}" id="drink-cart" alt="Bebida Carrinho"></div>
                                         <div class="specifications">
                                             <p><strong>Tipo:</strong> {{ order.details }} {{ order.product }}</p>
                                             <p><strong>L/mg:</strong> <span>{{ order.measure }}</span></p>
@@ -66,7 +66,7 @@
                                 <p class="category">Salgado</p>
                                 {% if order.product == 'Pastel' %}
                                     <div class="order-details">
-                                        <div><img src="{{ order.image }}" id="soda-cart" alt="Pastel Carrinho"></div>
+                                        <div><img src="{{ order.image }}" id="pasta-cart" alt="Pastel Carrinho"></div>
                                         <div class="specifications">
                                             <p><strong>Tipo:</strong> {{ order.product }}</p>
                                             <p><strong>Sabor:</strong> {{ order.details }}</p>
@@ -77,7 +77,7 @@
 
                                 {% elif order.product == 'Esfirra' %}
                                     <div class="order-details">
-                                        <div><img src="{{ order.image }}" id="soda-cart" alt="Sfirra Carrinho"></div>
+                                        <div><img src="{{ order.image }}" id="pasta-cart" alt="Sfirra Carrinho"></div>
                                         <div class="specifications">
                                             <p><strong>Tipo:</strong> {{ order.product }}</p>
                                             <p><strong>Sabor:</strong> {{ order.details }}</p>
@@ -88,7 +88,7 @@
                     
                                 {% elif order.product == 'Coxinha' %}
                                     <div class="order-details">
-                                        <div><img src="{{ order.image }}" id="soda-cart" alt="Coxinha Carrinho"></div>
+                                        <div><img src="{{ order.image }}" id="pasta-cart" alt="Coxinha Carrinho"></div>
                                         <div class="specifications">
                                             <p><strong>Tipo:</strong> {{ order.product }}</p>
                                             <p><strong>Sabor:</strong> {{ order.details }}</p>
@@ -99,7 +99,7 @@
                                 
                                 {% elif order.product == 'Enroladinho' %}
                                     <div class="order-details">
-                                        <div><img src="{{ order.image }}" id="soda-cart" alt="Enroladinho Carrinho"></div>
+                                        <div><img src="{{ order.image }}" id="pasta-cart" alt="Enroladinho Carrinho"></div>
                                         <div class="specifications">
                                             <p><strong>Tipo:</strong> {{ order.product }}</p>
                                             <p><strong>Sabor:</strong> {{ order.details }}</p>
@@ -110,7 +110,7 @@
 
                                 {% else %}
                                     <div class="order-details">
-                                        <div><img src="{{ order.image }}" id="soda-cart" alt="Refrigerante Carrinho"></div>
+                                        <div><img src="{{ order.image }}" id="pasta-cart" alt="Variados Carrinho"></div>
                                         <div class="specifications">
                                             <p><strong>Tipo:</strong> {{ order.product }}</p>
                                             <p><strong>Sabor:</strong> {{ order.details }}</p>
