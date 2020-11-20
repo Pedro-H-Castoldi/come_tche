@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'come_tche.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-"""DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'come_tche',
@@ -89,12 +89,12 @@ WSGI_APPLICATION = 'come_tche.wsgi.application'
         'HOST': 'localhost',
         'PORT': '5432',
     }
-}"""
-
-
-DATABASES = {
-    'default': dj_database_url.config()
 }
+
+
+"""DATABASES = {
+    'default': dj_database_url.config()
+}"""
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
