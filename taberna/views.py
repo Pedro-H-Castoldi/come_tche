@@ -60,7 +60,7 @@ def add_cart(request, soda_pizza=False):
                 measure=measure,
                 price=data.price * int(form[i]),
                 amount=form[i],
-                image=f'../static/images/{data.image}',
+                image=data.image.thumb.url,
             )
             Cart.save(cart)
     order_date = Date(
