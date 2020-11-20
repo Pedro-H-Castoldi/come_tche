@@ -98,7 +98,7 @@ function go() {
     button.disabled = true;
     soda_exist();
 
-    let select = document.querySelectorAll('.select');
+    /*let select = document.querySelectorAll('.select');
     select.forEach(task => {
         task.addEventListener('change', e => {
             let flavor = e.target.value;
@@ -113,7 +113,7 @@ function go() {
                 photo_l.src = `../static/images/${flavor}_d.jpg`;
             }
         })
-    })
+    })*/
 
     let c_size = document.querySelectorAll('.content-sizes');
     number_pizza = c_size.length / 5;
