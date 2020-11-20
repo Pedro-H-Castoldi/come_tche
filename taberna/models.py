@@ -1,13 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 from stdimage.models import StdImageField
-import uuid
+#import uuid
 
+"""
 def get_filename(_intance, filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4}.{ext}'
     return filename
-
+"""
 class Base(models.Model):
 
     created = models.DateField('Data de criação', auto_now_add=True)
@@ -20,7 +21,7 @@ class Produto(Base):
 
     product = models.CharField('Produto', max_length=50)
     stock = models.BooleanField('Estoque', default=True)
-    image = StdImageField('Imagem', upload_to=get_filename, variations={'thumb': (124, 124)})
+    image = StdImageField('Imagem', variations={'thumb': (124, 124)})
 
     class Meta:
         verbose_name = 'Produto'
