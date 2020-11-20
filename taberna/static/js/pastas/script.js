@@ -64,6 +64,10 @@ function date_today() {
         max_day = 30;
     }
 
+    else {
+        max_day = 31
+    }
+
     if(minutes + 20 < 60) {
         minutes = minutes + 20;
     }
