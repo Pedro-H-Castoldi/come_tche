@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'accounts',
     'bootstrap4',
     'crispy_forms',
+    'storages',
 
     'django.contrib.admin',
     'django.contrib.auth',
