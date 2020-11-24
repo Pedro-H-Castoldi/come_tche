@@ -73,6 +73,7 @@ def add_pizzar_cart(request):
     messages.success(request,"Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
     form = request.POST
     date = product = details = measure = flavor1 = flavor2 = price = amount = ''
+    cont = 0
     for i in form:
         identify = i.split(', ')
 
@@ -80,7 +81,8 @@ def add_pizzar_cart(request):
             date = f'{form[i][8:10]}/{form[i][5:7]}/{form[i][0:4]} às {form[i][11:]}'
 
 
-        if identify[0] == 'd' and form[i] != '':
+        if identify[0] == 'd' and form[i] != '' and cont == 0:
+            cont = 1
             add_cart(request, True)
         elif 'flavor1' in i:
             flavor1 = form[i]
