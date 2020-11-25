@@ -2,18 +2,33 @@ const button = document.querySelector('#authenticated');
 
 let pastaOrder = document.querySelectorAll('.pasta-flavors input');
 pastaOrder.forEach(task => {
-    task.addEventListener('change', pasta_exist);
+    task.addEventListener('change', function() {
+        food_exist(true);
+    });
 })
 
-function pasta_exist() {
+let sodaOrder = document.querySelectorAll('.soda-flavor input');
+sodaOrder.forEach(task => {
+    task.addEventListener('change', function() {
+        food_exist(false);
+    });
+})
 
+
+function food_exist(pasta) {
     let found = false;
+
     pastaOrder.forEach(task => {
         if(task.value > 0) {
             found = true;
         }
     })
-
+    sodaOrder.forEach(task => {
+        if(task.value > 0) {
+            found = true;
+        }
+    })
+    
     if(found) {
         button.disabled = false;
     }

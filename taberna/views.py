@@ -2,6 +2,7 @@ from django.views.generic import FormView, TemplateView
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db import connection
 from .models import Pizza, PrecoPizza, Drink, Pasta, Cart, Date
 
 def add_date(dates):
@@ -235,7 +236,6 @@ def pizza_view(request):
 
 @login_required()
 def kart_view(request):
-    print(dir(request.user))
     context = {}
     orders = Cart.objects.filter(user=request.user)
     dates = Date.objects.filter(user=request.user)
@@ -263,3 +263,11 @@ def kart_view(request):
             return redirect(to='index')
 
     return render(request, 'cart.html', context)
+
+def delete_cart_item(request, cart_id):
+    with connection.cursor() as cursor:
+        cursor.execute(f"DELETE FROM taberna_cart where id = {cart_id}")
+
+    return redirect(to='cart')
+
+    return render(request, 'cart.html')

@@ -227,7 +227,7 @@ section .content .soda details[open] {
     
 }
 
-section .content .soda details .flavor-soda {
+section .content .soda details .soda-flavor {
     background-color:rgb(241, 241, 241);
     display: flex;
     margin: auto;

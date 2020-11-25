@@ -71,7 +71,7 @@ function date_today() {
     date.max = `${max_year}-${max_month}-${max_day}T23:59`;
 }
 
-let amount_soda = document.querySelectorAll('.flavor-soda input');
+let amount_soda = document.querySelectorAll('.soda-flavor input');
 amount_soda.forEach(task => {
     task.addEventListener('change', soda_exist);
 })

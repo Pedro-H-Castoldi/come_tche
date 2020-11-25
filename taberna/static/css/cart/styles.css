@@ -64,12 +64,27 @@ header h2 {
 }
 
 #order-cart #order .order-details .specifications {
+    height: 245px;
     flex: 1;
 }
 
 #order-cart #order .order-details .specifications p {
     border-bottom: solid 1px #000;
     
+}
+
+#order-cart #order .order-details .specifications div {
+    max-width: 90px;
+    margin-top: 20px;
+}
+
+#order-cart #order .order-details .specifications a {
+    border: solid 1px red;
+    text-decoration: none;
+    padding: 10px 3px;
+    font-weight: bold;
+    color: #FFF;
+    background-color: #ea0606;
 }
 
 #order-cart #order p {
@@ -136,5 +151,9 @@ header h2 {
 @media(max-width: 450px) {
     #order-cart #order .order-details img {
         width: 125px;
+    }
+
+    #order-cart #order .order-details .specifications {
+        height: 255px;
     }
 }

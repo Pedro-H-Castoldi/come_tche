@@ -127,7 +127,7 @@
                             <summary>1L</summary>
                             {% for so in soda %}
                                 {% if so.liters == 1 and so.stock %}
-                                <div class="flavor-soda">
+                                <div class="soda-flavor">
                                     <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
@@ -138,7 +138,7 @@
                             <summary>2L</summary>
                             {% for so in soda %}
                                 {% if so.liters == 2 and so.stock %}
-                                <div class="flavor-soda">
+                                <div class="soda-flavor">
                                     <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
@@ -150,7 +150,7 @@
                             <summary>Lata</summary>
                             {% for so in soda %}
                                 {% if so.liters == 350 and so.stock %}
-                                <div class="flavor-soda">
+                                <div class="soda-flavor">
                                     <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
@@ -161,7 +161,7 @@
                             <summary>KS</summary>
                             {% for so in soda %}
                                 {% if so.liters == 290 and so.stock %}
-                                <div class="flavor-soda">
+                                <div class="soda-flavor">
                                     <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
@@ -172,7 +172,7 @@
                             <summary>Mini</summary>
                             {% for so in soda %}
                                 {% if so.liters > 5 and so.liters <= 250 and so.stock %}
-                                <div class="flavor-soda">
+                                <div class="soda-flavor">
                                     <p>{{ so.product }} - R${{ so.price }}</p><input type="number" name="d, {{ so.id }}" min="0">
                                 </div>
                                 {% endif %}
