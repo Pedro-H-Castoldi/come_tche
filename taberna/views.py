@@ -1,9 +1,9 @@
-from django.views.generic import FormView, TemplateView
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import connection
 from .models import Pizza, PrecoPizza, Drink, Pasta, Cart, Date
+from datetime import datetime
 
 def add_date(dates):
     definitive_date = ''
@@ -85,6 +85,7 @@ def add_pizzar_cart(request):
         if identify[0] == 'd' and form[i] != '' and cont == 0:
             cont = 1
             add_cart(request, True)
+
         elif 'flavor1' in i:
             flavor1 = form[i]
         elif 'flavor2' in i:
@@ -150,7 +151,16 @@ def add_pizzar_cart(request):
     Date.save(order_date)
 
 def make_message(orders, total, date, user):
-    message = f'*Olá sou {user.first_name} {user.last_name}. Eu gostaria de:*\n\n'
+    hours = datetime.now().hour
+    greeting = ''
+    if hours < 12:
+        greeting = 'Bom dia'
+    elif hours > 12 < 18:
+        greeting = 'Boa tarde'
+    else:
+        greeting = 'Boa noite'
+
+    message = f'*{greeting}. Sou {user.first_name} {user.last_name}. Gostaria de:*\n\n'
     for order in orders:
         if order.product_type == 'Pizza':
             if 'catupiry' in order.details:
