@@ -5,7 +5,7 @@ document.querySelector('#order-now').addEventListener('click', () => {
         let order = document.querySelector('#order-cart').getAttribute('data-message');
         order = window.encodeURIComponent(order);
     
-        open(`https://api.whatsapp.com/send?phone=5588981194819&text=${order}`);
+        open(`https://api.whatsapp.com/send?phone=5588981361195&text=${order}`);
     }
     else {
         alert("Seu carrinho está vázio. Peça algum produto antes de encomendar.");
