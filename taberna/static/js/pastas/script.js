@@ -89,6 +89,12 @@ function date_today() {
 
     else {
         minutes = (minutes + 20) - 60;
+        if(hours < 23) {
+            hours += 1;
+        }
+        else {
+            hours = '00';
+        }
         if(minutes < 10) {
             minutes = `0${minutes}`;
         }
