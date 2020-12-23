@@ -44,7 +44,7 @@
                                             <p><strong>Sabor:</strong> {{ order.product }}</p>
                                             <p><strong>Tamanho:</strong> <span>{{ order.measure }}</span></p>
                                             <p><strong>Quantidade:</strong> <span>{{ order.amount }}</span></p>
-                                            <p><strong>Preço:</strong> <span>R${{ order.price }}</span></p>
+                                            <p><strong>Preço:</strong>t <span>R${{ order.price }}</span></p>
                                             <div><a href="{% url 'delete_cart_item' order.id %}">REMOVER</a></div>
                                         </div>
                                     </div>
@@ -56,7 +56,7 @@
                                     <div class="order-details">
                                         <div><img src="{{ order.image }}" id="drink-cart" alt="Bebida Carrinho"></div>
                                         <div class="specifications">
-                                            <p><strong>Tipo:</strong> {{ order.details }} {{ order.product }}</p>
+                                            <p><strong>Tipo:</strong> {{ order.product }}</p>
                                             <p><strong>L/mg:</strong> <span>{{ order.measure }}</span></p>
                                             <p><strong>Quantidade:</strong> <span>{{ order.amount }}</span></p>
                                             <p><strong>Preço:</strong> <span>R${{ order.price }}</span></p>

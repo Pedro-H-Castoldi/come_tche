@@ -47,7 +47,7 @@
                                 {% for pasta in pastas.pastel %}
                                     {% if pasta.stock %}
                                         <div>
-                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}" type="number" min="0" max="100" placeholder="Quant">
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}" type="number" min="0" max="100" placeholder="Quant" autocomplete="off">
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -70,7 +70,7 @@
                                 {% for pasta in pastas.esfirra %}
                                     {% if pasta.stock %}
                                         <div>
-                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}" type="number" min="0" max="100" placeholder="Quant">
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}" type="number" min="0" max="100" placeholder="Quant" autocomplete="off">
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -93,7 +93,7 @@
                                 {% for pasta in pastas.coxinha %}
                                     {% if pasta.stock %}
                                         <div>
-                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}"type="number" min="0" max="100" placeholder="Quant">
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}"type="number" min="0" max="100" placeholder="Quant" autocomplete="off">
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -116,7 +116,7 @@
                                 {% for pasta in pastas.enroladinho %}
                                     {% if pasta.stock %}
                                         <div>
-                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}"type="number" min="0" max="100" placeholder="Quant">
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}"type="number" min="0" max="100" placeholder="Quant" autocomplete="off">
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -139,7 +139,7 @@
                                 {% for pasta in pastas.sundry %}
                                     {% if pasta.stock %}
                                         <div>
-                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}"type="number" min="0" max="100" placeholder="Quant">
+                                            <p>{{ pasta.flavor }} - <wbr><span>R${{ pasta.price }}</span></p><input name="p, {{ pasta.id }}"type="number" min="0" max="100" placeholder="Quant" autocomplete="off">
                                         </div>
                                     {% endif %}
                                 {% endfor %}
