@@ -155,17 +155,17 @@ AWS_DEFAULT_ACL = None
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+"""EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = '@'
-EMAIL_HOST_PASSWORD = '*'
-DEFAULT_FROM_EMAIL = 'ComeTchÊ Team <noreply@codingwithmich.com>'
+EMAIL_HOST_USER = 'pedro.henrique.castoldi05@aluno.ifce.edu.br'
+EMAIL_HOST_PASSWORD = 'lavmovprjmqnacdn'
+DEFAULT_FROM_EMAIL = 'ComeTchÊ Team <noreply@codingwithmich.com>'"""
 
-"""
+
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_email')
-"""
+
 
 
