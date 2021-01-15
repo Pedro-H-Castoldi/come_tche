@@ -5,7 +5,9 @@ from django.views import generic
 from django.contrib import messages
 from .form import UserForm
 
+
 class SignUp(generic.CreateView):
     form_class = UserForm
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
+

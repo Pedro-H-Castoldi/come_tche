@@ -14,6 +14,10 @@
         {% csrf_token %}
         {{ form }}
 
+        <div id="forget_password">
+            <a href="{% url 'password_reset' %}">Esqueci minha senha</a>
+        </div>
+
         <div>
             <button type="submit" id="button">Entrar</button>
         </div>

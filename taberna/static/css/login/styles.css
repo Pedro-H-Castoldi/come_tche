@@ -29,6 +29,19 @@ body {
     padding: 20px;
 }
 
+#forget_password {
+    padding-bottom: 10px;
+}
+
+#forget_password a {
+    text-decoration: none;
+    color: #ca2103;
+}
+
+#forget_password a:hover {
+    color: #ff2700;
+}
+
 .help-block, .errorlist, .nonfield {
     padding: 5px;
     background-color: #ff2700;
