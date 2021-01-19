@@ -33,7 +33,7 @@ body {
     padding-bottom: 10px;
 }
 
-#forget_password a {
+#forget_password a, #reset_complete a {
     text-decoration: none;
     color: #ca2103;
 }
@@ -71,7 +71,7 @@ body {
     background-color: #eaeaea;
     font-size: 12px;
     margin-bottom: 15px;
-    color: #929798;
+    color: #414142;
     border: solid 1px whitesmoke;
 }
 
@@ -82,11 +82,11 @@ body {
     border: solid 1px whitesmoke;
 }
 
-.content-center #hint_id_password1 ul {
+ ul {
     padding-left: 15px;
-    color: #929798;
+    color: #414142;
 }
-.content-center #hint_id_password1 ul li {
+ ul li {
     padding: 3px;
 }
 .content-center button {
