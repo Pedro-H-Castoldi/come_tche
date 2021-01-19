@@ -131,6 +131,11 @@ header h1 {
     margin: 50px auto;
 }
 
+.callout {
+    text-align: justify;
+    color: #414142;
+}
+
 footer {
     font-size: .8em;
     text-align: center;

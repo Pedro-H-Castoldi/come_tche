@@ -5,6 +5,7 @@ from django.db import connection
 from .models import Pizza, PrecoPizza, Drink, Pasta, Cart, Date
 from datetime import datetime
 
+
 def add_date(dates):
     definitive_date = ''
     for date in dates:
@@ -24,6 +25,7 @@ def add_date(dates):
                         if int(date.date.split('/')[2][11:]) > int(definitive_date.split('/')[2][11:]):
                             definitive_date = date.date
     return definitive_date
+
 
 def add_cart(request, soda_pizza=False):
     if not soda_pizza:
@@ -70,7 +72,8 @@ def add_cart(request, soda_pizza=False):
     )
     Date.save(order_date)
 
-def add_pizzar_cart(request):
+
+def add_pizza_cart(request):
     messages.success(request,"Seu pedido foi enviado ao carrinho. Continue pedindo ou acesse o carrinho para finalizar a encomenda.")
     form = request.POST
     date = product = details = measure = flavor1 = flavor2 = price = amount = ''
@@ -80,7 +83,6 @@ def add_pizzar_cart(request):
 
         if i == 'request_date':
             date = f'{form[i][8:10]}/{form[i][5:7]}/{form[i][0:4]} às {form[i][11:]}'
-
 
         if identify[0] == 'd' and form[i] != '' and cont == 0:
             cont = 1
@@ -150,6 +152,7 @@ def add_pizzar_cart(request):
     )
     Date.save(order_date)
 
+
 def make_message(orders, total, date, user):
     hours = datetime.now().hour
     greeting = ''
@@ -169,7 +172,7 @@ def make_message(orders, total, date, user):
                 message += f'Pizza: {order.product} {order.measure} x {order.amount} (R${order.price})\n\n'
 
         elif order.product_type == 'Bebida':
-            message += f'{order.details} {order.product} {order.measure} x {order.amount} (R${order.price})\n\n'
+            message += f'{order.product} {order.measure} x {order.amount} (R${order.price})\n\n'
 
         elif order.product_type == 'Salgado':
             message += f'{order.product} de {order.details} x {order.amount} (R${order.price})\n\n'
@@ -179,8 +182,10 @@ def make_message(orders, total, date, user):
 
     return message
 
+
 def index_view(request):
     return render(request, 'index.html')
+
 
 def drinks_view(request):
     context = {
@@ -190,9 +195,8 @@ def drinks_view(request):
     if str(request.method) == 'POST':
         add_cart(request)
         return redirect(to='drinks')
-
-
     return render(request, 'drinks.html', context)
+
 
 def pastas_view(request):
     pastas = Pasta.objects.all()
@@ -231,6 +235,7 @@ def pastas_view(request):
 
     return render(request, 'pastas.html', context)
 
+
 def pizza_view(request):
     context = {
         'pizzas': Pizza.objects.order_by('?').all(),
@@ -239,7 +244,7 @@ def pizza_view(request):
     }
 
     if str(request.method) == 'POST':
-        add_pizzar_cart(request)
+        add_pizza_cart(request)
         return redirect(to='pizzas')
 
     return render(request, 'pizzas.html', context)
@@ -252,7 +257,6 @@ def kart_view(request):
 
     if orders:
         total = 0
-        order_date = ''
         for order in orders:
             total += order.price
 
@@ -274,6 +278,7 @@ def kart_view(request):
 
     return render(request, 'cart.html', context)
 
+
 def delete_cart_item(request, cart_id):
     with connection.cursor() as cursor:
         cursor.execute(f"DELETE FROM taberna_cart where id = {cart_id}")
@@ -281,3 +286,4 @@ def delete_cart_item(request, cart_id):
     return redirect(to='cart')
 
     return render(request, 'cart.html')
+
