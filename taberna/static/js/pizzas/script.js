@@ -93,7 +93,29 @@ function soda_exist() {
     }
 }
 
-function go() {
+function pizza_exist(c_size_exist, number_pizza_exist) {
+    let checked = 0;
+    let cont = 0
+    
+    for(let i=0; i<number_pizza_exist; i++) {
+        for(j=cont; j<cont+5; j++){
+            if(c_size_exist[j].children[2].checked) {
+                checked++;
+                break;
+            }
+        }
+        cont += 5;
+    }
+
+    if(checked == number_pizza_exist) {
+        order_released();
+    }
+    else {
+        soda_exist();
+    }
+}
+
+function go(more=false) {
 
     button.disabled = true;
     soda_exist();
@@ -117,6 +139,10 @@ function go() {
 
     let c_size = document.querySelectorAll('.content-sizes');
     number_pizza = c_size.length / 5;
+
+    if(!more) {
+        pizza_exist(c_size, number_pizza);
+    }
     
     c_size.forEach(task => {
         task.children[2].addEventListener('click', e => {
@@ -127,26 +153,7 @@ function go() {
             else {
                 task.children[3].innerHTML = '';
             }
-            
-            let checked = 0;
-            let cont = 0
-            
-            for(let i=0; i<number_pizza; i++) {
-                for(j=cont; j<cont+5; j++){
-                    if(c_size[j].children[2].checked) {
-                        checked++;
-                        break;
-                    }
-                }
-                cont += 5;
-            }
-            
-            if(checked == number_pizza) {
-                order_released();
-            }
-            else {
-                soda_exist();
-            }
+            pizza_exist(c_size, number_pizza);
         })
     })
 }
@@ -223,11 +230,11 @@ let one_more = document.querySelector('#one-more').addEventListener('click', fun
         task.addEventListener('click', e => {
             e.target.parentNode.remove();
             --number_pizza;
-            soda_exist();
+            go();
         })
     } )
 
-    go();
+    go(true);
 })
 
 go();
