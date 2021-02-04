@@ -158,7 +158,7 @@ def make_message(orders, total, date, user):
     greeting = ''
     if hours < 12:
         greeting = 'Bom dia'
-    elif hours > 12 < 18:
+    elif hours > 12 and hours < 18:
         greeting = 'Boa tarde'
     else:
         greeting = 'Boa noite'
