@@ -1,0 +1,75 @@
+section main .content .product-content {
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+
+section main .content .drink-type {
+    font-size: 55px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+    color: #fff;
+}
+
+section main .content .drink {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: solid 2px #414142;
+}
+
+section main .content .drink .drink-details .drink-title {
+    color: #414142;
+    font-weight: bold;
+    font-size: 25px;
+    margin: 10px 0;
+}
+
+section main .content .drink .drink-img {
+    width: 225px;
+}
+
+section main .content .drink details summary{
+    font-size: 20px;
+    font-weight: bold;
+    color: #414142;
+    outline: none;
+    cursor: pointer;
+}
+
+section main .content .drink .drink-flavor {
+    background-color: #ffd41b;
+    padding: 5px 2px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+section main .content .drink .drink-flavor .drink-amount p {
+    font-weight: bold;
+    color: #414142;
+    margin: 0;
+    margin-top: 15px;
+    margin-bottom: 3px;
+}
+
+section main .content .drink .drink-flavor .drink-amount input {
+    width: 100px;
+    border-radius: 5px;
+    border: none;
+    font-size: 25px;
+    outline: none;
+}
+
+@media(max-width: 450px) {
+
+    section main .content .drink-type {
+        font-size: 38px;
+    }
+
+    section main .content .drink .drink-img {
+        width: 115px;
+    }
+
+    section main .content .drink .drink-flavor .drink-amount input {
+        font-size: 30px;
+    }
+}

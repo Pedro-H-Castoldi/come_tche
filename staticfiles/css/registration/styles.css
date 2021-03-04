@@ -1,0 +1,143 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    background-color: #e5edef;
+}
+
+.content-center {
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+    margin-top: 15px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.content-center .text-center {
+    text-align: center;
+}
+
+.content-center img {
+    width: 55%;
+    border-radius: 5%;
+}
+
+.content-center form {
+    padding: 20px;
+}
+
+#forget_password {
+    padding-bottom: 10px;
+}
+
+#forget_password a, #reset_complete a {
+    text-decoration: none;
+    color: #ca2103;
+}
+
+#forget_password a:hover {
+    color: #ff2700;
+}
+
+.help-block, .errorlist, .nonfield {
+    padding: 5px;
+    background-color: #ff2700;
+    color: white;
+    border: solid 3px #ffdcdcc9;
+    border-radius: 5px;
+}
+
+.content-center input,
+.content-center button {
+    width: 100%;
+    padding: 10px 5px;
+    border: none;
+    outline: none;
+}
+
+.content-center input {
+    border-bottom: solid 2px #CCC;
+    margin-bottom: 10px;
+}
+
+.content-center input:focus {
+    border-bottom-color: #f47920;
+}
+
+.content-center #hint_id_username, #hint_id_password2 {
+    background-color: #eaeaea;
+    font-size: 12px;
+    margin-bottom: 15px;
+    color: #414142;
+    border: solid 1px whitesmoke;
+}
+
+.content-center #hint_id_password1 {
+    background-color: #eaeaea;
+    font-size: 12px;
+    margin-top: 0;
+    border: solid 1px whitesmoke;
+}
+
+ ul {
+    padding-left: 15px;
+    color: #414142;
+}
+ ul li {
+    padding: 3px;
+}
+.content-center button {
+    background-color: #ea0606;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.content-center button:hover {
+    background-color: #B55B28;
+}
+
+.content-center button:active {
+    background-color: #f47920;
+}
+
+header a {
+    color: #666;
+    text-decoration: none;
+}
+
+header a:visited {
+    color: #000;
+}
+
+header a:hover {
+    color: #f47920;
+    text-decoration: underline;
+}
+
+header a:focus {
+    color: purple;
+}
+
+header a:active {
+    color: green;
+}
+
+header h1 {
+    font-size: 2.5em;
+    text-align: center;
+    margin: 50px auto;
+}
+
+.callout {
+    text-align: justify;
+    color: #414142;
+}
+
+footer {
+    font-size: .8em;
+    text-align: center;
+    margin: 15px auto;
+}

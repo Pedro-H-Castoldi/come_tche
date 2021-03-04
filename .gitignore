@@ -11,3 +11,5 @@ __pycache__
 template/*
 
 htmlcov/*
+
+staticfiles

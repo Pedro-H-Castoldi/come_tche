@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'v9q!9w15ss@g*^3shly9ecx%2hr+uip6o7-=^_cf4nr3tt=q%_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -90,8 +90,8 @@ WSGI_APPLICATION = 'come_tche.wsgi.application'
         'HOST': 'localhost',
         'PORT': '5432',
     }
-}"""
-
+}
+"""
 
 DATABASES = {
     'default': dj_database_url.config()
