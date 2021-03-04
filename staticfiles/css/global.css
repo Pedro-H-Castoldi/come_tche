@@ -13,7 +13,7 @@ body {
     border-radius: 3px;
     text-shadow: rgb(49, 49, 49) 1px 1px 1px;
     width: 99%;
-    background-color: #ea0606;
+    background-color: #d41f1f;
     margin: auto;
     text-align: center;
     padding: 3px;
@@ -40,7 +40,7 @@ body {
     padding: 10px 15px;
     border: 2px solid #f3f3f3;
     border-radius: 13px;
-    background-color: #ea0606;
+    background-color: #d41f1f;
 }
 
 #main-header .authentication:hover:active {
@@ -93,7 +93,7 @@ body {
     padding: 25px 29px;
 }
 #pastas {
-    background-color: #ea0606;
+    background-color: #d41f1f;
     padding: 25px 13px;
 }
 
@@ -113,7 +113,7 @@ body {
 }
 
 #pastas:active {
-    background-color: #ea0606;
+    background-color: #d41f1f;
 }
 
 section {
@@ -155,7 +155,7 @@ section main #cart {
 
 section main .content {
     padding: 10px 20px;
-    background-color: #ea0606;
+    background-color: #d41f1f;
     border-radius: 8px;
     box-shadow: #4f4f50 1px 1px 6px;
 }
@@ -236,7 +236,7 @@ section .content .soda details .soda-flavor {
 
 section .content .soda details p {
     width: 150px;
-    border-left: solid 4px #ea0606;
+    border-left: solid 4px #d41f1f;
     margin: 0;
     padding: 10px 5px;
     font-size: 14px;
@@ -293,7 +293,7 @@ summary:before {
 
 #order-now button:hover {
     background: rgba(255, 255, 2, 0.986);
-    color: #ea0606;
+    color: #d41f1f;
     text-shadow: #000 1px 1px 1px;
 }
 
