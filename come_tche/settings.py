@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'come_tche.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'come_tche',
@@ -91,11 +91,11 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+"""
 
-
-"""DATABASES = {
+DATABASES = {
     'default': dj_database_url.config()
-}"""
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -159,7 +159,7 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = '@'
-EMAIL_HOST_PASSWORD = '*'
+EMAIL_HOST_USER = 'pedro.henrique.@aluno.ifce.edu.br'
+EMAIL_HOST_PASSWORD = 'lavmovprjmqnacdn'
 DEFAULT_FROM_EMAIL = 'ComeTchÊ Team <noreply@codingwithmich.com>'
 
