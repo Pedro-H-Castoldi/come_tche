@@ -56,12 +56,16 @@ function date_today() {
         max_day = 31
     }
 
-    if(hours < 23) {
+    if(hours < 9) {
+        hours = `0${hours + 1}`;
+    }
+    else if(hours >= 9 && hours < 23) {
         hours = hours + 1;
     }
     else {
         hours = '00';
     }
+    
     if(minutes < 10) {
         minutes = `0${minutes}`;
     }
@@ -119,23 +123,6 @@ function go(more=false) {
 
     button.disabled = true;
     soda_exist();
-
-    /*let select = document.querySelectorAll('.select');
-    select.forEach(task => {
-        task.addEventListener('change', e => {
-            let flavor = e.target.value;
-            let num = e.target.id.split('-')[1];
-    
-            if(num%2 != 0) {
-                let photo_l = document.querySelector(`#img-p${num}`);
-                photo_l.src = `../static/images/${flavor}_e.jpg`;
-            }
-            else {
-                let photo_l = document.querySelector(`#img-p${num}`);
-                photo_l.src = `../static/images/${flavor}_d.jpg`;
-            }
-        })
-    })*/
 
     let c_size = document.querySelectorAll('.content-sizes');
     number_pizza = c_size.length / 5;
