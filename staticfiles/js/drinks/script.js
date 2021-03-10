@@ -87,6 +87,10 @@ function date_today() {
             minutes = `0${minutes}`;
         }
     }
+
+    if(hours != '00' && hours < 10) {
+        hours = `0${hours}`;
+    }
     
     date.min = `${today.getFullYear()}-${month}-${day}T${hours}:${minutes}`;
     date.value = `${today.getFullYear()}-${month}-${day}T${hours}:${minutes}`;
