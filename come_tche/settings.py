@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import dj_database_url
 
+from decouple import config
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'v9q!9w15ss@g*^3shly9ecx%2hr+uip6o7-=^_cf4nr3tt=q%_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -81,7 +83,7 @@ WSGI_APPLICATION = 'come_tche.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'come_tche',
@@ -91,11 +93,11 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+"""
 
-
-"""DATABASES = {
+DATABASES = {
     'default': dj_database_url.config()
-}"""
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -144,8 +146,8 @@ LOGOUT_REDIRECT_URL = '/accounts/login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-AWS_ACCESS_KEY_ID = 'AKIAS6EBEIOH7XNSLZWM'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = 'AKIAS6EBEIOH52JHOV7U'
+AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'come-tche'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_REGION_NAME = 'us-east-2'
@@ -159,7 +161,7 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = '@'
-EMAIL_HOST_PASSWORD = '*'
+EMAIL_HOST_USER = 'pedrohenriquebackend@gmail.com'
+EMAIL_HOST_PASSWORD = 'pp35643017'
 DEFAULT_FROM_EMAIL = 'ComeTchÊ Team <noreply@codingwithmich.com>'
 
